@@ -15,13 +15,15 @@ class CreateUnduhLaporansTable extends Migration
     {
         Schema::create('unduh_laporans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('hasil_trainings_id');
+            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('hasil_trainings_id');
             $table->dateTime('tgl_laporan');
             $table->string('judul_laporan');
             $table->string('download');
             $table->timestamps();
 
-            // $table->foreign('hasil_trainings_id')->references('id')->on('hasil_trainings');
+            $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('hasil_trainings_id')->references('id')->on('hasil_trainings');
         });
     }
 

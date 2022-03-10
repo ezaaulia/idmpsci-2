@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class SiswaController extends Controller
+class ContohController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -21,11 +21,9 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function tambahsis()
+    public function create()
     {
-        return view('siswa.isitambahsis' , [
-            "title" => "Tambah Data Siswa"
-            ]);
+        //
     }
 
     /**
@@ -36,7 +34,7 @@ class SiswaController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        //
     }
 
     /**
@@ -45,11 +43,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function lihatsis()
+    public function show($id)
     {
-        return view('siswa.isilihatsis' , [
-            "title" => "Lihat Data Siswa"
-            ]);
+        //
     }
 
     /**
@@ -58,11 +54,9 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editsis($id)
+    public function edit($id)
     {
-        return view('siswa.isieditsis' , [
-            "title" => "Edit Data Siswa"
-            ]);
+        //
     }
 
     /**
@@ -83,14 +77,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function hapussis($id)
-    {
-        // return view('siswa.isihapussis' , [
-        //     "title" => "Hapus Data Siswa"
-        //     ]);
-    }
-
-    public function import(Request $request, $id)
+    public function destroy($id)
     {
         //
     }

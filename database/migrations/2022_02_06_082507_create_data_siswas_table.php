@@ -15,12 +15,14 @@ class CreateDataSiswasTable extends Migration
     {
         Schema::create('data_siswas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id');
+            $table->unsignedBigInteger('users_id');
+            // $table->unsignedBigInteger('nilai_tes_id');
             $table->string('nama');
             $table->string('status_kelas');
             $table->timestamps();
 
-            // $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users');
+            // $table->foreign('nilai_tes_id')->references('id')->on('nilai_tes');
         });
     }
 

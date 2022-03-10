@@ -15,11 +15,11 @@ class CreateImportDataTable extends Migration
     {
         Schema::create('import_data', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id');
+            $table->unsignedBigInteger('users_id');
             $table->string('import_excel');
             $table->timestamps();
 
-            // $table->foreign('users_id')->references('id')->on('users');
+            $table->foreign('users_id')->references('id')->on('users');
         });
     }
 

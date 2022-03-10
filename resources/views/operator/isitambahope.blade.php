@@ -8,10 +8,6 @@
         <div class="container-xl">			    
             <h1 class="app-page-title">Form Tambah Data Operator</h1>
 
-            <picture>
-                <source srcset="assets/images/users/user-9.jpg" type="image/svg+xml">
-                <img src="assets/images/users/user-9.jpg" class="img-fluid img-thumbnail" alt="...">
-            </picture>
             
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-4">
