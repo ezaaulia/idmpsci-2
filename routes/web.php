@@ -58,7 +58,7 @@ Route::post('/insertsiswa', [SiswaController::class, 'store'])->name('/insertsis
 
 Route::get('/inputsiswa/editsiswa', [SiswaController::class, 'editsis']);
 Route::get('/inputsiswa/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('inputsiswa/lihatsiswa');
-Route::get('/inputsiswa/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'lihat_s']);
+Route::get('/inputsiswa/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
 
 Route::get('/inputsiswa/importsiswa', [SiswaController::class, 'import']);
 Route::get('/inputsiswa/carisiswa', [SiswaController::class, 'carisis']);

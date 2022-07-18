@@ -2,6 +2,12 @@
 
 @section('isi')
 
+@if (session('success'))
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ session ('success') }}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Sukses!"></button>
+</div>
+@endif
 
 <div class="app-wrapper">
 
@@ -37,7 +43,7 @@
                               @foreach ($siswa as $data_s)
                                   <td class="cell">{{ $loop->iteration }}.</td>
                                   <td class="cell">{{ $data_s->nama }}</td>
-                                  <td class="cell">{{ $data_s->id }}</td>
+                                  <td class="cell">{{ $data_s->nis }}</td>
                                     @foreach ($nilai as $data_n)
                                       <td class="cell">{{ $data_n->nilai_tes_mtk }}
                                       <td class="cell">{{ $data_n->nilai_tes_ipa }}</td>
@@ -45,9 +51,8 @@
                                       <td class="cell">{{ $data_n->nilai_tes_bindo }}</td>
                                       {{-- <td class="cell">{{ $data_n->data_s->id }}</td> --}}
                                     @endforeach
-                                    
                                   <td class="cell">{{ $data_s->status_kelas }}</td>
-                                <td>
+                                <td class="cell">
                                   <a href="" class="btn btn-sm btn-primary me-md-1" >
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
                                       <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
@@ -66,8 +71,8 @@
                                     </svg>
                                   </button>
                                 </td>
-                                @endforeach
-                              </tr>
+                              @endforeach
+                            </tr>
                               
 
                           </tbody>

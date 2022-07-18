@@ -12,6 +12,17 @@ class DataSiswa extends Model
 {
     use HasFactory;
 
+    //cobacreateinsertlara4
+    // public function insertSis($inserts)
+    // {
+    //      DB::table('data_siswas')->insert($inserts);
+    // }
+
+    protected $fillable = [
+        'id', 'nama', 'status_kelas',
+        
+    ];
+
     public function allData()
     {
         return DB::table('data_siswas')->get();
@@ -30,14 +41,4 @@ class DataSiswa extends Model
 
     // }
 
-    //cobacreateinsertlara4
-    public function insertSis($inserts)
-    {
-         DB::table('data_siswas')->insert($inserts);
-    }
-
-    protected $guarded = [
-        'nilai_tes_mtk', 'nilai_tes_ipa', 'nilai_tes_agama', 'nilai_tes_bindo',
-        
-    ];
 }

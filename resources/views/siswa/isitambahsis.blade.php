@@ -2,12 +2,6 @@
 
 @section('isi')
 
-@if (session('success'))
-  <div class="alert alert-success alert-dismissible fade show" role="alert">
-    {{ session ('success') }}
-  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Sukses!"></button>
-</div>
-@endif
 
 <div class="app-wrapper">
 	    
@@ -22,6 +16,16 @@
                             <form class="settings-form" method="post" action="/insertsiswa">
                                 @csrf
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
+                                    <label for="nis" class="form-label">NIS</label>
+                                    <input type="text" class="form-control @error('id') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}" >
+                                    @error('id')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div> 
+
+                                <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nama" class="form-label">Nama Siswa</label>
                                     <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama') }}" >
                                     @error('nama')
@@ -30,16 +34,6 @@
                                         </div>
                                     @enderror
                                 </div>
-
-                                <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
-                                    <label for="id" class="form-label">NIS</label>
-                                    <input type="text" class="form-control @error('id') is-invalid @enderror" id="id" name="id" value="{{ old('id') }}" >
-                                    @error('id')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div>    
 
                                 <div class="mb-1">
                                     <label for="nilai_tes_mtk" class="form-label">Nilai tes MTK</label>
