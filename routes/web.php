@@ -24,13 +24,15 @@ use App\Http\Controllers\RegisterController;
 //     return view('welcome');
 // });
 
-// Route::get('/login', [LoginController::class, 'login']);
-// Route::post('/login', [LoginController::class, 'auth']);
-// Route::get('/keluar', [LoginController::class, 'keluar']);
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'authenticate']);
 
 
-// Route::get('/registrasi', [RegisterController::class, 'regis']);
-// Route::post('/registrasi', [RegisterController::class, 'store']);
+Route::post('/keluar', [LoginController::class, 'keluar']);
+
+
+Route::get('/registrasi', [RegisterController::class, 'regis']);
+Route::post('/registrasi', [RegisterController::class, 'store']);
 
 
 Route::get('/beranda', [HomeController::class, 'beranda']);
@@ -50,8 +52,19 @@ Route::get('/kelolaoperator/hapusoperator', [OperatorController::class, 'hapusop
 
 // SISWA
 
-Route::get('/inputsiswa/tambahsiswa', [SiswaController::class, 'tambahsis']);
+Route::get('/inputsiswa/tambahsiswa', [SiswaController::class, 'tambahsis'])->name('/inputsiswa/tambahsiswa');;
+Route::post('/insertsiswa', [SiswaController::class, 'store'])->name('/insertsiswa');
+
+
 Route::get('/inputsiswa/editsiswa', [SiswaController::class, 'editsis']);
-Route::get('/inputsiswa/lihatsiswa', [SiswaController::class, 'lihatsis']);
+Route::get('/inputsiswa/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('inputsiswa/lihatsiswa');
+Route::get('/inputsiswa/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'lihat_s']);
+
 Route::get('/inputsiswa/importsiswa', [SiswaController::class, 'import']);
 Route::get('/inputsiswa/carisiswa', [SiswaController::class, 'carisis']);
+
+// Route::resource('/inputsiswa/tambahsiswa', SiswaController::class)->middleware('auth');
+// Route::resource('/inputsiswa/tambahsiswa', [SiswaController::class, 'tambahsis'])->middleware('auth');
+
+// TRAINING DATA
+

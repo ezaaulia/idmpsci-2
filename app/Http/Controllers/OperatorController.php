@@ -50,7 +50,7 @@ class OperatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function lihatope($id)
+    public function lihatope()
     {
         return view('operator.isilihatope' , [
             "title" => "Lihat Operator"

@@ -30,16 +30,16 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($operators as $operator)
+                                        {{-- @foreach ($operators as $operator) --}}
                                         <tr>
-                                            <td class="cell">{{ $loop->iteration }}</td>
-                                            <td class="cell">{{  }}</td>
+                                            <td class="cell"></td>{{--  {{ $loop->iteration }} --}}
+                                            <td class="cell"></td>
                                             <td class="cell">John Sanders</td>
                                             <td class="cell"><span>17 Oct</span><span class="note">2:16 PM</span></td>
                                             <td class="cell"><span class="badge bg-success">Paid</span></td>
                                             <td class="cell"><a class="btn-sm app-btn-secondary" href="#">View</a></td>
                                         </tr>
-                                        @endforeach
+                                        {{-- @endforeach --}}
                                         
                                         
                                     </tbody>

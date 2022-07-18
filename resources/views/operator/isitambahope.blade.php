@@ -36,7 +36,7 @@
 								        <a type="submit" class="btn app-btn-secondary" href="#">Batal</a>
 								    </div>
 								    <div class="col-auto">
-								        <a type="submit" class="btn app-btn-primary" href="#">Simpan</a>
+								        <a type="submit" class="btn app-btn-primary" href="/kelolaoperator/lihatoperator">Simpan</a>
 								    </div>
 							    </div>
 

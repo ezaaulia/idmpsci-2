@@ -2,36 +2,105 @@
 
 @section('isi')
 
+
 <div class="app-wrapper">
+
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">	    
-            <h1 class="app-page-title">Beranda</h1>
+            <h1 class="app-page-title">Lihat Siswa</h1>
+            
+            <hr class="mb-4"> {{-- garis panjang --}}
+            <div class="tab-content" id="orders-table-tab-content">
+                <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+                  <div class="app-card app-card-orders-table shadow-sm mb-5">
+                    <div class="app-card-body">
+                      <div class="table-responsive">
+                        <table class="table app-table-hover mb-0 text-left">
+                          <thead>
+                            <tr>
+                              <th class="cell">No.</th>
+                              <th class="cell">Nama Siswa</th>
+                              <th class="cell">NIS</th>
+                              {{-- <th class="cell">Asal Sekolah</th> --}}
+                              {{-- <th class="cell">Alamat</th> --}}
+                              <th class="cell">Nilai Tes MTK</th>
+                              <th class="cell">Nilai Tes IPA</th>
+                              <th class="cell">Nilai Tes Agama</th>
+                              <th class="cell">Nilai Tes B.I</th>
+                              <th class="cell">Ket</th>
+                              <th class="cell">Aksi</th>
+                            </tr>
+                          </thead>
 
-            <div class="search-mobile-trigger d-sm-none col">
-                <i class="search-mobile-trigger-icon fas fa-search"></i>
-            </div>
+                          <tbody>
+                            <tr>
+                              @foreach ($siswa as $data_s)
+                                  <td class="cell">{{ $loop->iteration }}.</td>
+                                  <td class="cell">{{ $data_s->nama }}</td>
+                                  <td class="cell">{{ $data_s->id }}</td>
+                                    @foreach ($nilai as $data_n)
+                                      <td class="cell">{{ $data_n->nilai_tes_mtk }}
+                                      <td class="cell">{{ $data_n->nilai_tes_ipa }}</td>
+                                      <td class="cell">{{ $data_n->nilai_tes_agama }}</td>
+                                      <td class="cell">{{ $data_n->nilai_tes_bindo }}</td>
+                                      {{-- <td class="cell">{{ $data_n->data_s->id }}</td> --}}
+                                    @endforeach
+                                    
+                                  <td class="cell">{{ $data_s->status_kelas }}</td>
+                                <td>
+                                  <a href="" class="btn btn-sm btn-primary me-md-1" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
+                                      <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                      <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
+                                    </svg>
+                                  </button>
+                                  <a href="" class="btn btn-sm btn-warning me-md-1" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                  </svg></button>
+                                  <a href="" class="btn btn-sm btn-danger" >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                      <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                      <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                    </svg>
+                                  </button>
+                                </td>
+                                @endforeach
+                              </tr>
+                              
 
-            <div class="app-search-box col">
-                <form class="app-search-form">
-                <input type="text" placeholder="Search..." name="search" class="form-control search-input" />
-                <button type="submit" class="btn search-btn btn-primary" value="Search"><i class="fas fa-search"></i></button>
-                </form>
-            </div>
+                          </tbody>
+                        </table>
+                      </div>
+                      <!--//table-responsive-->
+                    </div>
+                    <!--//app-card-body-->
+                  </div>
+
+                  <!--//app-card-->
+                  <nav class="app-pagination">
+                    <ul class="pagination justify-content-center">
+                      <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Sebelumnya</a>
+                      </li>
+                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <a class="page-link" href="#">Selanjutnya</a>
+                      </li>
+                    </ul>
+                  </nav>
+                  <!--//app-pagination-->
+                </div>
+                <!--//tab-pane-->
+              </div>
+                
         </div>
     </div>
 </div>
 
 
-{{-- <div class="row">
-    <div class="col md-6">
-        <form class="action">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Search" name="search">
-                <button class="btn btn-outline-secondary" type="submit">Cari</button>
-              </div>
-        </form>
-    </div>
-</div> --}}
 
 @endsection
 

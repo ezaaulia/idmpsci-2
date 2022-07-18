@@ -16,7 +16,7 @@ class LoginController extends Controller
     }
 
 
-    public function auth(Request $request)
+    public function authenticate(Request $request)
     {
         $credentials = $request->validate([
             'email' => 'required|email:dns',
@@ -31,14 +31,14 @@ class LoginController extends Controller
         return back()->with('loginError', 'Gagal Login!');
     }
 
-    // public function keluar(Request $request)
-    // {
-    //     Auth::keluar();
+    public function keluar(Request $request)
+    {
+        Auth::keluar();
 
-    //     $request->session()->invalidate();
+        $request->session()->invalidate();
 
-    //     $request->session()->regenerateToken();
+        $request->session()->regenerateToken();
 
-    //     return redirect('/login');
-    // }
+        return redirect('/login');
+    }
 }
