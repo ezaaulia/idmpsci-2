@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\NilaiTes;
 use Illuminate\Http\SiswaController;
 use Ramsey\Uuid\Rfc4122\NilUuid;
 
@@ -18,27 +19,30 @@ class DataSiswa extends Model
     //      DB::table('data_siswas')->insert($inserts);
     // }
 
+    protected $table = 'data_siswas';
+
     protected $fillable = [
-        'id', 'nama', 'status_kelas',
+        'nis', 
+        'nama', 
+        'status_kelas',
         
     ];
 
-    public function allData()
-    {
-        return DB::table('data_siswas')->get();
-    }
+    // public function allData()
+    // {
+    //     return DB::table('data_siswas')->get();
+    // }
 
-    public function NilaiTes()
+    public function nilai_tes()
     {
-        return $this->hasOne(NilaiTes::class);
+        return $this->hasOne(NilaiTes::class, 'data_siswas_nis', 'nis');
         
     }
 
-    // ini untuk detail persiswa
-    // public function lihatsiswa($id)
-    // {
-    //     return DB::table('data_siswas')->where('id', $id)->first();
-
-    // }
+    //ini untuk detail persiswa
+    public function detailsis($nis)
+    {
+        return DB::table('data_siswas')->where('nis', $nis)->first();
+    }
 
 }

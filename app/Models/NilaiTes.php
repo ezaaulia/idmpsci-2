@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Models\DataSiswa;
 
 class NilaiTes extends Model
 {
@@ -15,24 +16,31 @@ class NilaiTes extends Model
     //      DB::table('nilai_tes')->insert($insertn);
     // }
 
+    protected $table = 'nilai_tes';
+
     protected $fillable = [
-        'nilai_tes_mtk', 'nilai_tes_ipa', 'nilai_tes_agama', 'nilai_tes_bindo',
+        'id',
+        'data_siswas_nis',
+        'nilai_tes_mtk', 
+        'nilai_tes_ipa', 
+        'nilai_tes_agama', 
+        'nilai_tes_bindo',
     ];
 
-    public function allData()
-    {
-        return DB::table('nilai_tes')->get();
-    }
+    // public function allData()
+    // {
+    //     return DB::table('nilai_tes')->get();
+    // }
 
-    public function DataSiswa()
+    public function data_siswas()
     {
         return $this->belongsTo(DataSiswa::class);
     }
 
 
-    // public function lihatnilai($users_id)
-    // {
-    //     return DB::table('nilai_tes')->where('users_id', $users_id)->first();
+    public function lihatnilai($id)
+    {
+        return DB::table('nilai_tes')->where('id', $id)->first();
 
-    // }
+    }
 }

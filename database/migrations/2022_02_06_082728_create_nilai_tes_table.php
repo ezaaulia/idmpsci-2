@@ -15,7 +15,7 @@ class CreateNilaiTesTable extends Migration
     {
         Schema::create('nilai_tes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('data_siswas_nis')->nullable();
+            $table->unsignedBigInteger('data_siswas_nis');
             $table->unsignedBigInteger('users_id')->nullable();
             $table->integer('nilai_tes_mtk');
             $table->integer('nilai_tes_ipa');
