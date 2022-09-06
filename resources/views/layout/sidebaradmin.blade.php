@@ -4,7 +4,7 @@
         <a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
         
         <div class="app-branding"> {{-- ngatur tampilan logo --}}
-            <a class="app-logo"><img class="logo-icon me-2" src="assets/images/smp.png" alt="logo"/><span class="logo-text">IDMPSCI</span></a>
+            <a class="app-logo"><img class="logo-icon me-2" src="{{asset('assets/images/smp.png')}}" alt="logo"/><span class="logo-text">IDMPSCI</span></a>
         </div>  
         
         <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1"> {{-- untuk mengatur tampilan tulisan, warna dan efek di sidebar --}}
