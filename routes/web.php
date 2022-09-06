@@ -52,16 +52,18 @@ Route::get('/kelolaoperator/hapusoperator', [OperatorController::class, 'hapusop
 
 // SISWA
 
-Route::get('/inputsiswa/tambahsiswa', [SiswaController::class, 'tambahsis'])->name('/inputsiswa/tambahsiswa');;
-Route::post('/insertsiswa', [SiswaController::class, 'store'])->name('/insertsiswa');
-
+Route::get('/inputsiswa/tambahsiswa', [SiswaController::class, 'tambahsis'])->name('/inputsiswa/tambahsiswa');
+Route::post('/inputsiswa/save', [SiswaController::class, 'save']);
+// Route::post('/save', [SiswaController::class, 'save']);
 
 Route::get('/inputsiswa/editsiswa', [SiswaController::class, 'editsis']);
 
 Route::get('/inputsiswa/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('inputsiswa/lihatsiswa');
-Route::get('/inputsiswa/lihatsiswa/detailsiswa/{nis,id}', [SiswaController::class, 'details']);
+Route::get('/inputsiswa/tambahnilai', [SiswaController::class, 'tambahnil']);
+Route::get('/inputsiswa/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
 
 Route::get('/inputsiswa/importsiswa', [SiswaController::class, 'import']);
+
 Route::get('/inputsiswa/carisiswa', [SiswaController::class, 'carisis']);
 
 // Route::resource('/inputsiswa/tambahsiswa', SiswaController::class)->middleware('auth');

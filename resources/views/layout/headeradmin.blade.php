@@ -12,10 +12,7 @@
                 
                 <div class="app-utilities col-auto">
                     <div class="app-utility-item app-user-dropdown dropdown">
-                        <a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
-                            <img src="{{asset('assets/images/user.png')}}" alt="user profile">
-                        </a>
-
+                        <a class="btn btn-outline-success" href="lihatprofil/" role="button">{{ auth()->user()->nama }}</a>
                         <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
                             <li><a class="dropdown-item" href="/lihatprofil">Lihat Profil</a></li>
                             <li><hr class="dropdown-divider"></li>
@@ -26,3 +23,5 @@
             </div><!--//row-->
             </div><!--//app-header-content-->
         </div><!--//container-fluid-->
+
+        {{-- <h3 class="mb-3">Selamat Datang  {{ auth()->user()->nama }}</h3> --}}

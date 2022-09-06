@@ -12,75 +12,90 @@
             <hr class="mb-4"> {{-- garis panjang --}}
            
             <div class="app-card app-card-account shadow-sm d-flex flex-column align-items-start">
-              <div class="app-card-header border-bottom-0">
-                  <div class="row align-items-center gx-3">
-                      
-                  </div><!--//row-->
-              </div><!--//app-card-header-->
-              
-              <div class="app-card-body px-4 w-100"> 
-                  <div class="item border-bottom py-3">
+                <div class="app-card-header border-bottom-0">
+                    <div class="row align-items-center gx-3">
+                    </div><!--//row-->
+                </div><!--//app-card-header-->
+                <div class="app-card-body px-4 w-100"> 
+
+                  {{-- <div class="item border-bottom py-3"> --}}
+                  <div class="item border-bottom py-2">
                       <div class="row justify-content-between align-items-center">
-                          <div class="col-auto">
-                              <div class="item-label"><strong>Nama Siswa</strong></div>
-                              <div class="item-data">{{ $lihat_sis->nama }}</div>
-                          </div><!--//col-->
+                            <div class="col-auto">
+                                <div class="item-label"><strong>NIS</strong></div>
+                                <div class="item-data">{{ $lihat_sis->nis }}</div>
+                            </div><!--//col-->
                       </div><!--//row-->
                   </div><!--//item-->
-                  <div class="item border-bottom py-3">
+
+                  <div class="item border-bottom py-2">
                       <div class="row justify-content-between align-items-center">
-                          <div class="col-auto">
-                              <div class="item-label"><strong>NIS</strong></div>
-                              <div class="item-data">{{ $lihat_sis->id }}</div>
-                          </div><!--//col-->
+                            <div class="col-auto">
+                                <div class="item-label"><strong>Nama Siswa</strong></div>
+                                <div class="item-data">{{ $lihat_sis->nama }}</div>
+                            </div><!--//col-->
+                     </div><!--//row-->
+                  </div><!--//item-->
+
+                  <div class="item border-bottom py-2">
+                      <div class="row justify-content-between align-items-center">
+                            <div class="col-auto">
+                                <div class="item-label"><strong>Asal Sekolah</strong></div>
+                                <div class="item-data">{{ $lihat_sis->asal }}</div>
+                            </div><!--//col-->
                       </div><!--//row-->
                   </div><!--//item-->
-                  <div class="item border-bottom py-3">
+
+                  <div class="item border-bottom py-2">
                       <div class="row justify-content-between align-items-center">
-                          <div class="col-auto">
-                              <div class="item-label"><strong>Nilai tes MTK</strong></div>
-                              <div class="item-data">{{ $lihat_nil->nilai_tes_mtk}}</div>
-                          </div><!--//col-->
+                            <div class="col-auto">
+                                <div class="item-label"><strong>Nilai tes MTK</strong></div>
+                                <div class="item-data">{{ $lihat_nil->nilai_tes_mtk}}</div>
+                            </div><!--//col-->
                       </div><!--//row-->
                   </div><!--//item-->
-                  <div class="item border-bottom py-3">
+
+                  <div class="item border-bottom py-2">
                       <div class="row justify-content-between align-items-center">
-                          <div class="col-auto">
-                              <div class="item-label"><strong>Nilai Tes IPA</strong></div>
-                              <div class="item-data">{{ $lihat_nil->nilai_tes_ipa}}</div>
-                          </div><!--//col-->
+                            <div class="col-auto">
+                                <div class="item-label"><strong>Nilai Tes IPA</strong></div>
+                                <div class="item-data">{{ $lihat_nil->nilai_tes_ipa}}</div>
+                            </div><!--//col-->
                       </div><!--//row-->
                   </div><!--//item-->
-                  <div class="item border-bottom py-3">
+
+                  <div class="item border-bottom py-2">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
                             <div class="item-label"><strong>Nilai Tes Agama</strong></div>
                             <div class="item-data">{{ $lihat_nil->nilai_tes_agama}}</div>
                         </div><!--//col-->
                     </div><!--//row-->
-                </div><!--//item-->
-                <div class="item border-bottom py-3">
-                  <div class="row justify-content-between align-items-center">
-                      <div class="col-auto">
-                          <div class="item-label"><strong>Nilai Tes B.I</strong></div>
-                          <div class="item-data">{{ $lihat_nil->nilai_tes_bindo}}</div>
-                      </div><!--//col-->
-                  </div><!--//row-->
-              </div><!--//item-->
-              <div class="item border-bottom py-3">
-                <div class="row justify-content-between align-items-center">
-                    <div class="col-auto">
-                        <div class="item-label"><strong>Keterangan</strong></div>
-                        <div class="item-data">{{ $lihat_sis->status_kelas}}</div>
-                    </div><!--//col-->
-                </div><!--//row-->
-            </div><!--//item-->
+                  </div><!--//item-->
+
+                  <div class="item border-bottom py-2">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <div class="item-label"><strong>Nilai Tes B.I</strong></div>
+                            <div class="item-data">{{ $lihat_nil->nilai_tes_bindo}}</div>
+                        </div><!--//col-->
+                    </div><!--//row-->
+                  </div><!--//item-->
+
+                  <div class="item border-bottom py-2">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <div class="item-label"><strong>Keterangan</strong></div>
+                            <div class="item-data">{{ $lihat_nil->status_kelas}}</div>
+                        </div><!--//col-->
+                    </div><!--//row-->
+                  </div><!--//item-->
 
                   <div class="item border-bottom py-3">
                     <div class="row justify-content-center align-items-center">
-                      <div class="row justify-content-end">
+                      <div class="justify-content-start">
                         <div class="col-auto">
-                            <a type="submit" class="btn btn-warning" href="#">Edit</a>
+                            <a type="submit" class="btn app-btn-secondary" href="/inputsiswa/lihatsiswa/">Kembali</a>
                         </div>
                       </div>
                     </div>

@@ -22,27 +22,34 @@ class DataSiswa extends Model
     protected $table = 'data_siswas';
 
     protected $fillable = [
+        'id',
         'nis', 
         'nama', 
-        'status_kelas',
+        'asal',
         
     ];
 
-    // public function allData()
-    // {
-    //     return DB::table('data_siswas')->get();
-    // }
+    public function allData()
+    {
+        return DB::table('data_siswas')->get();
+    }
 
     public function nilai_tes()
     {
-        return $this->hasOne(NilaiTes::class, 'data_siswas_nis', 'nis');
+        return $this->hasOne(NilaiTes::class, 'data_siswas_id', 'id');
         
     }
 
-    //ini untuk detail persiswa
-    public function detailsis($nis)
+    // ini untuk detail persiswa
+    public function detailSis($id)
     {
-        return DB::table('data_siswas')->where('nis', $nis)->first();
+        return DB::table('data_siswas')->where('id', $id)->first();
+    }
+    
+    //ini untuk nambah data siswa 
+    public function addData($datasis)
+    {
+        DB::table('data_siswas')->insert($datasis);
     }
 
 }

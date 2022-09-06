@@ -25,7 +25,7 @@
     </div><!--//auth-background-col-->
     
     {{-- REGISTRASI --}}
-    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-5"> {{-- biar gambar naik sejajar dengan tampilan login dan tidak di bawah, ukurn gmbr udh sesuai --}}
+    <div class="col-12 col-md-7 col-lg-6 auth-main-col text-center p-4"> {{-- biar gambar naik sejajar dengan tampilan login dan tidak di bawah, ukurn gmbr udh sesuai --}}
         <div class="d-flex flex-column align-content-"> {{-- gambar dibawah tampilan login --}}
             <div class="card border-primary mb-3 shadow-sm p-3">
                 <div class="app-card-body">	
@@ -65,7 +65,6 @@
                                 @enderror
                             </div><!--//form-group-->
                             
-
                             <div class="alamat mb-1">
                                 <label class="sr-only" for="alamat">Alamat</label>
                                 <input id="alamat" name="alamat" type="alamat" class="form-control @error('alamat') is-invalid @enderror" placeholder="Alamat" required="required" value="{{ old('alamat') }}">
@@ -97,7 +96,7 @@
                             </div><!--//form-group-->
 
                             <div class="text-center">
-                                <button type="submit" class="btn app-btn-primary  theme-btn mx-auto">Daftar</button>
+                                <button type="submit" neme="proses" class="btn app-btn-primary  theme-btn mx-auto">Daftar</button>
                             </div>
                         </form>
                     </div><!--//auth-form-container-->

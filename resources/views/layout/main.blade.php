@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>IDMPSCI |  {{ $title }}</title>
+    {{-- <title>IDMPSCI |  {{ $title }}</title> --}}
     
     <!-- Meta -->
     <meta charset="utf-8">

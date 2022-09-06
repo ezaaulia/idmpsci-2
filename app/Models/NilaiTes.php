@@ -20,17 +20,18 @@ class NilaiTes extends Model
 
     protected $fillable = [
         'id',
-        'data_siswas_nis',
+        'data_siswas_id',
         'nilai_tes_mtk', 
         'nilai_tes_ipa', 
         'nilai_tes_agama', 
         'nilai_tes_bindo',
+        'status_kelas',
     ];
 
-    // public function allData()
-    // {
-    //     return DB::table('nilai_tes')->get();
-    // }
+    public function allData()
+    {
+        return DB::table('nilai_tes')->get();
+    }
 
     public function data_siswas()
     {
@@ -38,9 +39,12 @@ class NilaiTes extends Model
     }
 
 
-    public function lihatnilai($id)
+    //ini untuk detail persiswa
+    public function detailNil($id)
     {
         return DB::table('nilai_tes')->where('id', $id)->first();
 
     }
+
+    
 }

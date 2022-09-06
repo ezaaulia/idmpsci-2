@@ -13,12 +13,12 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" method="post" action="/insertsiswa">
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="/inputsiswa/save"> {{-- {{ URL::to('save') }} --}}
                                 @csrf
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nis" class="form-label">NIS</label>
-                                    <input type="text" class="form-control @error('id') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}" >
-                                    @error('id')
+                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}" >
+                                    @error('nis')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -35,54 +35,16 @@
                                     @enderror
                                 </div>
 
-                                <div class="mb-1">
-                                    <label for="nilai_tes_mtk" class="form-label">Nilai tes MTK</label>
-                                    <input type="text" class="form-control @error('nilai_tes_mtk') is-invalid @enderror" id="mtk" name="nilai_tes_mtk" value="{{ old('nilai_tes_mtk') }}" >
-                                    @error('nilai_tes_mtk')
-                                        <div class="invalid-feedback">
-                                                {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-1">
-                                    <label for="nilai_tes_ipa" class="form-label">Nlai Tes IPA</label>
-                                    <input type="text" class="form-control @error('nilai_tes_ipa') is-invalid @enderror" id="ipa" name="nilai_tes_ipa" value="{{ old('nilai_tes_ipa') }}" >
-                                    @error('nilai_tes_ipa')
-                                        <div class="invalid-feedback">
-                                                {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-1">
-                                    <label for="nilai_tes_agama" class="form-label">Nilai Tes Agama</label>
-                                    <input type="text" class="form-control @error('nilai_tes_agama') is-invalid @enderror" id="agama" name="nilai_tes_agama" value="{{ old('nilai_tes_agama') }}" >
-                                    @error('nilai_tes_agama')
-                                        <div class="invalid-feedback">
-                                                {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-
-                                <div class="mb-1">
-                                    <label for="nilai_tes_bindo" class="form-label">Nilai Tes B.I</label>
-                                    <input type="text" class="form-control @error('nilai_tes_bindo') is-invalid @enderror" id="bindo" name="nilai_tes_bindo" value="{{ old('nilai_tes_bindo') }}" >
-                                    @error('nilai_tes_bindo')
-                                        <div class="invalid-feedback">
-                                                {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                
                                 <div class="mb-3">
-                                    <label for="kelas" class="form-label">Ket Kelas</label>
-                                    <select class="form-select" name="status_kelas" orto-label="Default select example">
-                                        <option selected>Pilih kelas</option>
-                                        <option value="reguler" selected>Reguler</option>
-                                        <option value="ci" selected>CI</option>
-                                    </select>
+                                    <label for="asal" class="form-label">Asal Sekolah</label>
+                                    <input type="text" class="form-control @error('asal') is-invalid @enderror" id="asal" name="asal" value="{{ old('asal') }}" >
+                                    @error('asal')
+                                        <div class="invalid-feedback">
+                                                {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
+
 
                                 <div class="row justify-content-between">
 								    <div class="col-auto">
