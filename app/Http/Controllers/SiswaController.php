@@ -142,16 +142,22 @@ class SiswaController extends Controller
 
     public function details($id) //NilaiTes $nilaites
     {
-        $detail_s = [
-            'lihat_sis' => $this->DataSiswa->detailSis($id),
-        ];
+        // $detail_s = [
+        //     'lihat_sis' => $this->DataSiswa->detailSis($id),
+        // ];
 
-        $detail_n = [
-            'lihat_nil' => $this->NilaiTes->detailNil($id),
-        ];
+        // $detail_n = [
+        //     'lihat_nil' => $this->NilaiTes->detailNil($id),
+        // ];
+        $lihatnil = $this->NilaiTes->detailNil($id);
+        $lihatsis = $this->DataSiswa->detailSis($id);
 
-        return view('siswa.isidetailsis' , $detail_s , $detail_n , [
-            'title' => 'Detail Data Siswa'
+
+        return view('siswa.isidetailsis', 
+        [
+            'title' => 'Detail Data Siswa', 
+            'lihatnil' => $lihatnil,
+            'lihatsis' =>$lihatsis,
         ]);
     }
 
