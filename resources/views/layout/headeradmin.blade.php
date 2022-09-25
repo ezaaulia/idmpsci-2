@@ -11,14 +11,7 @@
 
                 
                 <div class="app-utilities col-auto">
-                    <div class="app-utility-item app-user-dropdown dropdown">
                         <a class="btn btn-outline-success" href="lihatprofil/" role="button">{{ auth()->user()->nama }}</a>
-                        <ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
-                            <li><a class="dropdown-item" href="/lihatprofil">Lihat Profil</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/editprofil">Edit Profil</a></li>
-                        </ul>
-                    </div><!--//app-user-dropdown--> 
                 </div><!--//app-utilities-->
             </div><!--//row-->
             </div><!--//app-header-content-->

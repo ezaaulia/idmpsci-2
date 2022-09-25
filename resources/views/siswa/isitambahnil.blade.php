@@ -13,19 +13,10 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" method="post" action="{{ URL::to('save') }}">
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="/tambahnilai/save">
                                 @csrf
+                                
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
-                                    <label for="nis" class="form-label">NIS</label>
-                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis') }}" >
-                                    @error('nis')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                    @enderror
-                                </div> 
-
-                                <div class="mb-1">
                                     <label for="nilai_tes_mtk" class="form-label">Nilai tes MTK</label>
                                     <input type="text" class="form-control @error('nilai_tes_mtk') is-invalid @enderror" id="mtk" name="nilai_tes_mtk" value="{{ old('nilai_tes_mtk') }}" >
                                     @error('nilai_tes_mtk')
@@ -68,11 +59,14 @@
                                 <div class="mb-3">
                                     <label for="kelas" class="form-label">Ket Kelas</label>
                                     <div class="col-auto">
-                                        <select class="form-select" name="status_kelas" orto-label="Default select example">
-                                            <option selected>Pilih kelas</option>
-                                            <option value="reguler" selected>Reguler</option>
-                                            <option value="ci" selected>CI</option>
-                                        </select>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="reg" value="reguler">
+                                            <label class="form-check-label" for="reg">Reguler</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ci" value="ci">
+                                            <label class="form-check-label" for="ci">CI</label>
+                                        </div>
                                     </div>
                                 </div>
 

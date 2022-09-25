@@ -52,4 +52,20 @@ class DataSiswa extends Model
         DB::table('data_siswas')->insert($datasis);
     }
 
+    //ini untuk edit data siswa
+    public function editData($id, $datasis)
+    {
+        DB::table('data_siswas')
+            ->where('id', $id)
+            ->update($datasis);
+    }
+
+    //ini untuk hapus data siswa
+    // public function deleteData($id)
+    // {
+    //     DB::table('data_siswas')
+    //         ->where('id', $id)
+    //         ->delete();
+    // }
+
 }

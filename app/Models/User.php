@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -50,4 +51,11 @@ class User extends Authenticatable
         return $this->hasMany(RoleUser::class);
     }
     
+    //ini untuk edit data siswa
+    public function editp($id, $profil)
+    {
+        DB::table('users')
+            ->where('id', $id)
+            ->update($profil);
+    }
 }

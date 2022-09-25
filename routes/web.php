@@ -7,6 +7,8 @@ use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\LogoutController;
 
 
 /*
@@ -24,12 +26,16 @@ use App\Http\Controllers\RegisterController;
 //     return view('welcome');
 // });
 
-Route::get('/login', [LoginController::class, 'login']);
+
+// LOGIN
+
+Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 
-Route::post('/keluar', [LoginController::class, 'keluar']);
+Route::post('/keluar', [LogoutController::class, 'keluar']);
 
+// REGISTER
 
 Route::get('/registrasi', [RegisterController::class, 'regis']);
 Route::post('/registrasi', [RegisterController::class, 'store']);
@@ -37,37 +43,48 @@ Route::post('/registrasi', [RegisterController::class, 'store']);
 
 Route::get('/beranda', [HomeController::class, 'beranda']);
 
-//PROFIL
+// PROFIL
 
 Route::get('/lihatprofil', [ProfilController::class, 'lihatprofil']);
-Route::get('/editprofil', [ProfilController::class, 'editprofil']);
+Route::get('/editprofil', [ProfilController::class, 'editprofil'])->name('editprofil');
+Route::post('/editprofil/update/{id}', [ProfilController::class, 'update']);
 
 
 // OPERATOR
 
-Route::get('/kelolaoperator/tambahoperator', [OperatorController::class, 'tambahope']);
-Route::get('/kelolaoperator/lihatoperator', [OperatorController::class, 'lihatope']);
-Route::get('/kelolaoperator/hapusoperator', [OperatorController::class, 'hapusope']);
+Route::get('/tambahoperator', [OperatorController::class, 'tambahope']);
+Route::get('/lihatoperator', [OperatorController::class, 'lihatope']);
+Route::get('/hapusoperator', [OperatorController::class, 'hapusope']);
 
 
 // SISWA
 
-Route::get('/inputsiswa/tambahsiswa', [SiswaController::class, 'tambahsis'])->name('/inputsiswa/tambahsiswa');
-Route::post('/inputsiswa/save', [SiswaController::class, 'save']);
+Route::get('/tambahsiswa', [SiswaController::class, 'tambahsis'])->name('tambahsiswa', 'tambahnilai');
+Route::post('/tambahsiswa/save', [SiswaController::class, 'save']);
 // Route::post('/save', [SiswaController::class, 'save']);
 
-Route::get('/inputsiswa/editsiswa', [SiswaController::class, 'editsis']);
 
-Route::get('/inputsiswa/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('inputsiswa/lihatsiswa');
-Route::get('/inputsiswa/tambahnilai', [SiswaController::class, 'tambahnil']);
-Route::get('/inputsiswa/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
+Route::get('/tambahnilai', [NilaiController::class, 'tambahnil'])->name('tambahnilai');
+Route::post('/tambahnilai/save', [NilaiController::class, 'save']);
 
-Route::get('/inputsiswa/importsiswa', [SiswaController::class, 'import']);
 
-Route::get('/inputsiswa/carisiswa', [SiswaController::class, 'carisis']);
+// Route::get('/editsiswa', [SiswaController::class, 'editsis']);
+Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis']);
+Route::post('/lihatsiswa/update/{id}', [SiswaController::class, 'update']);
 
-// Route::resource('/inputsiswa/tambahsiswa', SiswaController::class)->middleware('auth');
-// Route::resource('/inputsiswa/tambahsiswa', [SiswaController::class, 'tambahsis'])->middleware('auth');
+Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy']);
+// Route::post('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy']);
+
+Route::get('/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('lihatsiswa');
+Route::get('/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
+// Route::get('/lihatsiswa/detailsiswa/{id}', [NilaiController::class, 'detailn'])
+
+
+// Route::get('/importsiswa', [SiswaController::class, 'import']);
+
+
+// Route::get('/carisiswa', [SiswaController::class, 'carisis']);
+
 
 // TRAINING DATA
 

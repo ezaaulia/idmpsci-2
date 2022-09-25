@@ -42,7 +42,7 @@
                     </a><!--//nav-link-->
                     <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('kelolaoperator/tambahoperator') ? 'active' : '' }}" href="/kelolaoperator/tambahoperator">Tambah</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahoperator') ? 'active' : '' }}" href="/kelolaoperator/tambahoperator">Tambah</a></li>
                         </ul>
                     </div>
                 </li><!--//nav-item-->
@@ -67,11 +67,11 @@
                     </a><!--//nav-link-->
                     <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('inputsiswa/tambahsiswa') ? 'active' : '' }}" href="/inputsiswa/tambahsiswa">Tambah Data</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('inputsiswa/lihatsiswa*') ? 'active' : '' }}" href="/inputsiswa/lihatsiswa">Lihat Siswa</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('inputsiswa/editsiswa*') ? 'active' : '' }}" href="/inputsiswa/editsiswa">Edit Data</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('inputsiswa/importsiswa*') ? 'active' : '' }}" href="/inputsiswa/importsiswa">Import Data</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('inputsiswa/carisiswa*') ? 'active' : '' }}" href="/inputsiswa/carisiswa">Cari Siswa</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahsiswa') ? 'active' : '' }}" href="/tambahsiswa">Tambah Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatsiswa*') ? 'active' : '' }}" href="/lihatsiswa">Lihat Siswa</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('editsiswa*') ? 'active' : '' }}" href="/editsiswa">Edit Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('importsiswa*') ? 'active' : '' }}" href="/importsiswa">Import Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('carisiswa*') ? 'active' : '' }}" href="/carisiswa">Cari Siswa</a></li>
                         </ul>
                     </div>
                 </li><!--//nav-item-->
@@ -105,16 +105,18 @@
 
                 <li class="nav-item">
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                    <a class="nav-link" href="/keluar"> {{-- harusnya ini /keluar --}}
-                        <span class="nav-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                              </svg>
-                        </span>
-                        <span class="nav-link-text">Keluar</span>
-                         @csrf
-                    </a><!--//nav-link-->
+                    <form action="/keluar" method="post" id="logout-form" >
+                        @csrf
+                        <button class="btn border-0" type="submit"> 
+                            <span class="nav-icon" >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                                </svg>
+                            </span>
+                            <span class="nav-link-text">Keluar</span>
+                        </button><!--//nav-link-->
+                    </form>
                 </li><!--//nav-item-->
 
 

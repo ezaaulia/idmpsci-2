@@ -95,7 +95,7 @@
                     <div class="row justify-content-center align-items-center">
                       <div class="justify-content-start">
                         <div class="col-auto">
-                            <a type="submit" class="btn app-btn-secondary" href="/inputsiswa/lihatsiswa/">Kembali</a>
+                            <a type="submit" class="btn app-btn-secondary" href="/lihatsiswa">Kembali</a>
                         </div>
                       </div>
                     </div>

@@ -11,23 +11,59 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-4">
                         <div class="app-card-body">
-                            <form class="settings-form">
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="/editprofil/update/">
+                                @csrf
+
                                 <div class="mb-3"> {{-- jarak antara form 1 dan tulisan contact name --}}
-                                    <label for="setting-input-1" class="form-label">Nama</label>
-                                    <input type="text" class="form-control" id="setting-input-1">
+                                    <label for="nama" class="form-label">Nama</label>
+                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nis" value="">
+                                    @error('nama')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="setting-input-2" class="form-label">Alamat</label>
-                                    <input type="text" class="form-control" id="setting-input-2">
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="" readonly>
+                                    @error('email')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="setting-input-3" class="form-label">No. HP</label>
-                                    <input type="text" class="form-control" id="setting-input-3">
+                                    <label for="username" class="form-label">Username</label>
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="">
+                                    @error('username')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="setting-input-4" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="setting-input-4">
+                                    <label for="alamat" class="form-label">Alamat</label>
+                                    <input type="text" class="form-control @error('alamat') is-invalid @enderror" id="alamat" name="alamat" value="">
+                                    @error('alamat')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
+
+                                <div class="mb-3">
+                                    <label for="no_hp" class="form-label">No. HP</label>
+                                    <input type="text" class="form-control @error('no_hp') is-invalid @enderror" id="no_hp" name="no_hp" value="">
+                                    @error('no_hp')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div>
+                                
 
                                 <div class="row justify-content-between">
 								    <div class="col-auto">

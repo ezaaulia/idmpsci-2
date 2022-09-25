@@ -31,14 +31,14 @@ class LoginController extends Controller
         return back()->with('loginError', 'Gagal Login!');
     }
 
-    public function keluar(Request $request)
-    {
-        Auth::keluar();
+    // public function keluar(Request $request)
+    // {
+    //     Auth::keluar();
 
-        $request->session()->invalidate();
+    //     $request->session()->invalidate();
 
-        $request->session()->regenerateToken();
+    //     $request->session()->regenerateToken();
 
-        return redirect('/login');
-    }
+    //     return redirect('/login');
+    // }
 }
