@@ -9,7 +9,7 @@ class HomeController extends Controller
     public function beranda()
     {
         return view('isiadmin' , [
-            "title" => "Beranda"
+            'title' => 'Beranda'
         ]);
 
     }

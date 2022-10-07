@@ -40,14 +40,17 @@ Route::post('/keluar', [LogoutController::class, 'keluar']);
 Route::get('/registrasi', [RegisterController::class, 'regis']);
 Route::post('/registrasi', [RegisterController::class, 'store']);
 
+// HOMEPAGE
 
 Route::get('/beranda', [HomeController::class, 'beranda']);
 
-// PROFIL
+// PROFIL USER
+// ---------- LIHAT ----------
+Route::get('/lihatprofil', [ProfilController::class, 'lihatprofil'])->name('lihatprofil');
 
-Route::get('/lihatprofil', [ProfilController::class, 'lihatprofil']);
-Route::get('/editprofil', [ProfilController::class, 'editprofil'])->name('editprofil');
-Route::post('/editprofil/update/{id}', [ProfilController::class, 'update']);
+// ---------- EDIT ----------
+Route::get('/editprofil/{id}', [ProfilController::class, 'editprofil'])->name('editprofil');
+Route::patch('/editprofil/update/{id}', [ProfilController::class, 'update']);
 
 
 // OPERATOR
@@ -58,26 +61,35 @@ Route::get('/hapusoperator', [OperatorController::class, 'hapusope']);
 
 
 // SISWA
-
+// ---------- TAMBAH SISWA ----------
 Route::get('/tambahsiswa', [SiswaController::class, 'tambahsis'])->name('tambahsiswa', 'tambahnilai');
 Route::post('/tambahsiswa/save', [SiswaController::class, 'save']);
-// Route::post('/save', [SiswaController::class, 'save']);
 
+// ---------- TAMBAH NILAI ----------
 
-Route::get('/tambahnilai', [NilaiController::class, 'tambahnil'])->name('tambahnilai');
-Route::post('/tambahnilai/save', [NilaiController::class, 'save']);
+Route::get('/tambahnilai/{id}', [NilaiController::class, 'tambahnil'])->name('tambahnilai');
+Route::post('/tambahnilai/save/{id}', [NilaiController::class, 'save']);
 
-
-// Route::get('/editsiswa', [SiswaController::class, 'editsis']);
-Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis']);
-Route::post('/lihatsiswa/update/{id}', [SiswaController::class, 'update']);
-
-Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy']);
-// Route::post('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy']);
+// ---------- LIHAT SISWA DAN DETAIL SISWA ----------
 
 Route::get('/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('lihatsiswa');
 Route::get('/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
-// Route::get('/lihatsiswa/detailsiswa/{id}', [NilaiController::class, 'detailn'])
+
+// ---------- EDIT SISWA ----------
+
+Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis'])->name('editsiswa');
+Route::patch('/lihatsiswa/update/{id}', [SiswaController::class, 'update']);
+
+// ---------- EDIT NILAI ----------
+
+// Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis'])->name('editsiswa');
+// Route::put('/lihatsiswa/update/{id}', [SiswaController::class, 'update']);
+
+
+// ---------- DELETE SISWA ----------
+
+Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'])->name('deletesiswa');
+
 
 
 // Route::get('/importsiswa', [SiswaController::class, 'import']);

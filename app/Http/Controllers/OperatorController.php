@@ -53,7 +53,7 @@ class OperatorController extends Controller
     public function lihatope()
     {
         return view('operator.isilihatope' , [
-            "title" => "Lihat Operator"
+            'title' => 'Lihat Operator'
             ]);
     }
 

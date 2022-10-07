@@ -44,10 +44,5 @@ class NilaiTes extends Model
         return DB::table('nilai_tes')->where('id', $id)->first();
 
     }
-
-    //ini untuk nambah nilai siswa 
-    public function addNilai($datanil)
-    {
-        DB::table('nilai_tes')->insert($datanil);
-    }
+    
 }

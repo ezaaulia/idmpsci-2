@@ -13,7 +13,7 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" enctype="multipart/form-data" method="post" action="/tambahnilai/save">
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('tambahnilai/save/'.$idsiswa)}}">
                                 @csrf
                                 
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
@@ -60,19 +60,19 @@
                                     <label for="kelas" class="form-label">Ket Kelas</label>
                                     <div class="col-auto">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="reg" value="reguler">
+                                            <input class="form-check-input" type="radio" name="status_kelas" id="reg" value="reguler">
                                             <label class="form-check-label" for="reg">Reguler</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ci" value="ci">
+                                            <input class="form-check-input" type="radio" name="status_kelas" id="ci" value="ci">
                                             <label class="form-check-label" for="ci">CI</label>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row justify-content-between">
-								    <div class="col-auto">
-								        <button type="submit" class="btn app-btn-secondary">Batal</button>
+                                    <div class="col-auto">
+								        <a type="submit" class="btn app-btn-primary" href="{{ url('lihatsiswa') }}">Batal</a>
 								    </div>
 								    <div class="col-auto">
 								        <button type="submit" class="btn app-btn-primary">Simpan</button>

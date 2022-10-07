@@ -10,7 +10,7 @@ class LoginController extends Controller
     public function login()
     {
         return view('isilogin' , [
-            "title" => "Login"
+            'title' => 'Login'
         ]);
 
     }

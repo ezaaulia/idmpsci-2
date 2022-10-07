@@ -12,7 +12,7 @@ class RegisterController extends Controller
     public function regis()
     {
         return view('isiregis' , [
-            "title" => "Registrasi"
+            'title' => 'Registrasi'
         ]);
 
     }

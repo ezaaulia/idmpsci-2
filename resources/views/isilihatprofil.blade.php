@@ -23,49 +23,49 @@
                     </div><!--//row-->
                 </div><!--//app-card-header-->
                 
-                @foreach ($profil as $user)
+                @foreach ($profil as $userp)
                 <div class="app-card-body px-4 w-100"> 
-                    <div class="item border-bottom py-3">
+                    <div class="item border-bottom py-2">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
                                 <div class="item-label"><strong>Nama</strong></div>
-                                <div class="item-data">{{ $user->nama }}</div>
+                                <div class="item-data">{{ $userp->nama }}</div>
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//item-->
 
-                    <div class="item border-bottom py-3">
+                    <div class="item border-bottom py-2">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
                                 <div class="item-label"><strong>Email</strong></div>
-                                <div class="item-data">{{ $user->email }}</div>
+                                <div class="item-data">{{ $userp->email }}</div>
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//item-->
 
-                    <div class="item border-bottom py-3">
+                    <div class="item border-bottom py-2">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
                                 <div class="item-label"><strong>Username</strong></div>
-                                <div class="item-data">{{ $user->username }}</div>
+                                <div class="item-data">{{ $userp->username }}</div>
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//item-->
 
-                    <div class="item border-bottom py-3">
+                    <div class="item border-bottom py-2">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
                                 <div class="item-label"><strong>Alamat</strong></div>
-                                <div class="item-data">{{ $user->alamat }}</div>
+                                <div class="item-data">{{ $userp->alamat }}</div>
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//item-->
 
-                    <div class="item border-bottom py-3">
+                    <div class="item border-bottom py-2">
                         <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
                                 <div class="item-label"><strong>No. HP</strong></div>
-                                <div class="item-data">{{ $user->no_hp }}</div>
+                                <div class="item-data">{{ $userp->no_hp }}</div>
                             </div><!--//col-->
                         </div><!--//row-->
                     </div><!--//item-->
@@ -75,7 +75,7 @@
                         <div class="row justify-content-center align-items-center">
                           <div class="row justify-content-end">
                             <div class="col-auto">
-                                <a type="submit" class="btn btn-warning" href="/editprofil">Edit</a>
+                                <a type="submit" class="btn btn-warning" href="{{ url('editprofil/'.$userp->id)}}">Edit</a>
                             </div>
                           </div>
                         </div>

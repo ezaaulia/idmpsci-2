@@ -7,7 +7,15 @@
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">	    
             <h1 class="app-page-title">Lihat Siswa</h1>
-            
+
+            <div class="row justify-content-center align-items-center">
+              <div class="row justify-content-end">
+                <div class="col-auto">
+                  <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
+                </div>
+              </div>
+            </div>
+
             <hr class="mb-4"> {{-- garis panjang --}}
 
             @if (session('pesan'))
@@ -44,40 +52,35 @@
                           </thead>
 
                           <tbody>
-                            @foreach($siswa as $datas)
+                            @foreach($lhtsiswa as $datas)
                               <tr>
                                   <td class="cell">{{ $loop->iteration }}.</td>
                                   <td class="cell">{{ $datas->nis }}</td>
                                   <td class="cell">{{ $datas->nama }}</td>
                                   <td class="cell">{{ $datas->asal }}</td>
-                                  {{-- <td class="cell">{{ $datas->nilai_tes->nilai_tes_mtk }}</td>
-                                  <td class="cell">{{ $datas->nilai_tes->nilai_tes_ipa }}</td>
-                                  <td class="cell">{{ $datas->nilai_tes->nilai_tes_agama }}</td>
-                                  <td class="cell">{{ $datas->nilai_tes->nilai_tes_bindo }}</td>
-                                  <td class="cell">{{ $datas->status_kelas }}</td>  --}}
                                   
                                   <td class="cell"> 
                                     <div class="app-card-footer mt-auto">
-                                      <a class="btn app-btn-secondary" href="tambahnilai">Tambah Nilai</a>
+                                      <a class="btn app-btn-secondary" href="{{ url('tambahnilai/'.$datas->id) }}">Tambah Nilai</a>
                                     </div>
                                   </td>
                                   
                                   <td class="cell">  
-                                    <a href="/lihatsiswa/detailsiswa/{{ $datas->id }}" class="btn btn-sm btn-primary ">
+                                    <a href="{{ url('lihatsiswa/detailsiswa/'.$datas->id) }}" class="btn btn-sm btn-primary ">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">
                                         <path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
                                         <path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
                                       </svg>
                                     </a>
                                     
-                                    <a href="/lihatsiswa/editsiswa/{{ $datas->id }}" class="btn btn-sm btn-warning" >
+                                    <a href="{{ url('lihatsiswa/editsiswa/'.$datas->id) }}" class="btn btn-sm btn-warning" >
                                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
                                       <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
                                       <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
                                     </svg>
                                     </a>
 
-                                    <form action="/lihatsiswa/deletesiswa/{{ $datas->id }}" method="post" class="d-inline">
+                                    <form action="{{ url('lihatsiswa/deletesiswa/'.$datas->id) }}" method="post" class="d-inline">
                                       @method('delete')
                                       @csrf
                                       <button class="btn btn-sm btn-danger border-0" onclick="return confirm ('Anda yakin ingin menghapus data?')"> 
@@ -93,29 +96,6 @@
 
                           </tbody>
                         </table>
-
-                    {{-- @foreach ($siswa as $datas)
-                        <div class="modal modal-danger fade" id="delete{{ $datas->id }}">
-                          <div class="modal-dialog modal-sm">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">{{ $datas->nama }}</h4>
-                              </div>
-                              <div class="modal-body">
-                                <p>Anda yakin ingin menghapus data?</p>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Tidak</button>
-                                <a href="/lihatsiswa/deletesiswa/{{ $datas->id }}" class="btn btn-outline">Yakin</a>
-                              </div>
-                            </div> {{-- modal-content --}}
-                          {{-- </div> {{-- modal-dialog --}}
-                        {{-- </div> --}}
-                    {{-- @endforeach --}}
-
 
                       </div>
                       <!--//table-responsive-->

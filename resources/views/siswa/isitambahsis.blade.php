@@ -13,7 +13,7 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" enctype="multipart/form-data" method="post" action="/tambahsiswa/save"> {{-- {{ URL::to('save') }} --}}
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ URL('tambahsiswa/save') }}"> {{-- {{ URL::to('save') }} --}}
                                 @csrf
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nis" class="form-label">NIS</label>
@@ -48,7 +48,9 @@
 
                                 <div class="row justify-content-between">
 								    <div class="col-auto">
-								        <button type="submit" class="btn app-btn-secondary">Batal</button>
+								        <a type="submit" class="btn app-btn-secondary" href="{{ url('beranda') }}">
+                                            <i class="fa fa-undo"></i> Batal
+                                        </a>
 								    </div>
 								    <div class="col-auto">
 								        <button type="submit" class="btn app-btn-primary">Simpan</button>

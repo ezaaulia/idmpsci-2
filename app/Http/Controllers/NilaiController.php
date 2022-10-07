@@ -25,27 +25,13 @@ class NilaiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->DataSiswa = new DataSiswa();
-        $this->NilaiTes = new NilaiTes();
-    }
 
-    public function tambahnil()
+    public function tambahnil($id)
     {   
-        // $data_siswas = DB::table('data_siswas')
-        //             ->join('nilai_tes', 'nilai_tes.id', '=', 'data_siswas.nilaites_id')
-        //             ->get();
 
-        // $nilaites = DB::table('nilai_tes')
-        //              ->get();
-
-
-        return view('siswa.isitambahnil', [
-            // 'data_siswas' => $data_siswas,
-            // 'nilai_tes' => $nilaites,
+        return view('siswa.isitambahnil', [ 
+            'idsiswa' => $id,
             'title' => 'Tambah Nilai Siswa'
-            
             ]);
     }
 
@@ -57,7 +43,7 @@ class NilaiController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function save(Request $request)
+    public function save(Request $request, $id)
     {
         
         // dd($request->all());
@@ -80,38 +66,89 @@ class NilaiController extends Controller
                 'status_kelas.required' => 'Kelas wajib diisi!',
         ]);
 
-        $datanil = [
-           'nilai_tes_mtk' => Request()->nilai_tes_mtk,
-           'nilai_tes_ipa' => Request()->nilai_tes_ipa,
-           'nilai_tes_agama' => Request()->nilai_tes_agama,
-           'nilai_tes_bindo' => Request()->nilai_tes_bindo,
-           'status_kelas' => Request()->status_kelas,
-        ];
+        $model = new NilaiTes();
+        $model -> nilai_tes_mtk = $request->nilai_tes_mtk;
+        $model -> nilai_tes_ipa = $request->nilai_tes_ipa;
+        $model -> nilai_tes_agama = $request->nilai_tes_agama;
+        $model -> nilai_tes_bindo = $request->nilai_tes_bindo;
+        $model -> status_kelas = $request->status_kelas;
+        $model -> data_siswas_id = $id;
+        $model->save();
 
-
-        $this->NilaiTes->addNilai($datanil);
         return redirect()->route('lihatsiswa')->with('pesan', 'Nilai Siswa Berhasil di Tambahkan!!!');
     }    
 
 
-    // public function detailn($id) //NilaiTes $nilaites
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function editsis($id)
+    {
+        // if (!$this->DataSiswa->detailSis($id)) {
+        //     abort(404);
+        // }
+
+        // $editn = NilaiTes::find($id);
+        
+        return view('siswa.isieditsis',
+        [
+            // 'editn' => $editn,
+            'title' => 'Edit Data Siswa', 
+        ]
+        );
+    }
+
+    
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    // public function update(Request $request, $id)
     // {
-    //     // $detail_s = [
-    //     //     'lihat_sis' => $this->DataSiswa->detailSis($id),
-    //     // ];
-
-    //     // $detail_n = [
-    //     //     'lihat_nil' => $this->NilaiTes->detailNil($id),
-    //     // ];
-    //     $lihatnil = $this->NilaiTes->detailNil($id);
-
-
-    //     return view('siswa.isidetailsis', 
-    //     [
-    //         'title' => 'Detail Data Siswa', 
-    //         'lihatnil' => $lihatnil,
+    //     Request()->validate([
+    //         // 'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
+    //         // 'nama' => 'required',
+    //         // 'asal' => 'required',
+    //         'nilai_tes_mtk' => 'required','numeric',
+    //         'nilai_tes_ipa' => 'required', 'numeric',
+    //         'nilai_tes_agama' => 'required', 'numeric',
+    //         'nilai_tes_bindo' => 'required', 'numeric',
+    //         'status_kelas' => 'required',
+    //     ],[
+    //         // 'nis.required' => 'NIS wajib diisi!',
+    //         // 'nis.unique' => 'NIS ini sudah ada!',
+    //         // 'nis.min' => 'NIS minimal 9 karakter!',
+    //         // 'nis.max' => 'NIS maksimal 10 karakter!',
+    //         // 'nama.required' => 'Nama wajib diisi!',
+    //         // 'asal.required' => 'Asal Sekolah wajib diisi!',
+    //         'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
+    //         'nilai_tes_mtk.numemric' => 'Nilai wajib angka!',
+    //         'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
+    //         'nilai_tes_ipa.numemric' => 'Nilai wajib angka!',
+    //         'nilai_tes_agama.required' => 'Nilai wajib diisi!',
+    //         'nilai_tes_agama.numemric' => 'Nilai wajib angka!',
+    //         'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
+    //         'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
+    //         'status_kelas.required' => 'Kelas wajib diisi!',
     //     ]);
-    // }
+        
+        
+    //     // $edit = NilaiTes::find($id);
+    //     // $edit -> nilai_tes_mtk = $request->nilai_tes_mtk;
+    //     // $edit -> nilai_tes_ipa = $request->nilai_tes_ipa;
+    //     // $edit -> nilai_tes_agama = $request->nilai_tes_agama;
+    //     // $edit -> nilai_tes_bindo = $request->nilai_tes_bindo;
+    //     // $edit -> status_kelas = $request->status_kelas;
+    //     // // $edit -> data_siswas_id = $id;
+    //     // $edit->update();
 
+    //     // return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Edit!!!');
+    // }
 
 }

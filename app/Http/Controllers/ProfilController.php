@@ -10,8 +10,8 @@ class ProfilController extends Controller
     public function lihatprofil()
     {
         return view('isilihatprofil' , [
-            "profil" => User::all(),
-            "title" => "Lihat Profil"
+            'profil' => User::all(),
+            'title' => 'Lihat Profil'
         ]);
 
     }
@@ -20,13 +20,14 @@ class ProfilController extends Controller
     public function editprofil($id)
     {
 
-        $userp = $this->User->editp($id);
+        $userp = User::find($id);
 
-        return view('isieditprofil' , [
-            'title' => 'Edit Profil',
+        return view('isieditprofil' ,
+        [
             'userp' => $userp,
+            'title' => 'Edit Profil',
         ]);
-
+        // return view('isieditprofil', compact('userp'));
     }
 
     /**
@@ -36,34 +37,32 @@ class ProfilController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id)
+    public function update(Request $request, $id)
     {
         Request()->validate([
             'nama' => 'required',
             // 'email' => 'required',
             'username' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'required|max:10', 
+            'no_hp' => 'required|max:13', 
         ],[
             'nama.required' => 'Nama wajib diisi!',
             'username.required' => 'Username wajib diisi!',
             'alamat.required' => 'Alamat wajib diisi!',
             'no_hp.required' => 'No.HP wajib diisi!',
             'no_hp.numemric' => 'No.HP wajib angka!',
-            'no_hp.max' => 'No.HO maksimal 13 karakter!',
+            'no_hp.max' => 'No.HP maksimal 13 karakter!',
         ]);
         
+        $userp = User::find($id);
+        // $userp -> update($request->all());
+        $userp -> nama = $request -> nama;
+        $userp -> username = $request -> username;
+        $userp -> alamat = $request -> alamat;
+        $userp -> no_hp = $request -> no_hp;
+        $userp->update();
 
-        $profil = [
-            'nama' => Request()->nama,
-            'username' => Request()->username,
-            'alamat' => Request()->alamat,
-            'no_hp' => Request()->no_hp,
-        ];
-
-        // $validatedData['users_id'] = auth()->user()->id;
-
-        $this->User->editp($id, $profil);
+     
         return redirect()->route('lihatprofil')->with('pesan', 'Data Diri Berhasil di Edit!!!');
     }
 }

@@ -52,10 +52,10 @@ class User extends Authenticatable
     }
     
     //ini untuk edit data siswa
-    public function editp($id, $profil)
-    {
-        DB::table('users')
-            ->where('id', $id)
-            ->update($profil);
-    }
+    // public function editp($id, $profil)
+    // {
+    //     DB::table('users')
+    //         ->where('id', $id)
+    //         ->update($profil);
+    // }
 }

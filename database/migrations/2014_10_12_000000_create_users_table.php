@@ -19,12 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('username')->unique();
             $table->string('alamat');
-            $table->bigInteger('no_hp');
+            $table->string('no_hp');
             $table->string('password');
-            //$table->string('foto');
-            
-            // $table->boolean('is_admin')->default(false);
             $table->timestamps();
+            
         });
     }
 
