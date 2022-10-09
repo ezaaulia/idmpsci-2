@@ -19,6 +19,33 @@ class NilaiController extends Controller
         //
     }
 
+    public function __construct()
+    {
+        $this->DataSiswa = new DataSiswa();
+        $this->NilaiTes = new NilaiTes();
+    }
+
+    // public function detailn($id) //NilaiTes $nilaites
+    // {
+
+    //     // if (!$this->DataSiswa->detailSis($id)) {
+    //     //     abort(404);
+    //     // }
+ 
+    //     // $lihatsis = $this->DataSiswa->detailSis($id);
+    //     $lihatnil = $this->NilaiTes->detailNil($id);
+
+    //     // $lihatsis = DataSiswa::find($id);
+    //     // $lihatnil = DataSiswa::find($id);
+
+    //     return view('siswa.isidetailsis', 
+    //     [
+    //         // 'lihatsis' =>$lihatsis,
+    //         'lihatnil' => $lihatnil,
+    //         'title' => 'Detail Data Siswa', 
+    //     ]);
+    // }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -33,7 +33,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
 
-Route::post('/keluar', [LogoutController::class, 'keluar']);
+Route::post('/keluar', [LogoutController::class, 'keluar'])->name('keluar');
 
 // REGISTER
 
@@ -74,11 +74,12 @@ Route::post('/tambahnilai/save/{id}', [NilaiController::class, 'save']);
 
 Route::get('/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('lihatsiswa');
 Route::get('/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
+// Route::get('/lihatsiswa/detailsiswa/{id}', [NilaiController::class, 'detailn']);
 
 // ---------- EDIT SISWA ----------
 
 Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis'])->name('editsiswa');
-Route::patch('/lihatsiswa/update/{id}', [SiswaController::class, 'update']);
+Route::patch('/lihatsiswa/update/', [SiswaController::class, 'update'])->name('update');
 
 // ---------- EDIT NILAI ----------
 

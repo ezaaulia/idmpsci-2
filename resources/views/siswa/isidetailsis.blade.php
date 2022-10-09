@@ -18,33 +18,34 @@
                 </div><!--//app-card-header-->
                 <div class="app-card-body px-4 w-100"> 
 
-                  {{-- <div class="item border-bottom py-3"> --}}
-                  <div class="item border-bottom py-2">
-                      <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>NIS</strong></div>
-                                <div class="item-data">{{ $lihatsis->nis }}</div>
-                            </div><!--//col-->
-                      </div><!--//row-->
-                  </div><!--//item-->
+            {{-- <div class="item border-bottom py-3"> --}}
+            <div class="item border-bottom py-2">
+                <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                          <div class="item-label"><strong>NIS</strong></div>
+                          <div class="item-data">{{ $lihatsis->nis }}</div>
+                      </div><!--//col-->
+                </div><!--//row-->
+            </div><!--//item-->
 
-                  <div class="item border-bottom py-2">
-                      <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>Nama Siswa</strong></div>
-                                <div class="item-data">{{ $lihatsis->nama }}</div>
-                            </div><!--//col-->
-                     </div><!--//row-->
-                  </div><!--//item-->
+            <div class="item border-bottom py-2">
+                <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                          <div class="item-label"><strong>Nama Siswa</strong></div>
+                          <div class="item-data">{{$lihatsis->nama }}</div>
+                      </div><!--//col-->
+               </div><!--//row-->
+            </div><!--//item-->
 
-                  <div class="item border-bottom py-2">
-                      <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>Asal Sekolah</strong></div>
-                                <div class="item-data">{{ $lihatsis->asal }}</div>
-                            </div><!--//col-->
-                      </div><!--//row-->
-                  </div><!--//item-->
+            <div class="item border-bottom py-2">
+                <div class="row justify-content-between align-items-center">
+                      <div class="col-auto">
+                          <div class="item-label"><strong>Asal Sekolah</strong></div>
+                          <div class="item-data">{{$lihatsis->asal }}</div>
+                      </div><!--//col-->
+                </div><!--//row-->
+            </div><!--//item-->
+
 
                   <div class="item border-bottom py-2">
                       <div class="row justify-content-between align-items-center">
@@ -95,7 +96,7 @@
                     <div class="row justify-content-center align-items-center">
                       <div class="justify-content-start">
                         <div class="col-auto">
-                            <a type="submit" class="btn app-btn-secondary" href="/lihatsiswa">Kembali</a>
+                            <a type="submit" class="btn app-btn-secondary" href="{{ url('lihatsiswa') }}">Kembali</a>
                         </div>
                       </div>
                     </div>

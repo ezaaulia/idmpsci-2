@@ -12,7 +12,7 @@
                 
                 <li class="nav-item">
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                    <a class="nav-link {{ Request::is('beranda') ? 'active' : '' }}" href="/beranda"> {{-- ngatur warna dan tampilan pada menu beranda disidebar --}}
+                    <a class="nav-link {{ Request::is('beranda') ? 'active' : '' }}" href="{{ url('/beranda')}}"> {{-- ngatur warna dan tampilan pada menu beranda disidebar --}}
                         <span class="nav-icon"> {{-- ngatur ukuran tulisan dan rata kiri --}}
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg"> {{-- MENAMPILKAN LOGO SECARA UTUH--}}
                                 <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/> {{-- gambar logo--}}
@@ -42,7 +42,7 @@
                     </a><!--//nav-link-->
                     <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahoperator') ? 'active' : '' }}" href="/kelolaoperator/tambahoperator">Tambah</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahoperator') ? 'active' : '' }}" href="{{ url('/kelolaoperator/tambahoperator')}}">Tambah</a></li>
                         </ul>
                     </div>
                 </li><!--//nav-item-->
@@ -67,11 +67,11 @@
                     </a><!--//nav-link-->
                     <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahsiswa') ? 'active' : '' }}" href="/tambahsiswa">Tambah Data</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatsiswa*') ? 'active' : '' }}" href="/lihatsiswa">Lihat Siswa</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('editsiswa*') ? 'active' : '' }}" href="/editsiswa">Edit Data</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('importsiswa*') ? 'active' : '' }}" href="/importsiswa">Import Data</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('carisiswa*') ? 'active' : '' }}" href="/carisiswa">Cari Siswa</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahsiswa') ? 'active' : '' }}" href="{{ url('/tambahsiswa')}}">Tambah Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatsiswa*') ? 'active' : '' }}" href="{{ url('/lihatsiswa')}}">Lihat Siswa</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('editsiswa*') ? 'active' : '' }}" href="{{ url('/editsiswa')}}">Edit Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('importsiswa*') ? 'active' : '' }}" href="{{ url('/importsiswa')}}">Import Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('carisiswa*') ? 'active' : '' }}" href="{{ url('/carisiswa')}}">Cari Siswa</a></li>
                         </ul>
                     </div>
                 </li><!--//nav-item-->
@@ -95,7 +95,7 @@
                     </a><!--//nav-link-->
                     <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('miningdata/') ? 'active' : '' }}" href="#">Pohon Keputusan</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('/miningdata') ? 'active' : '' }}" href="#">Pohon Keputusan</a></li>
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="#">Pengujian Perhitugan Data</a></li>
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="#">Training Data</a></li>
                         </ul>
@@ -105,10 +105,10 @@
 
                 <li class="nav-item">
                     <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                    <form action="/keluar" method="post" id="logout-form" >
+                    <form action="{{ url('/keluar')}}" method="post">
                         @csrf
-                        <button class="btn border-0" type="submit"> 
-                            <span class="nav-icon" >
+                        <button class="nav link btn border-0" >           
+                            <span class="nav-item" >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
                                     <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
                                     <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
@@ -117,6 +117,19 @@
                             <span class="nav-link-text">Keluar</span>
                         </button><!--//nav-link-->
                     </form>
+                </li><!--//nav-item-->
+
+                <li class="nav-item">
+                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+                    <a class="nav-link" href="/beranda"> {{-- ngatur warna dan tampilan pada menu beranda disidebar --}}
+                        <span class="nav-icon"> {{-- ngatur ukuran tulisan dan rata kiri --}}
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                                <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                            </svg>
+                        </span>
+                        <span class="nav-link-text">Keluar</span>
+                    </a><!--//nav-link-->
                 </li><!--//nav-item-->
 
 

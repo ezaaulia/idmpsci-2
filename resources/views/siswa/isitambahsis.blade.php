@@ -48,8 +48,8 @@
 
                                 <div class="row justify-content-between">
 								    <div class="col-auto">
-								        <a type="submit" class="btn app-btn-secondary" href="{{ url('beranda') }}">
-                                            <i class="fa fa-undo"></i> Batal
+								        <a type="submit" class="btn app-btn-secondary" href="{{ url('lihatsiswa') }}">
+                                             Batal
                                         </a>
 								    </div>
 								    <div class="col-auto">

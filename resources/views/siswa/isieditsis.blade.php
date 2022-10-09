@@ -12,7 +12,7 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('lihatsiswa/update/'.$edits->id)}}">
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('lihatsiswa/update/')}}">
                                 @csrf
                                 @method('patch')
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
@@ -101,7 +101,7 @@
 
                                 <div class="row justify-content-between">
 								    <div class="col-auto">
-								        <button type="submit" class="btn app-btn-secondary">Batal</button>
+								        <a type="submit" class="btn app-btn-secondary"  href="{{ url('lihatsiswa') }}">Batal</a>
 								    </div>
 								    <div class="col-auto">
 								        <button type="submit" class="btn app-btn-primary">Simpan</button>

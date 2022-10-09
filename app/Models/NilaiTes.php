@@ -39,10 +39,10 @@ class NilaiTes extends Model
 
 
     //ini untuk detail persiswa
-    public function detailNil($id)
-    {
-        return DB::table('nilai_tes')->where('id', $id)->first();
+    // public function detailNil($id)
+    // {
+    //     return DB::table('nilai_tes')->where('id', $id)->first();
 
-    }
+    // }
     
 }
