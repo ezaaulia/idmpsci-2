@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DataExport;
 use Illuminate\Http\Request;
 use App\Models\DataSiswa;
-use App\Models\ImportData;
 use App\Models\NilaiTes;
 use Illuminate\Contracts\Support\ValidatedData;
 use Illuminate\Support\Facades\DB;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use App\Imports\DataImport;
 
 
 
@@ -93,9 +95,8 @@ class SiswaController extends Controller
     {
 
         $lhtsiswa = DataSiswa::all();
-        $nlaisiswa = NilaiTes::all();
 
-        return view('siswa.isilihatsis', // compact('lhtsiswa')
+        return view('siswa.isilihatsis',
         [
             'lhtsiswa' => $lhtsiswa,
             'title' => 'Lihat Data Siswa'
@@ -110,16 +111,10 @@ class SiswaController extends Controller
         //     abort(404);
         // }
 
- 
-        // $lihatsis = $this->DataSiswa->detailSis($id);
-        // $lihatnil = $this->NilaiTes->detailNil($id);
 
         $lihatsis = DataSiswa::find($id);
-        $lihatnil = NilaiTes::find($id);
+        $lihatnil = NilaiTes::where('data_siswas_id', $lihatsis->id)->first();
 
-        // $lihat = DB::table('data_siswas')
-        //             ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
-        //             ->get();
 
         // return DataSiswa::all();
         return view('siswa.isidetailsis', 
@@ -145,7 +140,7 @@ class SiswaController extends Controller
 
         
         $edits = DataSiswa::find($id);
-        $editn = NilaiTes::find($id);
+        $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
 
         return view('siswa.isieditsis',
         [
@@ -165,7 +160,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
         Request()->validate([
             // 'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
@@ -194,37 +189,21 @@ class SiswaController extends Controller
             'status_kelas.required' => 'Kelas wajib diisi!',
         ]);
         
-        $edits = [
-            'nama' =>  $request->nama,
-            'asal' => $request->asal,
-        ];
+        $edits = DataSiswa::find($id);
+        $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
 
-        $editn = [
-            'nilai_tes_mtk' => $request->nilai_tes_mtk,
-            'nilai_tes_ipa' => $request->nilai_tes_ipa,
-            'nilai_tes_agama' => $request->nilai_tes_agama,
-            'nilai_tes_bindo' => $request->nilai_tes_bindo,
-            'status_kelas' => $request->status_kelas,
-        ];
-        // $edits = DataSiswa::find($id);
-        // $edits = DataSiswa::where('id', $id)->first();
-        // // $edit->nis = $request->nis;
-        // $edits->nama = $request->nama;
-        // $edits->asal = $request->asal;
-        // $edits->update();
+        $edits->nama = $request->nama;
+        $edits->asal = $request->asal;
+        $edits->update();
 
-            // $editn = NilaiTes::find($id);
-            // $editn = NilaiTes::where('id', $id)->first();
-            // $editn -> nilai_tes_mtk = $request->nilai_tes_mtk;
-            // $editn -> nilai_tes_ipa = $request->nilai_tes_ipa;
-            // $editn -> nilai_tes_agama = $request->nilai_tes_agama;
-            // $editn -> nilai_tes_bindo = $request->nilai_tes_bindo;
-            // $editn -> status_kelas = $request->status_kelas;
-            // $editn -> data_siswas_id = $id;
-            // $editn->update();
-        DataSiswa::where('id', $request->id)->update($edits);
-        NilaiTes::where('id', $request->id)->update($editn);
-        DB::commit();
+        $editn -> nilai_tes_mtk = $request->nilai_tes_mtk;
+        $editn -> nilai_tes_ipa = $request->nilai_tes_ipa;
+        $editn -> nilai_tes_agama = $request->nilai_tes_agama;
+        $editn -> nilai_tes_bindo = $request->nilai_tes_bindo;
+        $editn -> status_kelas = $request->status_kelas;
+        // $editn -> data_siswas_id = $id;
+        $editn->update();
+        
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Edit!!!');
         
     }
@@ -247,10 +226,28 @@ class SiswaController extends Controller
 
     }
 
-    public function import(Request $request, ImportData $importdata)
+    public function export()
     {
-        //
+        return Excel::download(new DataExport, 'datasiswa.xlsx');
     }
+
+    // public function import(Request $request)
+    // {
+    //     $data = $request->file('file');
+    //     $namafile = $data->getClientOriginalName();
+    //     $data->move('DataSiswa', $namafile);
+
+    //     Excel::import(new DataImport, public_path('/DataSiswa/'.$namafile));
+
+    //     return redirect('importdata');
+    // }
+
+    public function import(Request $request)
+{
+        Excel::import(new DataImport, $request->file);
+
+        return redirect()->route('importdata');
+}
 
     public function carisis(DataSiswa $datasiswa)
     {

@@ -41,10 +41,10 @@ class DataSiswa extends Model
     }
 
     // ini untuk detail persiswa
-    // public function detailSis($id)
-    // {
-    //     return DB::table('data_siswas')->where('id', $id)->first();
-    // }
+    public function detailSis($id)
+    {
+        return DB::table('data_siswas')->where('id', $id)->first();
+    }
    
     
     //ini untuk nambah data siswa 

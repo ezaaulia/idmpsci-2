@@ -79,12 +79,7 @@ Route::get('/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
 // ---------- EDIT SISWA ----------
 
 Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis'])->name('editsiswa');
-Route::patch('/lihatsiswa/update/', [SiswaController::class, 'update'])->name('update');
-
-// ---------- EDIT NILAI ----------
-
-// Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis'])->name('editsiswa');
-// Route::put('/lihatsiswa/update/{id}', [SiswaController::class, 'update']);
+Route::patch('/lihatsiswa/update/{id}', [SiswaController::class, 'update'])->name('update');
 
 
 // ---------- DELETE SISWA ----------
@@ -92,8 +87,10 @@ Route::patch('/lihatsiswa/update/', [SiswaController::class, 'update'])->name('u
 Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'])->name('deletesiswa');
 
 
+// ---------- IMPORT DATA ----------
+Route::post('/importdata', [SiswaController::class, 'import'])->name('importdata');
 
-// Route::get('/importsiswa', [SiswaController::class, 'import']);
+Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
 
 
 // Route::get('/carisiswa', [SiswaController::class, 'carisis']);

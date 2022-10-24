@@ -12,7 +12,7 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('lihatsiswa/update/')}}">
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('lihatsiswa/update/'.$edits->id)}}">
                                 @csrf
                                 @method('patch')
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
@@ -89,11 +89,11 @@
                                     <label for="kelas" class="form-label">Ket Kelas</label>
                                     <div class="col-auto">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="reg" value="reguler">
+                                            <input class="form-check-input" type="radio" name="status_kelas" id="reg" value="reguler">
                                             <label class="form-check-label" for="reg">Reguler</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="ci" value="ci">
+                                            <input class="form-check-input" type="radio" name="status_kelas" id="ci" value="ci">
                                             <label class="form-check-label" for="ci">CI</label>
                                         </div>
                                     </div>

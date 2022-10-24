@@ -11,10 +11,19 @@
             <div class="row justify-content-center align-items-center">
               <div class="row justify-content-end">
                 <div class="col-auto">
+                  <a type="button" class="btn btn-info" href="{{ url('exportdata')}}">Unduh Data</a>
                   <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
                 </div>
               </div>
             </div>
+{{-- 
+            <div class="row justify-content-center align-items-center">
+              <div class="row justify-content-start">
+                <div class="col-auto">
+                  
+                </div>
+              </div>
+            </div> --}}
 
             <hr class="mb-4"> {{-- garis panjang --}}
 
@@ -41,11 +50,6 @@
                               <th class="cell">NIS</th>
                               <th class="cell col-2">Nama Siswa</th>
                               <th class="cell">Asal Sekolah</th>
-                              {{-- <th class="cell">Nilai Tes MTK</th>
-                              <th class="cell">Nilai Tes IPA</th>
-                              <th class="cell">Nilai Tes Agama</th>
-                              <th class="cell">Nilai Tes B.I</th>
-                              <th class="cell">Ket</th> --}}
                               <th class="cell">Input Nilai</th>
                               <th class="cell">Aksi</th>
                             </tr>

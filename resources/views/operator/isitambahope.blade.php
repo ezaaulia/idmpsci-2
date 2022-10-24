@@ -12,7 +12,7 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-4">
                         <div class="app-card-body">
-                            <form class="settings-form" method="POST" action="/kelolaoperator/tambahoperator">
+                            <form class="settings-form" method="POST" action="{{ URL('tambahoperator/save') }}">
                                 @csrf
                                 <div class="mb-3"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nama" class="form-label">Nama</label>
