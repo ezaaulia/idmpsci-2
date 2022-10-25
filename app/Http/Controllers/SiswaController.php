@@ -226,28 +226,42 @@ class SiswaController extends Controller
 
     }
 
+
+    
+    public function import()
+    {
+        return view('siswa.isiimportsis', [
+            'title' => 'Import Data'
+            ]);
+    }
+
+    public function store(Request $request)
+    {
+        $file = $request->file('file');
+        $namafile = $file->getClientOriginalName();
+        $file->move('DataSiswa', $namafile);
+
+        Excel::import(new DataImport, public_path('/DataSiswa/'.$namafile));
+
+        return redirect('importdata');
+    }
+
+    // public function store(Request $request)
+    // {
+    //     Excel::import(new DataImport, $request->file);
+
+    //     return back();
+    // }
+
+    // public function store(Request $request)
+    // {
+    //     return dd($request);
+    // }
+
     public function export()
     {
         return Excel::download(new DataExport, 'datasiswa.xlsx');
     }
-
-    // public function import(Request $request)
-    // {
-    //     $data = $request->file('file');
-    //     $namafile = $data->getClientOriginalName();
-    //     $data->move('DataSiswa', $namafile);
-
-    //     Excel::import(new DataImport, public_path('/DataSiswa/'.$namafile));
-
-    //     return redirect('importdata');
-    // }
-
-    public function import(Request $request)
-{
-        Excel::import(new DataImport, $request->file);
-
-        return redirect()->route('importdata');
-}
 
     public function carisis(DataSiswa $datasiswa)
     {

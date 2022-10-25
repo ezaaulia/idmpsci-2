@@ -88,7 +88,8 @@ Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'
 
 
 // ---------- IMPORT DATA ----------
-Route::post('/importdata', [SiswaController::class, 'import'])->name('importdata');
+Route::get('/import-data', [SiswaController::class, 'import']);
+Route::post('/import-data', [SiswaController::class, 'store'])->name('import-data');
 
 Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
 

@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\DataSiswa;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class DataImport implements ToModel
+class DataImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -23,7 +24,7 @@ class DataImport implements ToModel
             'nilai_tes_ipa' => $row[5],
             'nilai_tes_bi' => $row[6],
             'nilai_tes_agama' => $row[7],
-            'status_kelas' => $row[8]
+            'status_kelas' => $row[8],
         ]);
     }
 }
