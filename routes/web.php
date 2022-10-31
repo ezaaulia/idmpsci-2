@@ -3,12 +3,13 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SiswaController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\NilaiController;
-use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\MiningDataController;
 
 
 /*
@@ -93,9 +94,9 @@ Route::post('/import-data', [SiswaController::class, 'store'])->name('import-dat
 
 Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
 
+Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa');
 
-// Route::get('/carisiswa', [SiswaController::class, 'carisis']);
 
-
-// TRAINING DATA
+// MINING DATA
+Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
 

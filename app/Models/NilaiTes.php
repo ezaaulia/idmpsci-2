@@ -20,6 +20,7 @@ class NilaiTes extends Model
 
     protected $fillable = [
         'id',
+        'data_siswas_id',
         'nilai_tes_mtk', 
         'nilai_tes_ipa', 
         'nilai_tes_agama', 

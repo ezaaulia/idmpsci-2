@@ -2,29 +2,36 @@
 
 namespace App\Imports;
 
+use App\Models\NilaiTes;
 use App\Models\DataSiswa;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class DataImport implements ToModel, WithHeadingRow
+class DataImport implements ToCollection, WithHeadingRow
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    
+    public function collection(Collection $rows)
     {
-        return new DataSiswa([
-            'nis' => $row[1],
-            'nama' => $row[2],
-            'asal' => $row[3],
-            // 'nilai_tot' => $row[1],
-            'nilai_tes_mtk' => $row[4],
-            'nilai_tes_ipa' => $row[5],
-            'nilai_tes_bi' => $row[6],
-            'nilai_tes_agama' => $row[7],
-            'status_kelas' => $row[8],
-        ]);
+       
+        foreach ($rows as $row)
+        {
+            $data_siswa = DataSiswa::create([
+               'nis' =>  $row['nis'],
+               'nama' =>  $row['nama'],
+               'asal' => $row['asal'],
+           ]);
+
+            $data_siswa->nilai_tes()->create([
+                'nilai_tes_mtk' => $row['nilai_tes_mtk'],
+                'nilai_tes_ipa' => $row['nilai_tes_ipa'],
+                'nilai_tes_bindo' => $row['nilai_tes_bindo'],
+                'nilai_tes_agama' => $row['nilai_tes_agama'],
+                'status_kelas' =>$row['status_kelas']
+            ]);
+          
+      }
     }
 }

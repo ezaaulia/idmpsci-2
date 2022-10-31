@@ -70,7 +70,7 @@
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahsiswa') ? 'active' : '' }}" href="{{ url('/tambahsiswa')}}">Tambah Data</a></li>
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatsiswa*') ? 'active' : '' }}" href="{{ url('/lihatsiswa')}}">Lihat Siswa</a></li>
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('importdata*') ? 'active' : '' }}" href="{{ url('/import-data')}}">Import Data</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('carisiswa*') ? 'active' : '' }}" href="{{ url('/carisiswa')}}">Cari Siswa</a></li>
+                            {{-- <li class="submenu-item"><a class="submenu-link {{ Request::is('carisiswa*') ? 'active' : '' }}" href="{{ url('/carisiswa')}}">Cari Siswa</a></li> --}}
                         </ul>
                     </div>
                 </li><!--//nav-item-->
@@ -94,7 +94,7 @@
                     </a><!--//nav-link-->
                     <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="#">Pengujian Perhitugan Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ url('/pengujiandata')}}">Pengujian Perhitugan Data</a></li>
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="#">Training Data</a></li>
                         </ul>
                     </div>

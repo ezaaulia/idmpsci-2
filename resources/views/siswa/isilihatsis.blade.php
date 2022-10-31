@@ -8,24 +8,22 @@
         <div class="container-xl">	    
             <h1 class="app-page-title">Lihat Siswa</h1>
 
-            <div class="row justify-content-center align-items-center">
-              <div class="row justify-content-end">
-                <div class="col-auto">
-                  <a type="button" class="btn btn-info" href="{{ url('exportdata')}}">Unduh Data</a>
-                  <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
+            <hr class="mb-4"> {{-- garis panjang --}}
+
+            <div class="row justify-content-end mb-3">
+              <div class="app-search-box col">
+                <form action="{{ url('lihatsiswa')}}" class="app-search-form col-5">
+                  <input type="text" placeholder="Cari Siswa" name="search" class="form-control search-input" value="{{ request('search') }}"/>
+                  <button type="submit" class="btn search-btn btn-primary" value="search">
+                    <i class="fas fa-search">
+                    </i></button>
+                  </form>
                 </div>
+              <div class="col-auto">
+                <a type="button" class="btn btn-info" href="{{ url('exportdata')}}">Unduh Data</a>
+                <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
               </div>
             </div>
-{{-- 
-            <div class="row justify-content-center align-items-center">
-              <div class="row justify-content-start">
-                <div class="col-auto">
-                  
-                </div>
-              </div>
-            </div> --}}
-
-            <hr class="mb-4"> {{-- garis panjang --}}
 
             @if (session('pesan'))
               <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -56,9 +54,9 @@
                           </thead>
 
                           <tbody>
-                            @foreach($lhtsiswa as $datas)
+                            @foreach($lhtsiswa as $key=>$datas)
                               <tr>
-                                  <td class="cell">{{ $loop->iteration }}.</td>
+                                  <td class="cell">{{ $lhtsiswa->firstItem() + $key }}.</td>
                                   <td class="cell">{{ $datas->nis }}</td>
                                   <td class="cell">{{ $datas->nama }}</td>
                                   <td class="cell">{{ $datas->asal }}</td>
@@ -100,27 +98,19 @@
 
                           </tbody>
                         </table>
-
+                       
                       </div>
                       <!--//table-responsive-->
                     </div>
                     <!--//app-card-body-->
                   </div>
 
-                  <!--//app-card-->
+                  
                   <nav class="app-pagination">
                     <ul class="pagination justify-content-center">
-                      <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Sebelumnya</a>
-                      </li>
-                      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                      <li class="page-item"><a class="page-link" href="#">2</a></li>
-                      <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        <a class="page-link" href="#">Selanjutnya</a>
-                      </li>
+                      {{ $lhtsiswa->links() }}
                     </ul>
                   </nav>
-                  <!--//app-pagination-->
                 </div>
                 <!--//tab-pane-->
               </div>

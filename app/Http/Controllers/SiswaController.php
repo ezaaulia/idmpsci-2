@@ -91,14 +91,20 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function lihatsis() 
+    public function lihatsis(Request $request) 
     {
 
-        $lhtsiswa = DataSiswa::all();
-
+        // if($request->search)
+        // {
+        //     $lhtsiswa = DataSiswa::where('nama', 'LIKE', '%'.$request->search.'%');
+        // }
+        // else {
+        //     $lhtsiswa = DataSiswa::paginate(15);
+        // } 
+        
         return view('siswa.isilihatsis',
         [
-            'lhtsiswa' => $lhtsiswa,
+            'lhtsiswa' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
             'title' => 'Lihat Data Siswa'
         ]
         );
@@ -132,7 +138,7 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editsis($id)
+    public function editsis(Request $request, $id)
     {
         // if (!$this->DataSiswa->detailSis($id)) {
         //     abort(404);
@@ -230,45 +236,28 @@ class SiswaController extends Controller
     
     public function import()
     {
+        $datas = DB::table('data_siswas')
+                    ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
+                    ->get();
+
         return view('siswa.isiimportsis', [
+            'datas' => $datas,
             'title' => 'Import Data'
             ]);
     }
 
     public function store(Request $request)
     {
-        $file = $request->file('file');
-        $namafile = $file->getClientOriginalName();
-        $file->move('DataSiswa', $namafile);
+        Excel::import(new DataImport(), $request->file(key:'file'));
 
-        Excel::import(new DataImport, public_path('/DataSiswa/'.$namafile));
-
-        return redirect('importdata');
+        return redirect('import-data')->with('pesan', 'Data Siswa Berhasil di Import!!!');
     }
-
-    // public function store(Request $request)
-    // {
-    //     Excel::import(new DataImport, $request->file);
-
-    //     return back();
-    // }
-
-    // public function store(Request $request)
-    // {
-    //     return dd($request);
-    // }
 
     public function export()
     {
-        return Excel::download(new DataExport, 'datasiswa.xlsx');
+        return $this->excel->download(new DataExport, 'datasiswa.pdf', Excel::DOMPDF);
     }
 
-    public function carisis(DataSiswa $datasiswa)
-    {
-        return view('siswa.isicarisis' , [
-            'title' => 'Cari Data Siswa'
-            ]);
-    }
 
     /**
      * Show the form for editing the specified resource.
