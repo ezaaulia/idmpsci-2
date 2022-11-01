@@ -12,6 +12,10 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class DataImport implements ToCollection, WithHeadingRow
 {
+    // public function __construct()
+    // { 
+    //    DataImport::truncate();
+    // }
     
     public function collection(Collection $rows)
     {

@@ -20,7 +20,7 @@
                   </form>
                 </div>
               <div class="col-auto">
-                <a type="button" class="btn btn-info" href="{{ url('exportdata')}}">Unduh Data</a>
+                <a type="button" class="btn btn-info" href="{{ url('downloadpdf')}}">Unduh Data</a>
                 <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
               </div>
             </div>

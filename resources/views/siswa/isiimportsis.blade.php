@@ -26,10 +26,20 @@
                         
                           <div class="row justify-content-center align-items-center"> {{-- ini untuk ngatur posisi button atas bawah --}}
                                <div class="row justify-content-start"> {{--geser button kanan kiri --}}
-                                <div class="col-auto">
+                                <div class="col-">
                                   <button type="button" class="btn app-btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                       Upload File
                                   </button>
+                                  <form action="{{ url('import-data/hapus-data') }}"  class="d-inline">
+                                    {{-- @method('delete') --}}
+                                    @csrf
+                                    <button class="btn btn-danger" onclick="return confirm ('Anda yakin ingin menghapus data?')"> 
+                                      Hapus File
+                                    </button>
+                                  </form>
+                                  {{-- <a type="button" class="btn btn-danger" href="{{ url('import-data/hapus-data') }}">
+                                    Hapus File
+                                  </a> --}}
                                 </div>
                               </div>
                           </div>

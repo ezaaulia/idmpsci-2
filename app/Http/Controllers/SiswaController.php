@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\DataExport;
-use Illuminate\Http\Request;
-use App\Models\DataSiswa;
 use App\Models\NilaiTes;
-use Illuminate\Contracts\Support\ValidatedData;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Http\Controllers\Controller;
+use Barryvdh\DomPDF\PDF;
+use App\Models\DataSiswa;
+use App\Exports\DataExport;
 use App\Imports\DataImport;
-
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\App;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Contracts\Support\ValidatedData;
+// use PDF;
 
 class SiswaController extends Controller
 {
@@ -253,11 +255,41 @@ class SiswaController extends Controller
         return redirect('import-data')->with('pesan', 'Data Siswa Berhasil di Import!!!');
     }
 
-    public function export()
+    public function hapusfile($id)
     {
-        return $this->excel->download(new DataExport, 'datasiswa.pdf', Excel::DOMPDF);
+        $data = DataSiswa::find($id);
+        // $data-> nilai_tes -> delete();
+        // $data -> delete();
+        $destination = 'DataSiswa'.$data;
+
+        $file_name = $data->data;
+        $file_path = public_path('/import-data' . $file_name);
+        if (File::exists($destination)) 
+        {
+            File::delete($destination);
+        }
+
+        // unlink($file_path);
+        // $data->delete();
+        return redirect()->back();
     }
 
+    public function export()
+    {
+        return Excel::download(new DataExport, 'datasiswa.pdf');
+    }
+
+    public function exportPDF()
+    {
+        // $pdf = App::make('lihatsiswa');
+        // $pdf->loadHTML('tes');
+        // return $pdf->stream();
+        $datas = DataSiswa::all();
+ 
+	    view()->share('datas', $datas);
+        $pdf = PDF::loadview('siswa.isipdf');
+        return $pdf->download('datasiswa.pdf');
+    }
 
     /**
      * Show the form for editing the specified resource.

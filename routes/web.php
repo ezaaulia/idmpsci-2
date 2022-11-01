@@ -91,8 +91,10 @@ Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'
 // ---------- IMPORT DATA ----------
 Route::get('/import-data', [SiswaController::class, 'import']);
 Route::post('/import-data', [SiswaController::class, 'store'])->name('import-data');
+Route::get('/import-data/hapus-data', [SiswaController::class, 'hapusfile'])->name('hapus-data');
 
-Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
+// Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
+Route::get('/downloadpdf', [SiswaController::class, 'exportPDF'])->name('downloadpdf');
 
 Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa');
 
