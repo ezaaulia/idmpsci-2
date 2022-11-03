@@ -33,7 +33,10 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    // public function __construct()
+    // { 
+    //    DataImport::truncate();
+    // }
     public function __construct()
     {
         $this->DataSiswa = new DataSiswa();
@@ -257,21 +260,25 @@ class SiswaController extends Controller
 
     public function hapusfile($id)
     {
-        $data = DataSiswa::find($id);
+
+        // DB::table('data_siswas')->delete();
+
+        // $data = DataSiswa::find($id);
         // $data-> nilai_tes -> delete();
         // $data -> delete();
-        $destination = 'DataSiswa'.$data;
 
-        $file_name = $data->data;
-        $file_path = public_path('/import-data' . $file_name);
-        if (File::exists($destination)) 
-        {
-            File::delete($destination);
-        }
+                            // $destination = 'DataSiswa'.$data;
 
-        // unlink($file_path);
-        // $data->delete();
-        return redirect()->back();
+                            // $file_name = $data->data;
+                            // $file_path = public_path('/import-data' . $file_name);
+                            // if (File::exists($destination)) 
+                            // {
+                            //     File::delete($destination);
+                            // }
+
+                            // unlink($file_path);
+                            // $data->delete();
+        // return redirect()->back();
     }
 
     public function export()
