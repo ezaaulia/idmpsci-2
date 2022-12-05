@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\NilaiTes;
-use Barryvdh\DomPDF\PDF;
+// use Barryvdh\DomPDF\PDF;
 use App\Models\DataSiswa;
 use App\Exports\DataExport;
 use App\Imports\DataImport;
@@ -14,7 +14,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Contracts\Support\ValidatedData;
-// use PDF;
+use PDF;
 
 class SiswaController extends Controller
 {
@@ -291,11 +291,11 @@ class SiswaController extends Controller
         // $pdf = App::make('lihatsiswa');
         // $pdf->loadHTML('tes');
         // return $pdf->stream();
-        $datas = DataSiswa::all();
+    //     $datas = DataSiswa::all();
  
-	    view()->share('datas', $datas);
-        $pdf = PDF::loadview('siswa.isipdf');
-        return $pdf->download('datasiswa.pdf');
+	//     view()->share('datas', $datas);
+    //     $pdf = PDF::loadview('siswa.isipdf');
+    //     return $pdf->download('datasiswa.pdf');
     }
 
     /**
