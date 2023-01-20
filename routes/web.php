@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\C45;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
@@ -33,6 +34,7 @@ use App\Http\Controllers\MiningDataController;
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
+Route::get('/index', [C45::class, 'index'])->name('index');
 
 Route::post('/keluar', [LogoutController::class, 'keluar'])->name('keluar');
 
@@ -101,4 +103,5 @@ Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa')
 
 // MINING DATA
 Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
+Route::get('/miningdata', [MiningDataController::class, 'prosesmining']);
 

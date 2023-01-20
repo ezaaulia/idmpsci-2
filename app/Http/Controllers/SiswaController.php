@@ -87,6 +87,7 @@ class SiswaController extends Controller
         $siswa -> asal = $request -> asal;
         $siswa->save();
 
+        
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
     }    
 

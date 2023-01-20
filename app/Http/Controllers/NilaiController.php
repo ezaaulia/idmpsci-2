@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\DataSiswa;
 use App\Models\ImportData;
 use App\Models\NilaiTes;
+// use App\Http\Controllers\C45;
+use C45\C45;
 
 class NilaiController extends Controller
 {
@@ -93,6 +95,19 @@ class NilaiController extends Controller
                 'status_kelas.required' => 'Kelas wajib diisi!',
         ]);
 
+        $filename = \public_path() . '/csv/Data_Training.csv'; //DATA TRAINING
+        $c45 = new C45([
+            'targetAttribute' => 'beasiswa',
+            'trainingFile' => $filename,
+            'splitCriterion' => C45::SPLIT_GAIN,
+        
+        ]);
+
+        $tree = $c45->buildTree();
+        $treeString = $tree->toString();
+
+        
+
         $model = new NilaiTes();
         $model -> nilai_tes_mtk = $request->nilai_tes_mtk;
         $model -> nilai_tes_ipa = $request->nilai_tes_ipa;
@@ -101,6 +116,8 @@ class NilaiController extends Controller
         $model -> status_kelas = $request->status_kelas;
         $model -> data_siswas_id = $id;
         $model->save();
+
+        $hasil = $tree->classify($data);
 
         return redirect()->route('lihatsiswa')->with('pesan', 'Nilai Siswa Berhasil di Tambahkan!!!');
     }    
