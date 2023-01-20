@@ -21,6 +21,7 @@ class CreateTrainingDataTable extends Migration
             $table->string('information_gain');
             $table->string('split_information');
             $table->string('gain_ratio');
+            $table->enum('ketepatan', ['benar', 'salah']);
             $table->timestamps();
 
             $table->foreign('users_id')->references('id')->on('users');
