@@ -28,6 +28,7 @@
                               <th class="cell">Nilai Tes Agama</th>
                               <th class="cell">Nilai Tes B.I</th>
                               <th class="cell">Status Kelas</th>
+                              <th>Hasil C4.5</th>
                               
                             </tr>
                           </thead>
@@ -42,18 +43,15 @@
                                   <td class="cell">{{ $datas->nilai_tes_agama }}</td>
                                   <td class="cell">{{ $datas->nilai_tes_bindo }}</td>
                                   <td class="cell">{{ $datas->status_kelas }}</td>
+                                  <td>{{ $c45->classify($student) }}</td>
                               </tr>
                             @endforeach
                           </tbody>
                         </table>
 
-                    
-                        
-                        <div class="row justify-content-end mb-3">
-                            <div class="col-auto">
-                              <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('proses') }}" >Proses C4.5</a>
-                            </div>
-                        </div>
+                        <p>Jumlah data sebelum proses: {{$before}}</p>
+                        <p>Jumlah data sesuai setelah proses: {{$after}}</p>
+                        <p>Akurasi: {{$accuracy}}%</p>
 
                       </div> <!--//table-responsive-->
                     </div> <!--//app-card-body-->
