@@ -11,7 +11,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MiningDataController;
-
+use App\Http\Controllers\MiningSiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +24,9 @@ use App\Http\Controllers\MiningDataController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 // LOGIN
@@ -104,4 +104,7 @@ Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa')
 // MINING DATA
 Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
 Route::get('/miningdata', [MiningDataController::class, 'prosesmining']);
+
+Route::get('/mining-siswa',[MiningSiswaController::class,'index']);
+
 
