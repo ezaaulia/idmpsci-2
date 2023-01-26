@@ -102,7 +102,7 @@ Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa')
 
 
 // MINING DATA
-Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
+// Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
 Route::get('/miningdata', [MiningDataController::class, 'prosesmining']);
 Route::get('/hi', [MiningDataController::class, 'process']);
 

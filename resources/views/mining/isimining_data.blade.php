@@ -10,6 +10,12 @@
 
             
             <hr class="mb-4"> {{-- garis panjang --}}
+
+            <div class="row justify-content-end mb-3">
+                <div class="col-auto">
+                  <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('proses') }}" >Proses C4.5</a>
+                </div>
+            </div>
             
             <div class="tab-content" id="orders-table-tab-content">
               
@@ -46,14 +52,6 @@
                             @endforeach
                           </tbody>
                         </table>
-
-                    
-                        
-                        <div class="row justify-content-end mb-3">
-                            <div class="col-auto">
-                              <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('proses') }}" >Proses C4.5</a>
-                            </div>
-                        </div>
 
                       </div> <!--//table-responsive-->
                     </div> <!--//app-card-body-->
