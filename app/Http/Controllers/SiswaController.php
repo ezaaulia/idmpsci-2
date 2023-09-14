@@ -5,14 +5,18 @@ namespace App\Http\Controllers;
 use App\Models\NilaiTes;
 // use Barryvdh\DomPDF\PDF;
 use App\Models\DataSiswa;
+use App\Models\Data;
 use App\Exports\DataExport;
 use App\Imports\DataImport;
+use App\Imports\DataImport2;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use C45\C45;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\Support\ValidatedData;
 use PDF;
 
@@ -25,7 +29,11 @@ class SiswaController extends Controller
      */
     public function index()
     {
-        //
+        $data = DB::table('data_siswas')
+                    ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
+                    ->get();
+
+        return view('mining.isimining_data', compact('data'));
     }
 
     /**
@@ -33,23 +41,17 @@ class SiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function __construct()
-    // { 
-    //    DataImport::truncate();
-    // }
-    public function __construct()
-    {
-        $this->DataSiswa = new DataSiswa();
-        $this->NilaiTes = new NilaiTes();
-    }
+
 
     public function tambahsis()
     {   
-        $siswa = new DataSiswa; 
+        $sis = DataSiswa::with('nilai_tes')->get();
+        $nil = NilaiTes::with('data_siswas')->get();
 
         return view('siswa.isitambahsis',
         [   
-            'siswa' => $siswa,
+            'sis' => $sis, 
+            'nil' => $nil,
             'title' => 'Tambah Data Siswa'
         ]
     );
@@ -64,13 +66,17 @@ class SiswaController extends Controller
 
     public function save(Request $request)
     {
-        
-        // dd($request->all());
-    
+
+        // Validasi data siswa
         Request()->validate([
             'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
             'nama' => 'required',
             'asal' => 'required',
+            'nilai_tes_mtk' => 'required','numeric',
+            'nilai_tes_ipa' => 'required', 'numeric',
+            'nilai_tes_agama' => 'required', 'numeric',
+            'nilai_tes_bindo' => 'required', 'numeric',
+            'status_kelas' => 'required',
         ],[
             'nis.required' => 'NIS wajib diisi!',
             'nis.unique' => 'NIS ini sudah ada!',
@@ -78,16 +84,33 @@ class SiswaController extends Controller
             'nis.max' => 'NIS maksimal 10 karakter!',
             'nama.required' => 'Nama wajib diisi!',
             'asal.required' => 'Asal Sekolah wajib diisi!',
+            'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
+            'nilai_tes_mtk.numemric' => 'Nilai wajib angka!',
+            'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
+            'nilai_tes_ipa.numemric' => 'Nilai wajib angka!',
+            'nilai_tes_agama.required' => 'Nilai wajib diisi!',
+            'nilai_tes_agama.numemric' => 'Nilai wajib angka!',
+            'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
+            'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
+            'status_kelas.required' => 'Kelas wajib diisi!',
         ]);
-        
 
-        $siswa = new DataSiswa;
-        $siswa -> nis = $request -> nis;
-        $siswa -> nama = $request -> nama;
-        $siswa -> asal = $request -> asal;
-        $siswa->save();
+        $sis = new DataSiswa;
+        $sis ->nis = $request->nis;
+        $sis->nama = $request->nama;
+        $sis->asal = $request->asal;
+        $sis->save();
 
+        $nil = new NilaiTes;
+        $nil -> data_siswas_id = $sis->id;
+        $nil -> nilai_tes_mtk = $request->nilai_tes_mtk;
+        $nil -> nilai_tes_ipa = $request->nilai_tes_ipa;
+        $nil -> nilai_tes_agama = $request->nilai_tes_agama;
+        $nil -> nilai_tes_bindo = $request->nilai_tes_bindo;
+        $nil -> status_kelas = $request->status_kelas;
         
+        $nil->save();
+
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
     }    
 
@@ -100,14 +123,6 @@ class SiswaController extends Controller
     public function lihatsis(Request $request) 
     {
 
-        // if($request->search)
-        // {
-        //     $lhtsiswa = DataSiswa::where('nama', 'LIKE', '%'.$request->search.'%');
-        // }
-        // else {
-        //     $lhtsiswa = DataSiswa::paginate(15);
-        // } 
-        
         return view('siswa.isilihatsis',
         [
             'lhtsiswa' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
@@ -116,19 +131,12 @@ class SiswaController extends Controller
         );
     }
 
-    public function details($id) //NilaiTes $nilaites
+    public function details($id)
     {
-
-        // if (!$this->DataSiswa->detailSis($id)) {
-        //     abort(404);
-        // }
-
 
         $lihatsis = DataSiswa::find($id);
         $lihatnil = NilaiTes::where('data_siswas_id', $lihatsis->id)->first();
 
-
-        // return DataSiswa::all();
         return view('siswa.isidetailsis', 
         [
             'lihatsis' =>$lihatsis,
@@ -146,17 +154,12 @@ class SiswaController extends Controller
      */
     public function editsis(Request $request, $id)
     {
-        // if (!$this->DataSiswa->detailSis($id)) {
-        //     abort(404);
-        // }
-
         
         $edits = DataSiswa::find($id);
         $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
 
         return view('siswa.isieditsis',
         [
-            // 'idsiswa' => $id,
             'edits' => $edits, 
             'editn' => $editn,
             'title' => 'Edit Data Siswa', 
@@ -174,6 +177,8 @@ class SiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        
+        // Validasi data siswa yang diupdate
         Request()->validate([
             // 'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
             'nama' => 'required',
@@ -200,7 +205,30 @@ class SiswaController extends Controller
             'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
             'status_kelas.required' => 'Kelas wajib diisi!',
         ]);
-        
+
+        // Memuat model pohon keputusan C45
+        $filename = public_path('/csv/Data_Training.csv');
+        $c45 = new C45([
+            'targetAttribute' => 'status_kelas',
+            'trainingFile' => $filename,
+            'splitCriterion' => C45::SPLIT_GAIN,
+        ]);
+        $tree = $c45->buildTree();
+        $treeString = $tree->toString();
+
+        // Data yang akan diklasifikasikan
+        $data = [
+            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+        ];
+
+        // Melakukan klasifikasi menggunakan pohon keputusan C45
+        $hasil = $tree->classify($data);
+
+        // Mengambil data siswa yang akan diupdate
+        // $student = Student::findOrFail($id);
         $edits = DataSiswa::find($id);
         $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
 
@@ -216,6 +244,7 @@ class SiswaController extends Controller
         // $editn -> data_siswas_id = $id;
         $editn->update();
         
+        
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Edit!!!');
         
     }
@@ -226,22 +255,21 @@ class SiswaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        $hapus = DataSiswa::find($id);
-        $hapus-> nilai_tes -> delete();
-        $hapus -> delete();
-        
-        // $hapus = NilaiTes::where("data_siswas_id", $hapus->id)->delete();
+        // Hapus nilai terlebih dahulu
+        NilaiTes::where('data_siswas_id', $id)->delete();
+
+        // Hapus data siswa
+        DataSiswa::where('id', $id)->delete();
 
         return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Hapus!!!');
-
+        
     }
 
-
-    
-    public function import()
+    public function import(Request $request)
     {
+        
         $datas = DB::table('data_siswas')
                     ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
                     ->get();
@@ -252,35 +280,25 @@ class SiswaController extends Controller
             ]);
     }
 
-    public function store(Request $request)
+    public function upload(Request $request)
     {
-        Excel::import(new DataImport(), $request->file(key:'file'));
+        
+        Excel::import(new DataImport(), $request->file(key:'import_file'));
 
         return redirect('import-data')->with('pesan', 'Data Siswa Berhasil di Import!!!');
     }
 
-    public function hapusfile($id)
-    {
+    // public function deletefile(Request $request, $id)
+    // {
+    //     // Hapus nilai terlebih dahulu
+    //     NilaiTes::where('data_siswas_id', $id)->delete();
 
-        // DB::table('data_siswas')->delete();
+    //     // Hapus data siswa
+    //     DataSiswa::where('id', $id)->delete();
 
-        // $data = DataSiswa::find($id);
-        // $data-> nilai_tes -> delete();
-        // $data -> delete();
-
-                            // $destination = 'DataSiswa'.$data;
-
-                            // $file_name = $data->data;
-                            // $file_path = public_path('/import-data' . $file_name);
-                            // if (File::exists($destination)) 
-                            // {
-                            //     File::delete($destination);
-                            // }
-
-                            // unlink($file_path);
-                            // $data->delete();
-        // return redirect()->back();
-    }
+    //     return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Hapus!!!');
+        
+    // }
 
     public function export()
     {
@@ -299,10 +317,4 @@ class SiswaController extends Controller
     //     return $pdf->download('datasiswa.pdf');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 }

@@ -24,22 +24,17 @@
                     <div class="app-card-header p-3">
                       <div class="row justify-content-between align-items-center">
                         
+
                           <div class="row justify-content-center align-items-center"> {{-- ini untuk ngatur posisi button atas bawah --}}
                                <div class="row justify-content-start"> {{--geser button kanan kiri --}}
                                 <div class="col-">
+                                  <button type="button" class="btn app-btn-danger" id="deleteAllSelectedRecord" >
+                                    Hapus Data
+                                </button>
                                   <button type="button" class="btn app-btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                       Upload File
                                   </button>
-                                  <form action="{{ url('import-data/hapus-data') }}"  class="d-inline">
-                                    {{-- @method('delete') --}}
-                                    @csrf
-                                    <button class="btn btn-danger" onclick="return confirm ('Anda yakin ingin menghapus data?')"> 
-                                      Hapus File
-                                    </button>
-                                  </form>
-                                  {{-- <a type="button" class="btn btn-danger" href="{{ url('import-data/hapus-data') }}">
-                                    Hapus File
-                                  </a> --}}
+                                  
                                 </div>
                               </div>
                           </div>
@@ -64,11 +59,11 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
-                        <form action="{{ url('import-data')}}" method="POST" enctype="multipart/form-data" >
+                        <form action="{{ url('upload')}}" method="POST" enctype="multipart/form-data" >
                             @csrf
                             <div class="modal-body">
                                     <div class="form-group">
-                                        <input type="file" name="file" >
+                                        <input type="file" name="import_file" >
                                     </div>
                             </div>
                             <div class="modal-footer">
@@ -90,14 +85,15 @@
                         <table class="table table-bordered mb-0 text-left ">
                           <thead>
                             <tr>
+                              <td><input type="checkbox" name="" id="select_all_ids" ></td>
                               <th class="cell">No.</th>
                               <th class="cell">NIS</th>
                               <th class="cell col-2">Nama Siswa</th>
                               <th class="cell">Asal Sekolah</th>
-                              <th class="cell">Nilai Tes MTK</th>
-                              <th class="cell">Nilai Tes IPA</th>
-                              <th class="cell">Nilai Tes Agama</th>
-                              <th class="cell">Nilai Tes B.I</th>
+                              <th class="cell">Nilai MTK</th>
+                              <th class="cell">Nilai IPA</th>
+                              <th class="cell">Nilai Agama</th>
+                              <th class="cell">Nilai B.I</th>
                               <th class="cell">Status Kelas</th>
                             </tr>
                           </thead>
@@ -105,6 +101,7 @@
                           <tbody>
                             @foreach($datas as $data)
                               <tr>
+                                <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $data->id }}"></td>
                                   <td class="cell">{{ $loop->iteration }}.</td>
                                   <td class="cell">{{ $data->nis }}</td>
                                   <td class="cell">{{ $data->nama }}</td>
@@ -128,5 +125,15 @@
     </div>
 </div>
 
+<script>
+    $(function(e){
+
+      $("#select_all_ids").click(function(){
+        $('.checkbox_ids').prop('checked',$(this).prop('checked'));
+      });
+
+
+    });
+</script>
 @endsection
 

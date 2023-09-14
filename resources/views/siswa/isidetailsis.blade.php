@@ -50,7 +50,7 @@
                   <div class="item border-bottom py-2">
                       <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
-                                <div class="item-label"><strong>Nilai tes MTK</strong></div>
+                                <div class="item-label"><strong>Nilai MTK</strong></div>
                                 <div class="item-data">{{ $lihatnil->nilai_tes_mtk}}</div>
                             </div><!--//col-->
                       </div><!--//row-->
@@ -59,7 +59,7 @@
                   <div class="item border-bottom py-2">
                       <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
-                                <div class="item-label"><strong>Nilai Tes IPA</strong></div>
+                                <div class="item-label"><strong>Nilai IPA</strong></div>
                                 <div class="item-data">{{ $lihatnil->nilai_tes_ipa}}</div>
                             </div><!--//col-->
                       </div><!--//row-->
@@ -68,7 +68,7 @@
                   <div class="item border-bottom py-2">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
-                            <div class="item-label"><strong>Nilai Tes Agama</strong></div>
+                            <div class="item-label"><strong>Nilai Agama</strong></div>
                             <div class="item-data">{{ $lihatnil->nilai_tes_agama}}</div>
                         </div><!--//col-->
                     </div><!--//row-->
@@ -77,7 +77,7 @@
                   <div class="item border-bottom py-2">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
-                            <div class="item-label"><strong>Nilai Tes B.I</strong></div>
+                            <div class="item-label"><strong>Nilai B.I</strong></div>
                             <div class="item-data">{{ $lihatnil->nilai_tes_bindo}}</div>
                         </div><!--//col-->
                     </div><!--//row-->

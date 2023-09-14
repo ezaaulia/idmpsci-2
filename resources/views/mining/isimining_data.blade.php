@@ -13,7 +13,7 @@
 
             <div class="row justify-content-end mb-3">
                 <div class="col-auto">
-                  <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('proses') }}" >Proses C4.5</a>
+                  <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('miningsiswa') }}" >Proses C4.5</a>
                 </div>
             </div>
             
@@ -29,10 +29,10 @@
                             <tr>
                               <th class="cell">No.</th>
                               <th class="cell">Nama Siswa</th>
-                              <th class="cell">Nilai Tes MTK</th>
-                              <th class="cell">Nilai Tes IPA</th>
-                              <th class="cell">Nilai Tes Agama</th>
-                              <th class="cell">Nilai Tes B.I</th>
+                              <th class="cell">Nilai MTK</th>
+                              <th class="cell">Nilai IPA</th>
+                              <th class="cell">Nilai Agama</th>
+                              <th class="cell">Nilai B.I</th>
                               <th class="cell">Status Kelas</th>
                               
                             </tr>

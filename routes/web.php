@@ -12,6 +12,7 @@ use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MiningDataController;
 use App\Http\Controllers\MiningSiswaController;
+use App\Http\Controllers\ProsesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,7 @@ use App\Http\Controllers\MiningSiswaController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
 
@@ -34,7 +35,7 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-Route::get('/index', [C45::class, 'index'])->name('index');
+// Route::get('/index', [C45::class, 'index'])->name('index');
 
 Route::post('/keluar', [LogoutController::class, 'keluar'])->name('keluar');
 
@@ -70,8 +71,11 @@ Route::post('/tambahsiswa/save', [SiswaController::class, 'save']);
 
 // ---------- TAMBAH NILAI ----------
 
-Route::get('/tambahnilai/{id}', [NilaiController::class, 'tambahnil'])->name('tambahnilai');
-Route::post('/tambahnilai/save/{id}', [NilaiController::class, 'save']);
+// Route::get('/tambahnilai/{id}', [NilaiController::class, 'tambahnil'])->name('tambahnilai');
+// Route::post('/tambahnilai/save/{id}', [NilaiController::class, 'save']);
+
+// Route::get('/tambahnilai', [NilaiController::class, 'tambahnil'])->name('tambahnilai');
+// Route::post('/tambahnilai/save', [NilaiController::class, 'save']);
 
 // ---------- LIHAT SISWA DAN DETAIL SISWA ----------
 
@@ -91,9 +95,9 @@ Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'
 
 
 // ---------- IMPORT DATA ----------
-Route::get('/import-data', [SiswaController::class, 'import']);
-Route::post('/import-data', [SiswaController::class, 'store'])->name('import-data');
-Route::get('/import-data/hapus-data', [SiswaController::class, 'hapusfile'])->name('hapus-data');
+Route::get('/import-data', [SiswaController::class, 'import'])->name('import-data');
+Route::post('/upload', [SiswaController::class, 'upload'])->name('upload');
+// Route::get('/import-data/hapus', [SiswaController::class, 'deletefile'])->name('hapus');
 
 // Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
 Route::get('/downloadpdf', [SiswaController::class, 'exportPDF'])->name('downloadpdf');
@@ -101,11 +105,12 @@ Route::get('/downloadpdf', [SiswaController::class, 'exportPDF'])->name('downloa
 Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa');
 
 
-// MINING DATA
+// ---------- MINING DATA ----------
 // Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
-Route::get('/miningdata', [MiningDataController::class, 'prosesmining']);
-Route::get('/hi', [MiningDataController::class, 'process']);
-
-Route::get('/mining-siswa',[MiningSiswaController::class,'index']);
+Route::get('/miningdata', [SiswaController::class, 'index']);
+Route::get('/miningsiswa',[NilaiController::class,'save']);
+// Route::get('/isiresult',[MiningSiswaController::class,'result']);
+// Route::get('/mining',[NilaiController::class,'save']);
+// Route::get('/result',[ProsesController::class,'result']);
 
 

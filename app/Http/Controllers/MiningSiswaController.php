@@ -11,7 +11,26 @@ use Illuminate\Support\Facades\DB;
 class MiningSiswaController extends Controller
 {
 
-    public function index()
+    public function mining()
+    {
+        $data = DB::table('data_siswas')
+                    ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
+                    ->get();
+        // $data = Student::all();
+
+        // $c45 = new C45();
+
+        // dd($c45);
+        return view('mining.isimining_data', compact('data'));
+    }
+
+    // public function result()
+    // {
+
+    //     return view('mining.isResults');
+    // }
+
+    public function proses()
     {
         $c45 = new C45();
         $input = new DataInput();
@@ -38,10 +57,10 @@ class MiningSiswaController extends Controller
         echo "<hr>";
 
         $data_testing = array(
-            'nilai_tes_mtk' => $this->konversiKategori(85),
-            'nilai_tes_ipa' => $this->konversiKategori(92),
-            'nilai_tes_agama' => $this->konversiKategori(88),
-            'nilai_tes_bindo' => $this->konversiKategori(99)
+            'nilai_tes_mtk' => $this->konversiKategori(86),
+            'nilai_tes_ipa' => $this->konversiKategori(84),
+            'nilai_tes_agama' => $this->konversiKategori(84),
+            'nilai_tes_bindo' => $this->konversiKategori(90)
         );
 
         echo $c45->initialize()->buildTree()->classify($data_testing); // print "No"

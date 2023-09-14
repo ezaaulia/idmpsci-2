@@ -14,10 +14,11 @@
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
                             <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('tambahnilai/save/'.$idsiswa)}}">
+                                {{-- <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('tambahnilai/save')}}"> --}}
                                 @csrf
                                 
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
-                                    <label for="nilai_tes_mtk" class="form-label">Nilai tes MTK</label>
+                                    <label for="nilai_tes_mtk" class="form-label">Nilai MTK</label>
                                     <input type="text" class="form-control @error('nilai_tes_mtk') is-invalid @enderror" id="mtk" name="nilai_tes_mtk" value="{{ old('nilai_tes_mtk') }}" >
                                     @error('nilai_tes_mtk')
                                         <div class="invalid-feedback">
@@ -27,7 +28,7 @@
                                 </div>
 
                                 <div class="mb-1">
-                                    <label for="nilai_tes_ipa" class="form-label">Nilai Tes IPA</label>
+                                    <label for="nilai_tes_ipa" class="form-label">Nilai IPA</label>
                                     <input type="text" class="form-control @error('nilai_tes_ipa') is-invalid @enderror" id="ipa" name="nilai_tes_ipa" value="{{ old('nilai_tes_ipa') }}" >
                                     @error('nilai_tes_ipa')
                                         <div class="invalid-feedback">
@@ -37,7 +38,7 @@
                                 </div>
 
                                 <div class="mb-1">
-                                    <label for="nilai_tes_agama" class="form-label">Nilai Tes Agama</label>
+                                    <label for="nilai_tes_agama" class="form-label">Nilai Agama</label>
                                     <input type="text" class="form-control @error('nilai_tes_agama') is-invalid @enderror" id="agama" name="nilai_tes_agama" value="{{ old('nilai_tes_agama') }}" >
                                     @error('nilai_tes_agama')
                                         <div class="invalid-feedback">
@@ -47,7 +48,7 @@
                                 </div>
 
                                 <div class="mb-1">
-                                    <label for="nilai_tes_bindo" class="form-label">Nilai Tes B.I</label>
+                                    <label for="nilai_tes_bindo" class="form-label">Nilai B.I</label>
                                     <input type="text" class="form-control @error('nilai_tes_bindo') is-invalid @enderror" id="bindo" name="nilai_tes_bindo" value="{{ old('nilai_tes_bindo') }}" >
                                     @error('nilai_tes_bindo')
                                         <div class="invalid-feedback">
