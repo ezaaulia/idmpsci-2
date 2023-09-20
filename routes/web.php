@@ -25,11 +25,11 @@ use App\Http\Controllers\ProsesController;
 |
 */
 
+
+// Mengalihkan ke halaman login saat mengakses root
 Route::get('/', function () {
     return redirect()->route('login');
 });
-
-
 // LOGIN
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
@@ -37,7 +37,7 @@ Route::post('/login', [LoginController::class, 'authenticate']);
 
 // Route::get('/index', [C45::class, 'index'])->name('index');
 
-Route::post('/keluar', [LogoutController::class, 'keluar'])->name('keluar');
+Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 // REGISTER
 
@@ -95,9 +95,8 @@ Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'
 
 
 // ---------- IMPORT DATA ----------
-Route::get('/import-data', [SiswaController::class, 'import'])->name('import-data');
+// Route::get('/import-data', [SiswaController::class, 'import'])->name('import-data');
 Route::post('/upload', [SiswaController::class, 'upload'])->name('upload');
-// Route::get('/import-data/hapus', [SiswaController::class, 'deletefile'])->name('hapus');
 
 // Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
 Route::get('/downloadpdf', [SiswaController::class, 'exportPDF'])->name('downloadpdf');
@@ -108,9 +107,11 @@ Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa')
 // ---------- MINING DATA ----------
 // Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
 Route::get('/miningdata', [SiswaController::class, 'index']);
-Route::get('/miningsiswa',[NilaiController::class,'save']);
+Route::get('/hasilmining',[MiningDataController::class,'mining'])->name('hasilmining');
 // Route::get('/isiresult',[MiningSiswaController::class,'result']);
 // Route::get('/mining',[NilaiController::class,'save']);
 // Route::get('/result',[ProsesController::class,'result']);
 
 
+// Rute untuk menampilkan daftar status kelas siswa HALAMAN MINING SISWA
+// Route::get('status-kelas', 'KelasController@index')->name('status.index');

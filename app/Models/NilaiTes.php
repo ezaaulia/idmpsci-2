@@ -38,12 +38,17 @@ class NilaiTes extends Model
         return $this->belongsTo(DataSiswa::class);
     }
 
+    public function hasil_trainings()
+    {
+        return $this->belongsTo(HasilTraining::class);
+    }
+
 
     //ini untuk detail persiswa
-    public function detailNil($id)
-    {
-        return DB::table('nilai_tes')->where('id', $id)->first();
+    // public function detailNil($id)
+    // {
+    //     return DB::table('nilai_tes')->where('id', $id)->first();
 
-    }
+    // }
     
 }

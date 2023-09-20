@@ -13,7 +13,7 @@
 
             <div class="row justify-content-end mb-3">
                 <div class="col-auto">
-                  <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('miningsiswa') }}" >Proses C4.5</a>
+                  <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('hasilmining') }}" >Proses C4.5</a>
                 </div>
             </div>
             

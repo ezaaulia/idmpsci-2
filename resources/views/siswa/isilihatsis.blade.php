@@ -20,8 +20,9 @@
                   </form>
                 </div>
               <div class="col-auto">
-                <a type="button" class="btn btn-info" href="{{ url('downloadpdf')}}">Unduh Data</a>
+                <a type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Upload Data</a>
                 <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
+                <a type="button" class="btn btn-info" href="{{ url('downloadpdf')}}">Unduh Data</a>
               </div>
             </div>
 
@@ -32,8 +33,31 @@
               </div>
             @endif
 
-            
-
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Import Data Siswa</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      
+                      <form action="{{ url('upload')}}" method="POST" enctype="multipart/form-data" >
+                          @csrf
+                          <div class="modal-body">
+                                  <div class="form-group">
+                                      <input type="file" name="import_file" >
+                                  </div>
+                          </div>
+                          <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                  <button type="submit" class="btn app-btn-primary">Upload</button>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+          
             <div class="tab-content" id="orders-table-tab-content">
               
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -46,7 +70,7 @@
                             <tr>
                               <th class="cell">No.</th>
                               <th class="cell">NIS</th>
-                              <th class="cell col-2">Nama Siswa</th>
+                              <th class="cell">Nama Siswa</th>
                               <th class="cell">Asal Sekolah</th>
                               {{-- <th class="cell">Input Nilai</th> --}}
                               <th class="cell">Aksi</th>
@@ -61,13 +85,7 @@
                                   <td class="cell">{{ $datas->nama }}</td>
                                   <td class="cell">{{ $datas->asal }}</td>
                                   
-                                  {{-- <td class="cell"> 
-                                    <div class="app-card-footer mt-auto"> --}}
-                                      {{-- <button type="button" id="Btn" onclick="myFunction()"  >Klik</button> --}}
-                                      {{-- <a class="btn app-btn-secondary" href="{{ url('tambahnilai/'.$datas->id) }}">Tambah Nilai</a>
-                                    </div>
-                                  </td>
-                                   --}}
+
                                   <td class="cell">  
                                     <a href="{{ url('lihatsiswa/detailsiswa/'.$datas->id) }}" class="btn btn-sm btn-primary ">
                                       <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-file-earmark-person" viewBox="0 0 16 16">

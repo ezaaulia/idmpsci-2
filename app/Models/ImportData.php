@@ -12,6 +12,9 @@ class ImportData extends Model
     protected $table = 'import_data';
 
     protected $fillable = [
+        // 'nis',
+        // 'nama',
+        // 'asal',
         'data_siswas_id',
         'nilai_tes_mtk', 
         'nilai_tes_ipa', 

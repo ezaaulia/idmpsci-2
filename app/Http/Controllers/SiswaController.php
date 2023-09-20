@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 use C45\C45;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
+use App\Models\DataTraining;
 use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Session;
@@ -30,7 +31,7 @@ class SiswaController extends Controller
     public function index()
     {
         $data = DB::table('data_siswas')
-                    ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
+                    ->join('nilai_tes', 'nilai_tes.id', '=', 'data_siswas.id')
                     ->get();
 
         return view('mining.isimining_data', compact('data'));
@@ -52,6 +53,7 @@ class SiswaController extends Controller
         [   
             'sis' => $sis, 
             'nil' => $nil,
+            // 'hasil' => $hasilmd,
             'title' => 'Tambah Data Siswa'
         ]
     );
@@ -72,10 +74,10 @@ class SiswaController extends Controller
             'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
             'nama' => 'required',
             'asal' => 'required',
-            'nilai_tes_mtk' => 'required','numeric',
-            'nilai_tes_ipa' => 'required', 'numeric',
-            'nilai_tes_agama' => 'required', 'numeric',
-            'nilai_tes_bindo' => 'required', 'numeric',
+            'nilai_tes_mtk' => 'required',
+            'nilai_tes_ipa' => 'required',
+            'nilai_tes_agama' => 'required',
+            'nilai_tes_bindo' => 'required',
             'status_kelas' => 'required',
         ],[
             'nis.required' => 'NIS wajib diisi!',
@@ -95,6 +97,30 @@ class SiswaController extends Controller
             'status_kelas.required' => 'Kelas wajib diisi!',
         ]);
 
+
+        // Memuat model pohon keputusan C45
+        $filename = public_path('/csv/Data_Training.csv');
+        $c45 = new C45([
+            'targetAttribute' => 'hasilmd',
+            'trainingFile' => $filename,
+            'splitCriterion' => C45::SPLIT_GAIN,
+        ]);
+        $tree = $c45->buildTree();
+        $treeString = $tree->toString();
+
+        // Data yang akan diklasifikasikan
+        $data = [
+            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+        ];
+
+        // Melakukan klasifikasi menggunakan pohon keputusan C45
+        $hasilmd = $tree->classify($data);
+
+
+        // Membuat data siswa baru ke dalam database
         $sis = new DataSiswa;
         $sis ->nis = $request->nis;
         $sis->nama = $request->nama;
@@ -103,13 +129,15 @@ class SiswaController extends Controller
 
         $nil = new NilaiTes;
         $nil -> data_siswas_id = $sis->id;
-        $nil -> nilai_tes_mtk = $request->nilai_tes_mtk;
-        $nil -> nilai_tes_ipa = $request->nilai_tes_ipa;
-        $nil -> nilai_tes_agama = $request->nilai_tes_agama;
-        $nil -> nilai_tes_bindo = $request->nilai_tes_bindo;
-        $nil -> status_kelas = $request->status_kelas;
-        
+        $nil -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
+        $nil -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
+        $nil -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
+        $nil -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
+        $nil -> status_kelas = strtoupper($request->status_kelas);
         $nil->save();
+
+        $hasilmd = new DataTraining();
+        $hasilmd -> hasilmd = $request->hasilmd;
 
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
     }    
@@ -180,7 +208,6 @@ class SiswaController extends Controller
         
         // Validasi data siswa yang diupdate
         Request()->validate([
-            // 'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
             'nama' => 'required',
             'asal' => 'required',
             'nilai_tes_mtk' => 'required','numeric',
@@ -189,10 +216,6 @@ class SiswaController extends Controller
             'nilai_tes_bindo' => 'required', 'numeric',
             'status_kelas' => 'required',
         ],[
-            // 'nis.required' => 'NIS wajib diisi!',
-            // 'nis.unique' => 'NIS ini sudah ada!',
-            // 'nis.min' => 'NIS minimal 9 karakter!',
-            // 'nis.max' => 'NIS maksimal 10 karakter!',
             'nama.required' => 'Nama wajib diisi!',
             'asal.required' => 'Asal Sekolah wajib diisi!',
             'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
@@ -228,7 +251,6 @@ class SiswaController extends Controller
         $hasil = $tree->classify($data);
 
         // Mengambil data siswa yang akan diupdate
-        // $student = Student::findOrFail($id);
         $edits = DataSiswa::find($id);
         $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
 
@@ -236,12 +258,11 @@ class SiswaController extends Controller
         $edits->asal = $request->asal;
         $edits->update();
 
-        $editn -> nilai_tes_mtk = $request->nilai_tes_mtk;
-        $editn -> nilai_tes_ipa = $request->nilai_tes_ipa;
-        $editn -> nilai_tes_agama = $request->nilai_tes_agama;
-        $editn -> nilai_tes_bindo = $request->nilai_tes_bindo;
-        $editn -> status_kelas = $request->status_kelas;
-        // $editn -> data_siswas_id = $id;
+        $editn -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
+        $editn -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
+        $editn -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
+        $editn -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
+        $editn -> status_kelas = strtoupper($request->status_kelas);
         $editn->update();
         
         
@@ -267,38 +288,26 @@ class SiswaController extends Controller
         
     }
 
-    public function import(Request $request)
-    {
+    // public function import()
+    // {
         
-        $datas = DB::table('data_siswas')
-                    ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
-                    ->get();
+    //     $datas = DB::table('data_siswas')
+    //                 ->join('nilai_tes', 'nilai_tes.data_siswas_id', '=', 'data_siswas.id')
+    //                 ->get();
 
-        return view('siswa.isiimportsis', [
-            'datas' => $datas,
-            'title' => 'Import Data'
-            ]);
-    }
+    //     return view('siswa.isiimportsis', [
+    //         'datas' => $datas,
+    //         'title' => 'Import Data'
+    //         ]);
+    // }
 
     public function upload(Request $request)
     {
         
         Excel::import(new DataImport(), $request->file(key:'import_file'));
 
-        return redirect('import-data')->with('pesan', 'Data Siswa Berhasil di Import!!!');
+        return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Upload!!!');
     }
-
-    // public function deletefile(Request $request, $id)
-    // {
-    //     // Hapus nilai terlebih dahulu
-    //     NilaiTes::where('data_siswas_id', $id)->delete();
-
-    //     // Hapus data siswa
-    //     DataSiswa::where('id', $id)->delete();
-
-    //     return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Hapus!!!');
-        
-    // }
 
     public function export()
     {

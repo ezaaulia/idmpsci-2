@@ -44,14 +44,13 @@ class DataSiswa extends Model
     public function nilai_tes()
     {
         return $this->hasOne(NilaiTes::class, 'data_siswas_id');
-        
     }
 
     // ini untuk detail persiswa
-    public function detailSis($id)
-    {
-        return DB::table('data_siswas')->where('id', $id)->first();
-    }
+    // public function detailSis($id)
+    // {
+    //     return DB::table('data_siswas')->where('id', $id)->first();
+    // }
    
     
 

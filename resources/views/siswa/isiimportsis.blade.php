@@ -28,9 +28,6 @@
                           <div class="row justify-content-center align-items-center"> {{-- ini untuk ngatur posisi button atas bawah --}}
                                <div class="row justify-content-start"> {{--geser button kanan kiri --}}
                                 <div class="col-">
-                                  <button type="button" class="btn app-btn-danger" id="deleteAllSelectedRecord" >
-                                    Hapus Data
-                                </button>
                                   <button type="button" class="btn app-btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
                                       Upload File
                                   </button>
@@ -82,39 +79,37 @@
                     
                     <div class="app-card-body">
                       <div class="table-responsive-lg">
-                        <table class="table table-bordered mb-0 text-left ">
-                          <thead>
-                            <tr>
-                              <td><input type="checkbox" name="" id="select_all_ids" ></td>
-                              <th class="cell">No.</th>
-                              <th class="cell">NIS</th>
-                              <th class="cell col-2">Nama Siswa</th>
-                              <th class="cell">Asal Sekolah</th>
-                              <th class="cell">Nilai MTK</th>
-                              <th class="cell">Nilai IPA</th>
-                              <th class="cell">Nilai Agama</th>
-                              <th class="cell">Nilai B.I</th>
-                              <th class="cell">Status Kelas</th>
-                            </tr>
-                          </thead>
-
-                          <tbody>
-                            @foreach($datas as $data)
+                          <table class="table table-bordered mb-0 text-left ">
+                            <thead>
                               <tr>
-                                <td><input type="checkbox" name="ids" class="checkbox_ids" id="" value="{{ $data->id }}"></td>
-                                  <td class="cell">{{ $loop->iteration }}.</td>
-                                  <td class="cell">{{ $data->nis }}</td>
-                                  <td class="cell">{{ $data->nama }}</td>
-                                  <td class="cell">{{ $data->asal }}</td>
-                                  <td class="cell">{{ $data->nilai_tes_mtk }}</td>
-                                  <td class="cell">{{ $data->nilai_tes_ipa }}</td>
-                                  <td class="cell">{{ $data->nilai_tes_agama }}</td>
-                                  <td class="cell">{{ $data->nilai_tes_bindo }}</td>
-                                  <td class="cell">{{ $data->status_kelas }}</td>
+                                <th class="cell">No.</th>
+                                <th class="cell">NIS</th>
+                                <th class="cell col-2">Nama Siswa</th>
+                                <th class="cell">Asal Sekolah</th>
+                                <th class="cell">Nilai MTK</th>
+                                <th class="cell">Nilai IPA</th>
+                                <th class="cell">Nilai Agama</th>
+                                <th class="cell">Nilai B.I</th>
+                                <th class="cell">Status Kelas</th>
                               </tr>
-                            @endforeach
-                          </tbody>
-                        </table>
+                            </thead> 
+
+                            <tbody>
+                              @foreach($datas as $data)
+                                <tr>
+                                    <td class="cell">{{ $loop->iteration }}.</td>
+                                    <td class="cell">{{ $data->nis }}</td>
+                                    <td class="cell">{{ $data->nama }}</td>
+                                    <td class="cell">{{ $data->asal }}</td>
+                                    <td class="cell">{{ $data->nilai_tes_mtk }}</td>
+                                    <td class="cell">{{ $data->nilai_tes_ipa }}</td>
+                                    <td class="cell">{{ $data->nilai_tes_agama }}</td>
+                                    <td class="cell">{{ $data->nilai_tes_bindo }}</td>
+                                    <td class="cell">{{ $data->status_kelas }}</td>
+                                </tr>
+                              @endforeach
+                            </tbody>
+                          </table>
                       </div> <!--//table-responsive-->
                     </div> <!--//app-card-body-->
                   </div>
@@ -125,15 +120,5 @@
     </div>
 </div>
 
-<script>
-    $(function(e){
-
-      $("#select_all_ids").click(function(){
-        $('.checkbox_ids').prop('checked',$(this).prop('checked'));
-      });
-
-
-    });
-</script>
 @endsection
 

@@ -69,8 +69,7 @@
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahsiswa') ? 'active' : '' }}" href="{{ url('/tambahsiswa')}}">Tambah Data</a></li>
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatsiswa*') ? 'active' : '' }}" href="{{ url('/lihatsiswa')}}">Lihat Siswa</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('importdata*') ? 'active' : '' }}" href="{{ url('/import-data')}}">Import Data</a></li>
-                            {{-- <li class="submenu-item"><a class="submenu-link {{ Request::is('carisiswa*') ? 'active' : '' }}" href="{{ url('/carisiswa')}}">Cari Siswa</a></li> --}}
+                            {{-- <li class="submenu-item"><a class="submenu-link {{ Request::is('importdata*') ? 'active' : '' }}" href="{{ url('/import-data')}}">Import Data</a></li> --}}
                         </ul>
                     </div>
                 </li><!--//nav-item-->
@@ -99,29 +98,11 @@
                         </ul>
                     </div>
                 </li><!--//nav-item-->
-                
-
-                <li class="nav-item">
-                    <form action="{{ url('/keluar')}}" method="post">
-                        @csrf
-                    <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <button class="nav link btn border-0" >           
-                            <span class="nav-item" >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-                                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-                                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-                                </svg>
-                            </span>
-                            <span class="nav-link-text">Keluar</span>
-                        </button><!--//nav-link-->
-                    </form>
-                </li><!--//nav-item-->
-
-             
 
 
                 	    
             </ul><!--//app-menu-->
         </nav><!--//app-nav-->
+
     </div><!--//sidepanel-inner-->
 </div><!--//app-sidepanel-->

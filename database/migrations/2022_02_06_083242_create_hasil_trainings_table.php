@@ -15,13 +15,16 @@ class CreateHasilTrainingsTable extends Migration
     {
         Schema::create('hasil_trainings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('training_data_id');
-            $table->string('uji_data');
-            $table->string('hitung_akurasi');
+            $table->unsignedBigInteger('nilai_tes_id');
+            // $table->integer('nis');
+            // $table->string('nama');
+            // $table->string('asal');
+            // $table->enum('status_kelas', ['reguler', 'ci']);
+            $table->string('hasilmd');
             $table->timestamps();
 
-
-            $table->foreign('training_data_id')->references('id')->on('training_data');
+            $table->foreign('data_siswas_id')->references('id')->on('data_siswas');
+            $table->foreign('nilai_tes_id')->references('id')->on('nilai_tes');
         });
     }
 

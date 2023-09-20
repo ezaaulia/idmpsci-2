@@ -33,6 +33,7 @@ class DataImport implements ToCollection, WithHeadingRow
            ]);
 
             $data_siswa->nilai_tes()->create([
+                // 'data_siswas_id' => $row['data_siswas_id'],
                 'nilai_tes_mtk' => $row['nilai_tes_mtk'],
                 'nilai_tes_ipa' => $row['nilai_tes_ipa'],
                 'nilai_tes_bindo' => $row['nilai_tes_bindo'],
@@ -42,29 +43,29 @@ class DataImport implements ToCollection, WithHeadingRow
           
             
             // // Memuat model pohon keputusan C45
-            // $filename = public_path('/csv/Data_Training.csv');
-            // $c45 = new C45([
-            //     'targetAttribute' => 'status_kelas',
-            //     'trainingFile' => $filename,
-            //     'splitCriterion' => C45::SPLIT_GAIN,
-            // ]);
-            // $tree = $c45->buildTree();
-            // $treeString = $tree->toString();
+            $filename = public_path('/csv/Data_Training.csv');
+            $c45 = new C45([
+                'targetAttribute' => 'hasilmd',
+                'trainingFile' => $filename,
+                'splitCriterion' => C45::SPLIT_GAIN,
+            ]);
+            $tree = $c45->buildTree();
+            $treeString = $tree->toString();
 
-            // // Data yang akan diklasifikasikan
-            // $data = [
-            //     'nilai_tes_mtk' => strtoupper($data_siswa->nilai_tes_mtk),
-            //     'nilai_tes_ipa' => strtoupper($data_siswa->nilai_tes_ipa),
-            //     'nilai_tes_agama' => strtoupper($data_siswa->nilai_tes_agama),
-            //     'nilai_tes_bindo' => strtoupper($data_siswa->nilai_tes_bindo),
-            // ];
+            // Data yang akan diklasifikasikan
+            $data = [
+                'nilai_tes_mtk' => strtoupper($data_siswa->nilai_tes_mtk),
+                'nilai_tes_ipa' => strtoupper($data_siswa->nilai_tes_ipa),
+                'nilai_tes_agama' => strtoupper($data_siswa->nilai_tes_agama),
+                'nilai_tes_bindo' => strtoupper($data_siswa->nilai_tes_bindo),
+            ];
 
-            // // Melakukan klasifikasi menggunakan pohon keputusan C45
-            // $hasil = $tree->classify($data);
+            // Melakukan klasifikasi menggunakan pohon keputusan C45
+            $hasil = $tree->classify($data);
 
-            // // Menyimpan status kelas hasil klasifikasi
-            // $data_siswa->status_kelas = $hasil;
-            // $data_siswa->save();
+            // Menyimpan status kelas hasil klasifikasi
+            $data_siswa->status_kelas = $hasil;
+            $data_siswa->save();
       }
     }
 }
