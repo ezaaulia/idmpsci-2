@@ -15,15 +15,16 @@ class CreateNilaiTesTable extends Migration
     {
         Schema::create('nilai_tes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('data_siswas_id');
-            $table->string('nilai_tes_mtk');
-            $table->string('nilai_tes_ipa');
-            $table->string('nilai_tes_agama');
-            $table->string('nilai_tes_bindo');
-            $table->enum('status_kelas', ['reguler', 'ci']);
+            // $table->unsignedBigInteger('data_siswas_id');
+            // $table->string('nilai_tes_mtk');
+            // $table->string('nilai_tes_ipa');
+            // $table->string('nilai_tes_agama');
+            // $table->string('nilai_tes_bindo');
+            // $table->enum('status_kelas', ['reguler', 'ci']);
+            // $table->string('hasilmining')->nullable();
             $table->timestamps();
 
-            $table->foreign('data_siswas_id')->references('id')->on('data_siswas');
+            // $table->foreign('data_siswas_id')->references('id')->on('data_siswas');
         });
     }
 

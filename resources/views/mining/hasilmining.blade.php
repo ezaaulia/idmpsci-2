@@ -28,11 +28,11 @@
                           <thead>
                             <tr>
                               <th class="cell">No.</th>
-                              {{-- <th class="cell">NIS</th>
+                              {{-- <th class="cell">NIS</th> --}}
                               <th class="cell">Nama Siswa</th>
-                              <th class="cell">Asal Sekolah</th> --}}
+                              {{-- <th class="cell">Asal Sekolah</th> --}}
                               <th class="cell">Kelas Asli</th>
-                              <th class="cell">Kelas Mining</th>
+                              <th class="cell">Hasil Prediksi</th>
                             </tr>
                           </thead>
 
@@ -44,7 +44,7 @@
                                   <td class="cell">{{ $datas->nama }}</td>
                                   {{-- <td class="cell">{{ $datas->asal }}</td> --}}
                                   <td class="cell">{{ $datas->status_kelas }}</td>
-                                  <td class="cell">{{ $datas->hasilmd }}</td>
+                                  <td class="cell">{{ $datas->hasil_mining }}</td>
                               </tr>
                               @endforeach
 

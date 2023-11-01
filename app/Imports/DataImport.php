@@ -30,7 +30,7 @@ class DataImport implements ToCollection, WithHeadingRow
                'nis' =>  $row['nis'],
                'nama' =>  $row['nama'],
                'asal' => $row['asal'],
-           ]);
+            ]);
 
             $data_siswa->nilai_tes()->create([
                 // 'data_siswas_id' => $row['data_siswas_id'],
@@ -45,7 +45,7 @@ class DataImport implements ToCollection, WithHeadingRow
             // // Memuat model pohon keputusan C45
             $filename = public_path('/csv/Data_Training.csv');
             $c45 = new C45([
-                'targetAttribute' => 'hasilmd',
+                'targetAttribute' => 'hasilmining',
                 'trainingFile' => $filename,
                 'splitCriterion' => C45::SPLIT_GAIN,
             ]);
@@ -63,8 +63,8 @@ class DataImport implements ToCollection, WithHeadingRow
             // Melakukan klasifikasi menggunakan pohon keputusan C45
             $hasil = $tree->classify($data);
 
-            // Menyimpan status kelas hasil klasifikasi
-            $data_siswa->status_kelas = $hasil;
+            // Menyimpan hasil mining hasil klasifikasi
+            $data_siswa->hasilmining = $hasil;
             $data_siswa->save();
       }
     }

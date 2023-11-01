@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('username')->unique();
             $table->string('alamat');
             $table->string('no_hp');
+            $table->integer('level')->nullable();
             $table->string('password');
             $table->timestamps();
             

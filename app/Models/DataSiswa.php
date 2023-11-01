@@ -20,11 +20,12 @@ class DataSiswa extends Model
         'nis', 
         'nama', 
         'asal', 
-        // 'nilai_tes_mtk', 
-        // 'nilai_tes_ipa', 
-        // 'nilai_tes_agama', 
-        // 'nilai_tes_bindo',
-        // 'status_kelas',
+        'nilai_tes_mtk', 
+        'nilai_tes_ipa', 
+        'nilai_tes_agama', 
+        'nilai_tes_bindo',
+        'status_kelas',
+        'hasil_mining'
     ];
 
     public function scopeFilter($query, array $filters)

@@ -23,6 +23,11 @@ use PDF;
 
 class SiswaController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -46,14 +51,14 @@ class SiswaController extends Controller
 
     public function tambahsis()
     {   
-        $sis = DataSiswa::with('nilai_tes')->get();
-        $nil = NilaiTes::with('data_siswas')->get();
+        // $sis = DataSiswa::with('nilai_tes')->get();
+        // $nil = NilaiTes::with('data_siswas')->get();
 
         return view('siswa.isitambahsis',
         [   
-            'sis' => $sis, 
-            'nil' => $nil,
-            // 'hasil' => $hasilmd,
+            // 'sis' => $sis, 
+            // 'nil' => $nil,
+            // 'hasil' => $hasilmining,
             'title' => 'Tambah Data Siswa'
         ]
     );
@@ -68,45 +73,55 @@ class SiswaController extends Controller
 
     public function save(Request $request)
     {
-
-        // Validasi data siswa
-        Request()->validate([
-            'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
-            'nama' => 'required',
-            'asal' => 'required',
-            'nilai_tes_mtk' => 'required',
-            'nilai_tes_ipa' => 'required',
-            'nilai_tes_agama' => 'required',
-            'nilai_tes_bindo' => 'required',
-            'status_kelas' => 'required',
-        ],[
-            'nis.required' => 'NIS wajib diisi!',
-            'nis.unique' => 'NIS ini sudah ada!',
-            'nis.min' => 'NIS minimal 9 karakter!',
-            'nis.max' => 'NIS maksimal 10 karakter!',
-            'nama.required' => 'Nama wajib diisi!',
-            'asal.required' => 'Asal Sekolah wajib diisi!',
-            'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
-            'nilai_tes_mtk.numemric' => 'Nilai wajib angka!',
-            'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
-            'nilai_tes_ipa.numemric' => 'Nilai wajib angka!',
-            'nilai_tes_agama.required' => 'Nilai wajib diisi!',
-            'nilai_tes_agama.numemric' => 'Nilai wajib angka!',
-            'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
-            'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
-            'status_kelas.required' => 'Kelas wajib diisi!',
-        ]);
+    // Validasi data siswa
+    $this->validate($request, [
+        'nis' => 'required|numeric',
+        'nama' => 'required',
+        'asal' => 'required',
+        'nilai_tes_mtk' => 'required',
+        'nilai_tes_ipa' => 'required',
+        'nilai_tes_agama' => 'required',
+        'nilai_tes_bindo' => 'required',
+        'status_kelas' => 'required'
+    ]);
+        // // Validasi data siswa
+        // Request()->validate([
+        //     'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
+        //     'nama' => 'required',
+        //     'asal' => 'required',
+        //     'nilai_tes_mtk' => 'required',
+        //     'nilai_tes_ipa' => 'required',
+        //     'nilai_tes_agama' => 'required',
+        //     'nilai_tes_bindo' => 'required',
+        //     'status_kelas' => 'required',
+        // ],[
+        //     'nis.required' => 'NIS wajib diisi!',
+        //     'nis.unique' => 'NIS ini sudah ada!',
+        //     'nis.min' => 'NIS minimal 9 karakter!',
+        //     'nis.max' => 'NIS maksimal 10 karakter!',
+        //     'nama.required' => 'Nama wajib diisi!',
+        //     'asal.required' => 'Asal Sekolah wajib diisi!',
+        //     'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
+        //     'nilai_tes_mtk.numemric' => 'Nilai wajib angka!',
+        //     'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
+        //     'nilai_tes_ipa.numemric' => 'Nilai wajib angka!',
+        //     'nilai_tes_agama.required' => 'Nilai wajib diisi!',
+        //     'nilai_tes_agama.numemric' => 'Nilai wajib angka!',
+        //     'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
+        //     'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
+        //     'status_kelas.required' => 'Kelas wajib diisi!',
+        // ]);
 
 
         // Memuat model pohon keputusan C45
         $filename = public_path('/csv/Data_Training.csv');
         $c45 = new C45([
-            'targetAttribute' => 'hasilmd',
+            'targetAttribute' => 'hasil_mining',
             'trainingFile' => $filename,
             'splitCriterion' => C45::SPLIT_GAIN,
         ]);
         $tree = $c45->buildTree();
-        $treeString = $tree->toString();
+        // $treeString = $tree->toString();
 
         // Data yang akan diklasifikasikan
         $data = [
@@ -117,27 +132,39 @@ class SiswaController extends Controller
         ];
 
         // Melakukan klasifikasi menggunakan pohon keputusan C45
-        $hasilmd = $tree->classify($data);
+        $hasil = $tree->classify($data);
 
+// Membuat data siswa baru dalam database
+DataSiswa::create([
+    'nis' => $request->nis,
+    'nama' => $request->nama,
+    'asal' => $request->asal,
+    'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+    'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+    'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+    'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+    'hasil_mining' => $hasil,
+]);
+        // // Membuat data siswa baru ke dalam database DataSiswa
+        // $sis = new DataSiswa;
+        // $sis ->nis = $request->nis;
+        // $sis->nama = $request->nama;
+        // $sis->asal = $request->asal;
+        // $sis->save();
 
-        // Membuat data siswa baru ke dalam database
-        $sis = new DataSiswa;
-        $sis ->nis = $request->nis;
-        $sis->nama = $request->nama;
-        $sis->asal = $request->asal;
-        $sis->save();
+        // // Membuat data siswa baru ke dalam database NilaiTes
+        // $nil = new NilaiTes;
+        // $nil -> data_siswas_id = $sis->id;
+        // $nil -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
+        // $nil -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
+        // $nil -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
+        // $nil -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
+        // $nil -> status_kelas = strtoupper($request->status_kelas);
+        // $nil -> hasilmining = ($request->$hasil);
+        // $nil->save();
 
-        $nil = new NilaiTes;
-        $nil -> data_siswas_id = $sis->id;
-        $nil -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
-        $nil -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
-        $nil -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
-        $nil -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
-        $nil -> status_kelas = strtoupper($request->status_kelas);
-        $nil->save();
-
-        $hasilmd = new DataTraining();
-        $hasilmd -> hasilmd = $request->hasilmd;
+        // $hasilmining = new DataTraining();
+        // $hasilmining -> hasilmining = $request->hasilmining;
 
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
     }    
@@ -232,7 +259,7 @@ class SiswaController extends Controller
         // Memuat model pohon keputusan C45
         $filename = public_path('/csv/Data_Training.csv');
         $c45 = new C45([
-            'targetAttribute' => 'status_kelas',
+            'targetAttribute' => 'hasil_mining',
             'trainingFile' => $filename,
             'splitCriterion' => C45::SPLIT_GAIN,
         ]);
@@ -263,6 +290,7 @@ class SiswaController extends Controller
         $editn -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
         $editn -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
         $editn -> status_kelas = strtoupper($request->status_kelas);
+        $editn -> hasilmining = $hasil;
         $editn->update();
         
         

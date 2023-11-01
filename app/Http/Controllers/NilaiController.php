@@ -6,19 +6,55 @@ use Illuminate\Http\Request;
 use App\Models\DataSiswa;
 use App\Models\ImportData;
 use App\Models\NilaiTes;
+use Illuminate\Support\Facades\Auth;
 // use App\Http\Controllers\C45;
 use C45\C45;
 
 class NilaiController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Menampilkan daftar data siswa.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        // Memeriksa apakah pengguna telah login
+        // if (Auth::check()) {
+        //     $data = DataSiswa::all();
+        //     return view('siswa.isieditnil', compact('data'));
+        // } else {
+        //     return redirect()->route('login')->with(['msg' => 'Anda harus login!']);
+        // }
+
+        // $data = DataSiswa::all();
+        // return redirect()->route('nilai.isieditnil');
+        return view('nilai.isieditnil', );
+        // [
+        //     // 'edits' => $edits, 
+        //     // 'editn' => $editn,
+        //     'title' => 'Edit Data Siswa', 
+        // ]
+        // );
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editnil($id)
+    {
+
+        // Memeriksa apakah pengguna telah login
+        if (Auth::check()) {
+            $nilai = DataSiswa::findOrFail($id);
+            return view('nilai.editnil', compact('nilai'));
+        } else {
+            return redirect()->route('login')->with(['msg' => 'Anda harus login!']);
+        }
+
+        
     }
     
     /**

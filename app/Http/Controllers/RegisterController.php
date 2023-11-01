@@ -24,11 +24,12 @@ class RegisterController extends Controller
             'email' => ['required', 'email:dns', 'max:255', 'unique:users'],
             'username' => ['required', 'min:3', 'max:255', 'unique:users'],
             'alamat' => 'required|max:255',
-            'no_hp' => 'required|max:13',
+            'no_hp' => 'required|min:11|max:13',
+            // 'level' => 'required|max:255',
             'password' => 'required|min:6|max:255'
         ]);
 
-        // Untuk mengenkripsi password d dtbase bsa pke dua cara yaitu :
+        // Untuk mengenkripsi password d database bsa pke dua cara yaitu :
 
         // $validatedData['password'] = bcrypt($validatedData['password']);
 

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\C45;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\NilaiController;
@@ -30,23 +31,30 @@ use App\Http\Controllers\ProsesController;
 Route::get('/', function () {
     return redirect()->route('login');
 });
+
+// Rute otentikasi
+// Auth::routes();
+// // Rute halaman beranda setelah login
+// Route::get('/home', [HomeController::class, 'index'])->name('home');
+
 // LOGIN
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
-// Route::get('/index', [C45::class, 'index'])->name('index');
+ // HOMEPAGE
 
-Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
-
+Route::get('/beranda', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/datanilai', [NilaiController::class, 'index']);
+ 
 // REGISTER
 
 Route::get('/registrasi', [RegisterController::class, 'regis']);
 Route::post('/registrasi', [RegisterController::class, 'store']);
 
-// HOMEPAGE
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
-Route::get('/beranda', [HomeController::class, 'beranda']);
+
 
 // PROFIL USER
 // ---------- LIHAT ----------
@@ -77,6 +85,8 @@ Route::post('/tambahsiswa/save', [SiswaController::class, 'save']);
 // Route::get('/tambahnilai', [NilaiController::class, 'tambahnil'])->name('tambahnilai');
 // Route::post('/tambahnilai/save', [NilaiController::class, 'save']);
 
+// Route::get('/datanilai', [NilaiController::class, 'index'])->name('datanilai');
+
 // ---------- LIHAT SISWA DAN DETAIL SISWA ----------
 
 Route::get('/lihatsiswa', [SiswaController::class, 'lihatsis'])->name('lihatsiswa');
@@ -88,6 +98,8 @@ Route::get('/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
 Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis'])->name('editsiswa');
 Route::patch('/lihatsiswa/update/{id}', [SiswaController::class, 'update'])->name('update');
 
+// Route::get('/lihatnilai/editnilai/{id}', [NilaiController::class, 'editnil'])->name('editnilai');
+// Route::patch('/lihatnilai/editnilai/{id}', [NilaiController::class, 'update'])->name('update');
 
 // ---------- DELETE SISWA ----------
 
@@ -95,7 +107,7 @@ Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'
 
 
 // ---------- IMPORT DATA ----------
-// Route::get('/import-data', [SiswaController::class, 'import'])->name('import-data');
+Route::get('/import-data', [SiswaController::class, 'import'])->name('import-data');
 Route::post('/upload', [SiswaController::class, 'upload'])->name('upload');
 
 // Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
@@ -112,6 +124,20 @@ Route::get('/hasilmining',[MiningDataController::class,'mining'])->name('hasilmi
 // Route::get('/mining',[NilaiController::class,'save']);
 // Route::get('/result',[ProsesController::class,'result']);
 
+// routes/web.php
 
-// Rute untuk menampilkan daftar status kelas siswa HALAMAN MINING SISWA
-// Route::get('status-kelas', 'KelasController@index')->name('status.index');
+// Route::get('/upload', [MiningDataController::class, 'upload'])->name('upload');
+// Route::get('/process-data', [MiningDataController::class, 'processData'])->name('processData');
+// Route::post('/process-data', 'MiningDataController@processData')->name('processData');
+
+// Rute untuk mengimpor data siswa dari file CSV
+// Route::namespace('Import')->group(function () {
+//     Route::post('import', 'ImportData')->name('import');
+// });
+
+
+// Auth::routes();
+
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+

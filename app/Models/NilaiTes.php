@@ -20,12 +20,12 @@ class NilaiTes extends Model
 
     protected $fillable = [
         'id',
-        'data_siswas_id',
-        'nilai_tes_mtk', 
-        'nilai_tes_ipa', 
-        'nilai_tes_agama', 
-        'nilai_tes_bindo',
-        'status_kelas',
+        // 'data_siswas_id',
+        // 'nilai_tes_mtk', 
+        // 'nilai_tes_ipa', 
+        // 'nilai_tes_agama', 
+        // 'nilai_tes_bindo',
+        // 'status_kelas',
     ];
 
     public function allData()

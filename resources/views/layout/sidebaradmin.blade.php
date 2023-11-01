@@ -69,6 +69,7 @@
                         <ul class="submenu-list list-unstyled">
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahsiswa') ? 'active' : '' }}" href="{{ url('/tambahsiswa')}}">Tambah Data</a></li>
                             <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatsiswa*') ? 'active' : '' }}" href="{{ url('/lihatsiswa')}}">Lihat Siswa</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('datanilai*') ? 'active' : '' }}" href="{{ url('/datanilai')}}">Data Nilai</a></li>
                             {{-- <li class="submenu-item"><a class="submenu-link {{ Request::is('importdata*') ? 'active' : '' }}" href="{{ url('/import-data')}}">Import Data</a></li> --}}
                         </ul>
                     </div>

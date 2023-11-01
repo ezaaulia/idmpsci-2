@@ -52,6 +52,8 @@
                                 <div class="app-auth-branding mb-4 "><a class="app-logo" href="#"><img class="logo-icon me-2" src="assets/images/smp.png" alt="logo" ></a></div>
                                 <h2 class="auth-heading text-center mb-5 ">LOGIN</h2>
                                 <div class="auth-form-container text-start">
+                                    {{-- <form method="POST" action="{{ route('login') }}">
+                                        @csrf --}}
                                     <form class="auth-form login-form" action="/login" method="POST">
                                         @csrf         
                                         <div class="email mb-3">

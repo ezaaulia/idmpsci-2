@@ -20,10 +20,10 @@ class CreateHasilTrainingsTable extends Migration
             // $table->string('nama');
             // $table->string('asal');
             // $table->enum('status_kelas', ['reguler', 'ci']);
-            $table->string('hasilmd');
+            $table->string('hasilmd')->nullable();
             $table->timestamps();
 
-            $table->foreign('data_siswas_id')->references('id')->on('data_siswas');
+            // $table->foreign('data_siswas_id')->references('id')->on('data_siswas');
             $table->foreign('nilai_tes_id')->references('id')->on('nilai_tes');
         });
     }
