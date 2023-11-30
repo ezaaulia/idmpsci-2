@@ -37,17 +37,19 @@ Route::get('/', function () {
 // // Rute halaman beranda setelah login
 // Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// LOGIN
+
+// -------------------- LOGIN --------------------
 
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/login', [LoginController::class, 'authenticate']);
 
- // HOMEPAGE
+
+ // -------------------- HOMEPAGE --------------------
 
 Route::get('/beranda', [HomeController::class, 'index'])->middleware('auth');
-Route::get('/datanilai', [NilaiController::class, 'index']);
- 
-// REGISTER
+
+
+// -------------------- REGISTER --------------------
 
 Route::get('/registrasi', [RegisterController::class, 'regis']);
 Route::post('/registrasi', [RegisterController::class, 'store']);
@@ -55,8 +57,8 @@ Route::post('/registrasi', [RegisterController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 
+// -------------------- PROFIL USER --------------------
 
-// PROFIL USER
 // ---------- LIHAT ----------
 Route::get('/lihatprofil', [ProfilController::class, 'lihatprofil'])->name('lihatprofil');
 
@@ -65,14 +67,15 @@ Route::get('/editprofil/{id}', [ProfilController::class, 'editprofil'])->name('e
 Route::patch('/editprofil/update/{id}', [ProfilController::class, 'update']);
 
 
-// OPERATOR
+// -------------------- OPERATOR --------------------
 
 Route::get('/tambahoperator', [OperatorController::class, 'tambahope']);
 Route::get('/lihatoperator', [OperatorController::class, 'lihatope']);
 Route::get('/hapusoperator', [OperatorController::class, 'hapusope']);
 
 
-// SISWA
+// -------------------- SISWA --------------------
+
 // ---------- TAMBAH SISWA ----------
 Route::get('/tambahsiswa', [SiswaController::class, 'tambahsis'])->name('tambahsiswa', 'tambahnilai');
 Route::post('/tambahsiswa/save', [SiswaController::class, 'save']);
@@ -98,6 +101,9 @@ Route::get('/lihatsiswa/detailsiswa/{id}', [SiswaController::class, 'details']);
 Route::get('/lihatsiswa/editsiswa/{id}', [SiswaController::class, 'editsis'])->name('editsiswa');
 Route::patch('/lihatsiswa/update/{id}', [SiswaController::class, 'update'])->name('update');
 
+Route::get('/lihatnilai', [SiswaController::class, 'lihatnilai'])->name('lihatnilai');
+Route::patch('/lihatnilai/update/{id}', [SiswaController::class, 'update'])->name('update');
+
 // Route::get('/lihatnilai/editnilai/{id}', [NilaiController::class, 'editnil'])->name('editnilai');
 // Route::patch('/lihatnilai/editnilai/{id}', [NilaiController::class, 'update'])->name('update');
 
@@ -107,7 +113,7 @@ Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'
 
 
 // ---------- IMPORT DATA ----------
-Route::get('/import-data', [SiswaController::class, 'import'])->name('import-data');
+// Route::get('/import-data', [SiswaController::class, 'import'])->name('import-data');
 Route::post('/upload', [SiswaController::class, 'upload'])->name('upload');
 
 // Route::get('/exportdata', [SiswaController::class, 'export'])->name('exportdata');
@@ -116,7 +122,8 @@ Route::get('/downloadpdf', [SiswaController::class, 'exportPDF'])->name('downloa
 Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa');
 
 
-// ---------- MINING DATA ----------
+// -------------------- MINING DATA --------------------
+
 // Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
 Route::get('/miningdata', [SiswaController::class, 'index']);
 Route::get('/hasilmining',[MiningDataController::class,'mining'])->name('hasilmining');

@@ -12,12 +12,13 @@
             <hr class="mb-4"> {{-- garis panjang --}}
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('lihatsiswa/update/'.$edits->id)}}">
-                                @csrf
+                            <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('lihatsiswa/update/'.$siswa->id)}}">
                                 @method('patch')
+                                @csrf
+                                
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nis" class="form-label">NIS</label>
-                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ $edits->nis }}" readonly >
+                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ $siswa->nis }}" readonly >
                                     @error('nis')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -27,7 +28,7 @@
 
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nama" class="form-label">Nama Siswa</label>
-                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $edits->nama }}" >
+                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $siswa->nama }}" >
                                     @error('nama')
                                         <div class="invalid-feedback">
                                            {{ $message }}
@@ -37,7 +38,7 @@
 
                                 <div class="mb-3">
                                     <label for="asal" class="form-label">Asal Sekolah</label>
-                                    <input type="text" class="form-control @error('asal') is-invalid @enderror" id="asal" name="asal" value="{{ $edits->asal }}" >
+                                    <input type="text" class="form-control @error('asal') is-invalid @enderror" id="asal" name="asal" value="{{ $siswa->asal }}" >
                                     @error('asal')
                                         <div class="invalid-feedback">
                                                 {{ $message }}
@@ -45,8 +46,8 @@
                                     @enderror
                                 </div>
                                 
-                                 <div class="mb-1"> {{--jarak antara form 1 dan tulisan contact name --}}
-                                    <label for="nilai_tes_mtk" class="form-label">Nilai MTK</label>
+                                 {{-- <div class="mb-1"> jarak antara form 1 dan tulisan contact name --}}
+                                    {{-- <label for="nilai_tes_mtk" class="form-label">Nilai MTK</label>
                                     <input type="text" class="form-control @error('nilai_tes_mtk') is-invalid @enderror" id="mtk" name="nilai_tes_mtk" value="{{ $editn->nilai_tes_mtk }}" >
                                     @error('nilai_tes_mtk')
                                         <div class="invalid-feedback">
@@ -97,7 +98,7 @@
                                             <label class="form-check-label" for="ci">CI</label>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="row justify-content-between">
 								    <div class="col-auto">

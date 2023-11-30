@@ -75,7 +75,7 @@ class SiswaController extends Controller
     {
     // Validasi data siswa
     $this->validate($request, [
-        'nis' => 'required|numeric',
+        'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
         'nama' => 'required',
         'asal' => 'required',
         'nilai_tes_mtk' => 'required',
@@ -83,8 +83,24 @@ class SiswaController extends Controller
         'nilai_tes_agama' => 'required',
         'nilai_tes_bindo' => 'required',
         'status_kelas' => 'required'
+    ],[
+        'nis.required' => 'NIS wajib diisi!',
+        'nis.unique' => 'NIS ini sudah ada!',
+        'nis.min' => 'NIS minimal 9 karakter!',
+        'nis.max' => 'NIS maksimal 10 karakter!',
+        'nama.required' => 'Nama wajib diisi!',
+        'asal.required' => 'Asal Sekolah wajib diisi!',
+        'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
+        'nilai_tes_mtk.numemric' => 'Nilai wajib angka!',
+        'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
+        'nilai_tes_ipa.numemric' => 'Nilai wajib angka!',
+        'nilai_tes_agama.required' => 'Nilai wajib diisi!',
+        'nilai_tes_agama.numemric' => 'Nilai wajib angka!',
+        'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
+        'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
+        'status_kelas.required' => 'Kelas wajib diisi!',
     ]);
-        // // Validasi data siswa
+        // Validasi data siswa
         // Request()->validate([
         //     'nis' => 'required|unique:data_siswas,nis|min:9|max:10',
         //     'nama' => 'required',
@@ -114,6 +130,159 @@ class SiswaController extends Controller
 
 
         // Memuat model pohon keputusan C45
+        $filename = public_path('csv/Data_Training.csv');
+        $c45 = new C45([
+            'targetAttribute' => 'hasil_mining',
+            'trainingFile' => $filename,
+            'splitCriterion' => C45::SPLIT_GAIN,
+        ]);
+        $tree = $c45->buildTree();
+        // $treeString = $tree->toString();
+
+        // Data yang akan diklasifikasikan
+        $data = [
+            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+        ];
+
+        // Melakukan klasifikasi menggunakan pohon keputusan C45
+        $hasil = $tree->classify($data);
+
+        // dd($tree);
+        // Membuat data siswa baru dalam database
+        DataSiswa::create([
+            'nis' => $request->nis,
+            'nama' => $request->nama,
+            'asal' => $request->asal,
+            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+            'status_kelas' => strtoupper($request->status_kelas),
+            'hasil_mining' => $hasil,
+        ]);
+        // // Membuat data siswa baru ke dalam database DataSiswa
+        // $sis = new DataSiswa;
+        // $sis ->nis = $request->nis;
+        // $sis->nama = $request->nama;
+        // $sis->asal = $request->asal;
+        // $sis->save();
+
+        // // Membuat data siswa baru ke dalam database NilaiTes
+        // $nil = new NilaiTes;
+        // $nil -> data_siswas_id = $sis->id;
+        // $nil -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
+        // $nil -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
+        // $nil -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
+        // $nil -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
+        // $nil -> status_kelas = strtoupper($request->status_kelas);
+        // $nil -> hasil_mining = ($request->$hasil);
+        // $nil->save();
+
+        // $hasil_mining = new DataTraining();
+        // $hasil_mining -> hasil_mining = $request->hasil_mining;
+
+        return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
+    }    
+
+    public function lihatnilai(Request $request)
+    {
+
+        return view('siswa.isilihatnilai',
+        [
+            'lhtnilai' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
+            'title' => 'Lihat Data Nilai'
+        ]
+        );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function lihatsis(Request $request) 
+    {
+
+        return view('siswa.isilihatsis',
+        [
+            'lhtsiswa' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
+            'title' => 'Lihat Data Siswa'
+        ]
+        );
+    }
+    
+    
+    // /**
+    //  * Show the form for editing the specified resource.
+    //  *
+    //  * @param  int  $id
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function editsis(Request $request, $id)
+    // {
+        
+    //     $edits = DataSiswa::find($id);
+    //     $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
+
+    //     return view('siswa.isieditsis',
+    //     [
+    //         'edits' => $edits, 
+    //         'editn' => $editn,
+    //         'title' => 'Edit Data Siswa', 
+    //     ]
+    //     );
+    // }
+
+    /**
+     * Menampilkan halaman formulir untuk mengedit data siswa tertentu.
+     *
+     * @param  \App\Model\DataSiswa  $siswa
+     * @return \Illuminate\View\View
+     */
+    public function editsis(DataSiswa $siswa)
+    {
+        return view('siswa.isieditsis', compact('siswa'));
+    }
+
+    
+    /**
+     * Mengupdate data siswa yang telah ada dalam penyimpanan.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, $id)
+    {
+        
+        // Validasi data siswa yang diupdate
+        Request()->validate([
+            'nama' => 'required',
+            'asal' => 'required',
+            // 'nilai_tes_mtk' => 'required','numeric',
+            // 'nilai_tes_ipa' => 'required', 'numeric',
+            // 'nilai_tes_agama' => 'required', 'numeric',
+            // 'nilai_tes_bindo' => 'required', 'numeric',
+            // 'status_kelas' => 'required',
+        ],[
+            'nama.required' => 'Nama wajib diisi!',
+            'asal.required' => 'Asal Sekolah wajib diisi!',
+            // 'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
+            // 'nilai_tes_mtk.numemric' => 'Nilai wajib angka!',
+            // 'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
+            // 'nilai_tes_ipa.numemric' => 'Nilai wajib angka!',
+            // 'nilai_tes_agama.required' => 'Nilai wajib diisi!',
+            // 'nilai_tes_agama.numemric' => 'Nilai wajib angka!',
+            // 'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
+            // 'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
+            // 'status_kelas.required' => 'Kelas wajib diisi!',
+        ]);
+
+        // Memuat model pohon keputusan C45
         $filename = public_path('/csv/Data_Training.csv');
         $c45 = new C45([
             'targetAttribute' => 'hasil_mining',
@@ -134,164 +303,27 @@ class SiswaController extends Controller
         // Melakukan klasifikasi menggunakan pohon keputusan C45
         $hasil = $tree->classify($data);
 
-// Membuat data siswa baru dalam database
-DataSiswa::create([
-    'nis' => $request->nis,
-    'nama' => $request->nama,
-    'asal' => $request->asal,
-    'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
-    'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
-    'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
-    'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-    'hasil_mining' => $hasil,
-]);
-        // // Membuat data siswa baru ke dalam database DataSiswa
-        // $sis = new DataSiswa;
-        // $sis ->nis = $request->nis;
-        // $sis->nama = $request->nama;
-        // $sis->asal = $request->asal;
-        // $sis->save();
-
-        // // Membuat data siswa baru ke dalam database NilaiTes
-        // $nil = new NilaiTes;
-        // $nil -> data_siswas_id = $sis->id;
-        // $nil -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
-        // $nil -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
-        // $nil -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
-        // $nil -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
-        // $nil -> status_kelas = strtoupper($request->status_kelas);
-        // $nil -> hasilmining = ($request->$hasil);
-        // $nil->save();
-
-        // $hasilmining = new DataTraining();
-        // $hasilmining -> hasilmining = $request->hasilmining;
-
-        return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
-    }    
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function lihatsis(Request $request) 
-    {
-
-        return view('siswa.isilihatsis',
-        [
-            'lhtsiswa' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
-            'title' => 'Lihat Data Siswa'
-        ]
-        );
-    }
-
-    public function details($id)
-    {
-
-        $lihatsis = DataSiswa::find($id);
-        $lihatnil = NilaiTes::where('data_siswas_id', $lihatsis->id)->first();
-
-        return view('siswa.isidetailsis', 
-        [
-            'lihatsis' =>$lihatsis,
-            'lihatnil' => $lihatnil,
-            'title' => 'Detail Data Siswa', 
-        ]);
-    }
-
-    
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function editsis(Request $request, $id)
-    {
-        
-        $edits = DataSiswa::find($id);
-        $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
-
-        return view('siswa.isieditsis',
-        [
-            'edits' => $edits, 
-            'editn' => $editn,
-            'title' => 'Edit Data Siswa', 
-        ]
-        );
-    }
-
-    
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        
-        // Validasi data siswa yang diupdate
-        Request()->validate([
-            'nama' => 'required',
-            'asal' => 'required',
-            'nilai_tes_mtk' => 'required','numeric',
-            'nilai_tes_ipa' => 'required', 'numeric',
-            'nilai_tes_agama' => 'required', 'numeric',
-            'nilai_tes_bindo' => 'required', 'numeric',
-            'status_kelas' => 'required',
-        ],[
-            'nama.required' => 'Nama wajib diisi!',
-            'asal.required' => 'Asal Sekolah wajib diisi!',
-            'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
-            'nilai_tes_mtk.numemric' => 'Nilai wajib angka!',
-            'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
-            'nilai_tes_ipa.numemric' => 'Nilai wajib angka!',
-            'nilai_tes_agama.required' => 'Nilai wajib diisi!',
-            'nilai_tes_agama.numemric' => 'Nilai wajib angka!',
-            'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
-            'nilai_tes_bindo.numemric' => 'Nilai wajib angka!',
-            'status_kelas.required' => 'Kelas wajib diisi!',
-        ]);
-
-        // Memuat model pohon keputusan C45
-        $filename = public_path('/csv/Data_Training.csv');
-        $c45 = new C45([
-            'targetAttribute' => 'hasil_mining',
-            'trainingFile' => $filename,
-            'splitCriterion' => C45::SPLIT_GAIN,
-        ]);
-        $tree = $c45->buildTree();
-        $treeString = $tree->toString();
-
-        // Data yang akan diklasifikasikan
-        $data = [
-            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
-            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
-            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
-            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-        ];
-
-        // Melakukan klasifikasi menggunakan pohon keputusan C45
-        $hasil = $tree->classify($data);
-
         // Mengambil data siswa yang akan diupdate
-        $edits = DataSiswa::find($id);
-        $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
+        $siswa = DataSiswa::findOrFail($id);
 
-        $edits->nama = $request->nama;
-        $edits->asal = $request->asal;
-        $edits->update();
+        // Mengupdate data siswa
+        $siswa->nama = $request->nama;
+        $siswa->nisn = $request->nisn;
+        $siswa->save();
+        // $edits = DataSiswa::find($id);
+        // $editn = NilaiTes::where('data_siswas_id', $edits->id)->first();
 
-        $editn -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
-        $editn -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
-        $editn -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
-        $editn -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
-        $editn -> status_kelas = strtoupper($request->status_kelas);
-        $editn -> hasilmining = $hasil;
-        $editn->update();
+        // $edits->nama = $request->nama;
+        // $edits->asal = $request->asal;
+        // $edits->update();
+
+        // $editn -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
+        // $editn -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
+        // $editn -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
+        // $editn -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
+        // $editn -> status_kelas = strtoupper($request->status_kelas);
+        // $editn -> hasil_mining = $hasil;
+        // $editn->update();
         
         
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Edit!!!');

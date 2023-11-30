@@ -15,8 +15,37 @@
                         <div class="app-card-body">
                             <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('tambahsiswa/save') }}"> {{-- {{ URL::to('save') }} --}}
                                 @csrf
-                                {{-- <h3 class="mb-3"><strong>Data Siswa</strong></h3> --}}
-                                <h2 class="mb-4">Data Siswa</h2>
+
+                                <div class="col-auto  d-grid gap-2 d-md-flex justify-content-md-end ">
+                                    <a type="button" class="btn app-btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">Upload Data</a>
+                                </div>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">Import Data Siswa</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            
+                                            <form action="{{ url('upload')}}" method="POST" enctype="multipart/form-data" >
+                                                @csrf
+                                                <div class="modal-body">
+                                                        <div class="form-group">
+                                                            <input type="file" name="import_file" >
+                                                        </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn app-btn-primary">Upload</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <h2 class="mb-3">Data Siswa</h2>
                                 
                                 <div class="mb-3 row"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nis" class="col-sm-2 form-label">NIS</label>
@@ -105,12 +134,12 @@
                                 </div>
                                 
                                 <fieldset class="form-group">
-                                    <div class="row">
-                                        <legend class="col-form-label col-sm-2 pt-0">Ket Kelas</legend>
-                                        <div class="col-sm-9 @error('jenis_kelamin') is-invalid @enderror">
+                                    <div class="mb-3 row">
+                                        <legend class="col-sm-2 col-form-label fw-bold ">Ket Kelas</legend>
+                                        <div class="col-sm-9 @error('status_kelas') is-invalid @enderror">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="status_kelas" id="reg" value="reguler">
-                                                <label class="form-check-label" for="reg">
+                                                <input class="form-check-input" type="radio" name="status_kelas" id="reguler" value="reguler">
+                                                <label class="form-check-label" for="reguler">
                                                     Reguler
                                                 </label>
                                             </div>
@@ -123,7 +152,6 @@
                                         </div>
                                     </div>
                                 </fieldset>
-
 
                                 <div class="row justify-content-between">
 								    <div class="col-auto">
