@@ -13,12 +13,12 @@
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
                             <form class="settings-form" enctype="multipart/form-data" method="post" action="{{ url('lihatsiswa/update/'.$siswa->id)}}">
-                                @method('patch')
+                                @method('put')
                                 @csrf
                                 
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nis" class="form-label">NIS</label>
-                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ $siswa->nis }}" readonly >
+                                    <input type="text" class="form-control @error('nis') is-invalid @enderror" id="nis" name="nis" value="{{ old('nis', $siswa->nis) }}" readonly >
                                     @error('nis')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -28,7 +28,7 @@
 
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nama" class="form-label">Nama Siswa</label>
-                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $siswa->nama }}" >
+                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama', $siswa->nama) }}" >
                                     @error('nama')
                                         <div class="invalid-feedback">
                                            {{ $message }}
@@ -38,7 +38,7 @@
 
                                 <div class="mb-3">
                                     <label for="asal" class="form-label">Asal Sekolah</label>
-                                    <input type="text" class="form-control @error('asal') is-invalid @enderror" id="asal" name="asal" value="{{ $siswa->asal }}" >
+                                    <input type="text" class="form-control @error('asal') is-invalid @enderror" id="asal" name="asal" value="{{ old('asal', $siswa->asal) }}" >
                                     @error('asal')
                                         <div class="invalid-feedback">
                                                 {{ $message }}

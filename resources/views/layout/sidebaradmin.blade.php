@@ -95,8 +95,8 @@
                     </a><!--//nav-link-->
                     <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
                         <ul class="submenu-list list-unstyled">
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ url('/miningdata')}}">Mining</a></li>
-                            <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="#">Training Data</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ url('/pohonkeputusan')}}">Pohon Keputusan</a></li>
+                            <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ url('/pengujiandata')}}">Pegujian Data</a></li>
                         </ul>
                     </div>
                 </li><!--//nav-item-->

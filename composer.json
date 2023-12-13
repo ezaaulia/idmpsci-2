@@ -10,17 +10,23 @@
     "require": {
         "php": "^8.0",
         "ext-gd": "*",
+        "alom/graphviz": "^2.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "dompdf/dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "juliardi/c45": "^0.1.0",
+        "kartik-v/yii2-bootstrap5-dropdown": "@dev",
+        "kartik-v/yii2-grid": "@dev",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
         "laravel/ui": "3.2",
+        "league/csv": "^9.8",
         "maatwebsite/excel": "^3.1",
-        "php-ai/php-ml": "^0.10.0"
+        "medansoftware/c45-algorithm-php": "^1.0",
+        "php-ai/php-ml": "^0.10.0",
+        "phpoffice/phpspreadsheet": "^1.29"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

@@ -17,6 +17,7 @@
     
     <!-- App CSS -->  
     <link id="theme-style" rel="stylesheet" href="{{asset('assets/css/portal.css')}}">
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 
 </head>
 

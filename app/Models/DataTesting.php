@@ -6,21 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\NilaiTes;
-use Illuminate\Http\SiswaController;
-use Ramsey\Uuid\Rfc4122\NilUuid;
-use kartik\grid\GridView;
 
-class DataSiswa extends Model
+class DataTesting extends Model
 {
     use HasFactory;
 
-    protected $table = 'data_siswas';
+    protected $table = 'data_testing';
 
     protected $fillable = [
-        'id',
-        'nis', 
-        'nama', 
-        'asal', 
+        // 'id',
+        // 'nis', 
+        // 'nama', 
+        // 'asal', 
         'nilai_tes_mtk', 
         'nilai_tes_ipa', 
         'nilai_tes_agama', 
@@ -40,19 +37,12 @@ class DataSiswa extends Model
 
     public function allData()
     {
-        return DB::table('data_siswas')->get();
+        return DB::table('data_testing')->get();
     }
 
-    public function nilai_tes()
-    {
-        return $this->hasOne(NilaiTes::class, 'data_siswas_id');
-    }
-
-//     public function scopePilihKelas($query, $hasil_mining)
-// {
-//     return $query->where('status_kelas', $hasil_mining);
-// }
-   
-    
+    public function scopePilihKelas($query, $hasil_mining)
+{
+    return $query->where('status_kelas', $hasil_mining);
+}
 
 }

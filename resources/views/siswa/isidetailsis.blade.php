@@ -23,7 +23,7 @@
                 <div class="row justify-content-between align-items-center">
                       <div class="col-auto">
                           <div class="item-label"><strong>NIS</strong></div>
-                          <div class="item-data">{{ $lihatsis->nis }}</div>
+                          <div class="item-data">{{ $data->nis }}</div>
                       </div><!--//col-->
                 </div><!--//row-->
             </div><!--//item-->
@@ -32,7 +32,7 @@
                 <div class="row justify-content-between align-items-center">
                       <div class="col-auto">
                           <div class="item-label"><strong>Nama Siswa</strong></div>
-                          <div class="item-data">{{$lihatsis->nama }}</div>
+                          <div class="item-data">{{$data->nama }}</div>
                       </div><!--//col-->
                </div><!--//row-->
             </div><!--//item-->
@@ -41,7 +41,7 @@
                 <div class="row justify-content-between align-items-center">
                       <div class="col-auto">
                           <div class="item-label"><strong>Asal Sekolah</strong></div>
-                          <div class="item-data">{{$lihatsis->asal }}</div>
+                          <div class="item-data">{{$data->asal }}</div>
                       </div><!--//col-->
                 </div><!--//row-->
             </div><!--//item-->
@@ -51,7 +51,7 @@
                       <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
                                 <div class="item-label"><strong>Nilai MTK</strong></div>
-                                <div class="item-data">{{ $lihatnil->nilai_tes_mtk}}</div>
+                                <div class="item-data">{{ $data->nilai_tes_mtk}}</div>
                             </div><!--//col-->
                       </div><!--//row-->
                   </div><!--//item-->
@@ -60,7 +60,7 @@
                       <div class="row justify-content-between align-items-center">
                             <div class="col-auto">
                                 <div class="item-label"><strong>Nilai IPA</strong></div>
-                                <div class="item-data">{{ $lihatnil->nilai_tes_ipa}}</div>
+                                <div class="item-data">{{ $data->nilai_tes_ipa}}</div>
                             </div><!--//col-->
                       </div><!--//row-->
                   </div><!--//item-->
@@ -69,7 +69,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
                             <div class="item-label"><strong>Nilai Agama</strong></div>
-                            <div class="item-data">{{ $lihatnil->nilai_tes_agama}}</div>
+                            <div class="item-data">{{ $data->nilai_tes_agama}}</div>
                         </div><!--//col-->
                     </div><!--//row-->
                   </div><!--//item-->
@@ -78,7 +78,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
                             <div class="item-label"><strong>Nilai B.I</strong></div>
-                            <div class="item-data">{{ $lihatnil->nilai_tes_bindo}}</div>
+                            <div class="item-data">{{ $data->nilai_tes_bindo}}</div>
                         </div><!--//col-->
                     </div><!--//row-->
                   </div><!--//item-->
@@ -86,8 +86,17 @@
                   <div class="item border-bottom py-2">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
-                            <div class="item-label"><strong>Keterangan</strong></div>
-                            <div class="item-data">{{ $lihatnil->status_kelas}}</div>
+                            <div class="item-label"><strong>Status Kelas</strong></div>
+                            <div class="item-data">{{ $data->status_kelas}}</div>
+                        </div><!--//col-->
+                    </div><!--//row-->
+                  </div><!--//item-->
+
+                  <div class="item border-bottom py-2">
+                    <div class="row justify-content-between align-items-center">
+                        <div class="col-auto">
+                            <div class="item-label"><strong>Kelas Asli</strong></div>
+                            <div class="item-data">{{ $data->hasil_mining}}</div>
                         </div><!--//col-->
                     </div><!--//row-->
                   </div><!--//item-->

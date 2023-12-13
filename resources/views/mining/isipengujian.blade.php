@@ -10,10 +10,33 @@
 
             
             <hr class="mb-4"> {{-- garis panjang --}}
+            
+            <div class="col-auto mb-3 d-grid gap-2 d-md-flex justify-content-md-end ">
+              <a type="button" class="btn app-btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">Upload Data</a>
+            </div>
 
-            <div class="row justify-content-end mb-3">
-                <div class="col-auto">
-                  <a type="submit" name="md" class="btn app-btn-primary" href="{{ url('miningdata') }}" >Mining Data</a>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Upload Data Uji</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        
+                        <form action="{{ url('upload')}}" method="POST" enctype="multipart/form-data" >
+                            @csrf
+                            <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="file" name="import_file" >
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn app-btn-primary">Upload</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
 
@@ -28,31 +51,41 @@
                           <thead>
                             <tr>
                               <th class="cell">No.</th>
-                              <th class="cell">NIS</th>
+                              {{-- <th class="cell">NIS</th>
                               <th class="cell col-2">Nama Siswa</th>
-                              <th class="cell">Asal Sekolah</th>
+                              <th class="cell">Asal Sekolah</th> --}}
                               <th class="cell">Nilai Tes MTK</th>
                               <th class="cell">Nilai Tes IPA</th>
                               <th class="cell">Nilai Tes Agama</th>
                               <th class="cell">Nilai Tes B.I</th>
                               <th class="cell">Status Kelas</th>
+                              {{-- <th class="cell">Kelas Akhir</th> --}}
+                              <th class="cell">Ketepatan</th>
                             </tr>
                           </thead>
 
                           <tbody>
-                            @foreach($datas as $data)
+                            @forelse($tes as $data)
                               <tr>
                                   <td class="cell">{{ $loop->iteration }}.</td>
-                                  <td class="cell">{{ $data->nis }}</td>
+                                  {{-- <td class="cell">{{ $data->nis }}</td>
                                   <td class="cell">{{ $data->nama }}</td>
-                                  <td class="cell">{{ $data->asal }}</td>
+                                  <td class="cell">{{ $data->asal }}</td> --}}
                                   <td class="cell">{{ $data->nilai_tes_mtk }}</td>
                                   <td class="cell">{{ $data->nilai_tes_ipa }}</td>
                                   <td class="cell">{{ $data->nilai_tes_agama }}</td>
                                   <td class="cell">{{ $data->nilai_tes_bindo }}</td>
-                                  <td class="cell">{{ $data->status_kelas }}</td>
+                                  {{-- <td class="cell">{{ $data->status_kelas }}</td> --}}
+                                  <td class="cell">{{ $data->hasil_mining }}</td>
                               </tr>
-                            @endforeach
+                            @empty
+                              <!-- Pesan ketika data kosong -->
+                              <tr>
+                                <td colspan="6" class="text-center">
+                                    <h2><strong>Data kosong!!</strong></h2>
+                                </td>
+                              </tr>
+                            @endforelse
                           </tbody>
                         </table>
                       </div> <!--//table-responsive-->
