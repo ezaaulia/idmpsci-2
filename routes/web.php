@@ -126,6 +126,7 @@ Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa')
 // Route::get('/miningdata', [MiningDataController::class, 'mining_data'])->name('miningdata');
 
 Route::get('/pohonkeputusan', [MiningDataController::class, 'pohon']);
+Route::get('/hasilmining', [MiningDataController::class, 'hasil']);
 Route::get('/pengujiandata', [MiningDataController::class, 'ujidata']);
 Route::post('/upload', [MiningDataController::class, 'upload'])->name('upload');
 // Route::get('/lihatmining', [MiningSiswaController::class, 'mining'])->name('lihatmining');

@@ -43,7 +43,7 @@
             
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
-                            <form class="settings-form" enctype="multipart/form-data" method="POST" action="{{ url('tambahsiswa/save') }}"> {{-- {{ URL::to('save') }} --}}
+                            <form class="settings-form" enctype="multipart/form-data" method="POST" action="{{ url('/tambahsiswa/save') }}"> {{-- {{ URL::to('save') }} --}}
                                 @csrf
 
                                 <h2 class="mb-3">Data Siswa</h2>

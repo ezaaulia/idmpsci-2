@@ -71,7 +71,8 @@
                             @endforelse
                           </tbody>
                         </table>
-                        
+                        <!-- Tombol untuk cetak PDF -->
+                        <a href="{{ route('pdf') }}" class="btn btn-primary">PDF</a>
                       </div> <!--//table-responsive-->
                     </div> <!--//app-card-body-->
                   </div>

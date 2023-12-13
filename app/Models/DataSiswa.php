@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use App\Models\NilaiTes;
-use Illuminate\Http\SiswaController;
-use Ramsey\Uuid\Rfc4122\NilUuid;
-use kartik\grid\GridView;
 
 class DataSiswa extends Model
 {
+     /**
+     * Daftar kolom yang dapat diisi secara massal dalam model Student.
+     *
+     * @var array
+     */
     use HasFactory;
 
     protected $table = 'data_siswas';
@@ -26,7 +28,7 @@ class DataSiswa extends Model
         'nilai_tes_agama', 
         'nilai_tes_bindo',
         'status_kelas',
-        'hasil_mining'
+        'hasil_mining',
     ];
 
     public function scopeFilter($query, array $filters)
@@ -43,10 +45,10 @@ class DataSiswa extends Model
         return DB::table('data_siswas')->get();
     }
 
-    public function nilai_tes()
-    {
-        return $this->hasOne(NilaiTes::class, 'data_siswas_id');
-    }
+    // public function nilai_tes()
+    // {
+    //     return $this->hasOne(NilaiTes::class, 'data_siswas_id');
+    // }
 
 //     public function scopePilihKelas($query, $hasil_mining)
 // {

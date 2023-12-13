@@ -23,7 +23,7 @@ class DataTesting extends Model
         'nilai_tes_agama', 
         'nilai_tes_bindo',
         'status_kelas',
-        'hasil_mining'
+        'hasil'
     ];
 
     public function scopeFilter($query, array $filters)
@@ -40,9 +40,9 @@ class DataTesting extends Model
         return DB::table('data_testing')->get();
     }
 
-    public function scopePilihKelas($query, $hasil_mining)
-{
-    return $query->where('status_kelas', $hasil_mining);
-}
+//     public function scopePilihKelas($query, $hasil_mining)
+// {
+//     return $query->where('status_kelas', $hasil_mining);
+// }
 
 }

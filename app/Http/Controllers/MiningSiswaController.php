@@ -32,11 +32,11 @@ class MiningSiswaController extends Controller
         // Initialize Data
         $input->setData($this->ambilData()); // Set data from array
 
-        $input->setAttributes(array('nilai_tes_mtk', 'nilai_tes_ipa', 'nilai_tes_agama', 'nilai_tes_bindo', 'status_kelas', 'hasil_mining')); // Set attributes of data
+        $input->setAttributes(array('nilai_tes_mtk', 'nilai_tes_ipa', 'nilai_tes_agama', 'nilai_tes_bindo', 'status_kelas')); // Set attributes of data
 
         // Initialize C4.5
         $c45->c45 = $input; // Set input data
-        $c45->setTargetAttribute('hasil_mining'); // Set target attribute
+        // $c45->setTargetAttribute('hasil_mining'); // Set target attribute
         $initialize = $c45->initialize(); // initialize
 
         // Build Output
@@ -58,7 +58,7 @@ class MiningSiswaController extends Controller
         //     'nilai_tes_bindo' => $this->konversiKategori(99)
         // );
 
-        return view('mining.hasil_mining', compact('arrayTree', 'stringTree'));
+        return view('mining', compact('arrayTree', 'stringTree'));
         // echo $c45->initialize()->buildTree()->classify($data_testing); // print "No"
     }
 

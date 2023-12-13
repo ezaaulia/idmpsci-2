@@ -20,10 +20,12 @@ class NilaiController extends Controller
      */
     public function lihatnilai(Request $request)
     {
-
+        $data_siswas = DataSiswa::all();
+        // return view('admin/lihat-nilai', ['data_siswas' => $data_siswas]);
         return view('nilai.isilihatnilai',
         [
-            'lhtnilai' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
+            'data_siswas' => $data_siswas,
+            // 'data_siswas' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
             'title' => 'Lihat Data Nilai'
         ]
         );
@@ -79,7 +81,7 @@ class NilaiController extends Controller
         $nilai = DataSiswa::find($id);
 
         // Memuat model pohon keputusan C45AJA
-        $filename = public_path('/import_csv/Data_Training.csv');
+        $filename = public_path('/csv/Data_Training.csv');
         $c45 = new C45AJA([
             'targetAttribute' => 'hasil_mining',
             'trainingFile' => $filename,
@@ -101,10 +103,10 @@ class NilaiController extends Controller
         
         // Mengupdate data nilai siswa
         $nilai -> hasil_mining = $hasil;
-        $nilai->nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
-        $nilai->nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
-        $nilai->nilai_tes_agama = strtoupper($request->nilai_tes_agama);
-        $nilai->nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
+        $nilai -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
+        $nilai -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
+        $nilai -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
+        $nilai -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
         // $nilai -> nilai_tes_mtk = $request->nilai_tes_mtk;
         // $nilai -> nilai_tes_ipa = $request->nilai_tes_ipa;
         // $nilai -> nilai_tes_agama = $request->nilai_tes_agama;

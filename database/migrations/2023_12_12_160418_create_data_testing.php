@@ -20,7 +20,7 @@ class CreateDataTesting extends Migration
             $table->string('nilai_tes_agama');
             $table->string('nilai_tes_bindo');
             $table->enum('status_kelas', ['reguler', 'ci']);
-            $table->string('hasil_mining');
+            $table->string('hasil');
             $table->timestamps();
         });
     }

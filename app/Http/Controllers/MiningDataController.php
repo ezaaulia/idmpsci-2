@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataSiswa;
 use Illuminate\Http\Request;
 use App\Imports\DataTest;
+// use Excel;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use Algorithm\C45\DataInput;
@@ -32,7 +33,7 @@ class MiningDataController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function hasil()
     {
         $status = DataSiswa::all();
         return view('mining.hasilmining', compact('status'));
@@ -99,22 +100,22 @@ class MiningDataController extends Controller
         // $reader = new PhpSpreadsheetReaderCsv();
         // $spreadsheet = $reader->load('/import_csv/Data_Training.csv');
 
-        $c45->loadFile('Data_Training.csv'); // load example file
-        $c45->setTargetAttribute('hasil_mining'); // set target attribute
+        // $c45->loadFile('Data_Training.csv'); // load example file
+        // $c45->setTargetAttribute('hasil_mining'); // set target attribute
         
-        $initialize = $c45->initialize(); // initialize
-        $buildTree = $initialize->buildTree(); // build tree
+        // $initialize = $c45->initialize(); // initialize
+        // $buildTree = $initialize->buildTree(); // build tree
         
 
-        $arrayTree = $buildTree->toArray(); // set to array
-        $stringTree = $buildTree->toString(); // set to string
+        // $arrayTree = $buildTree->toArray(); // set to array
+        // $stringTree = $buildTree->toString(); // set to string
 
 
-        echo "<pre>";
-        print_r ($arrayTree);
-        echo "</pre>";
+        // echo "<pre>";
+        // print_r ($arrayTree);
+        // echo "</pre>";
 
-        echo $stringTree;
+        // echo $stringTree;
     // } catch (PhpSpreadsheetReaderException $e) {
     //     echo 'Error loading file: ' . $e->getMessage();
     // }

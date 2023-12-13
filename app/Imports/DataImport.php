@@ -34,7 +34,7 @@ class DataImport implements ToModel
         $data_siswa->status_kelas = $row[7];
 
         // Memuat model pohon keputusan C45
-        $filename = public_path('/import_csv/Data_Training.csv');
+        $filename = public_path('/csv/Data_Training.csv');
         $c45 = new C45([
             'targetAttribute' => 'hasil_mining',
             'trainingFile' => $filename,

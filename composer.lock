@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "00438a21a2ff276a1eae569dabcf0d12",
+    "content-hash": "f33b0aef1826e7a6536b0aa606692713",
     "packages": [
         {
             "name": "alom/graphviz",
@@ -2851,46 +2851,6 @@
                 "source": "https://github.com/Masterminds/html5-php/tree/2.8.1"
             },
             "time": "2023-05-10T11:58:31+00:00"
-        },
-        {
-            "name": "medansoftware/c45-algorithm-php",
-            "version": "1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/medansoftware/C45-Algorithm-PHP.git",
-                "reference": "91e369fc2f9f8bfa893f5cea752ef09b05762edd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/medansoftware/C45-Algorithm-PHP/zipball/91e369fc2f9f8bfa893f5cea752ef09b05762edd",
-                "reference": "91e369fc2f9f8bfa893f5cea752ef09b05762edd",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5",
-                "phpoffice/phpspreadsheet": "^1.9"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "src"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Agung Dirgantara",
-                    "email": "agungmasda29@gmail.com"
-                }
-            ],
-            "support": {
-                "issues": "https://github.com/medansoftware/C45-Algorithm-PHP/issues",
-                "source": "https://github.com/medansoftware/C45-Algorithm-PHP/tree/1.0.2"
-            },
-            "time": "2022-04-24T19:45:25+00:00"
         },
         {
             "name": "monolog/monolog",
