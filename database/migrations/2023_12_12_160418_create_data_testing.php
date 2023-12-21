@@ -15,12 +15,15 @@ class CreateDataTesting extends Migration
     {
         Schema::create('data_testing', function (Blueprint $table) {
             $table->id();
+            $table->integer('nis')->unique();
+            $table->string('nama');
+            $table->string('asal');
             $table->string('nilai_tes_mtk');
             $table->string('nilai_tes_ipa');
             $table->string('nilai_tes_agama');
             $table->string('nilai_tes_bindo');
             $table->enum('status_kelas', ['reguler', 'ci']);
-            $table->string('hasil');
+            $table->string('hasil_mining');
             $table->timestamps();
         });
     }

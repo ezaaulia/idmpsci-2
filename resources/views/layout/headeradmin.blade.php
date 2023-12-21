@@ -10,17 +10,29 @@
                     </a>
                 </div>
 
+
+
+                {{-- Dropdown --}}
+
                 <div class="nav justify-content-end dropdown gap-2">
-                    <a class="btn btn-success dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                      Profil
+                    <a class="btn btn-success dropdown-toggle " href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                      Profil {{ Auth::user()->nama}}
                     </a>
                   
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                      <li><a class="dropdown-item" href="lihatprofil/"> {{ Auth::user()->nama}}</a></li>
-                      <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="dropdown-item">Logout</button>
-                      </form>
+                      <li>
+                        <a class="dropdown-item" href="{{ route('lihatprofil') }}">
+                          {{ Auth::user()->nama}}
+                        </a>
+                      </li>
+
+                      <a class="dropdown-item" href="{{ route('logout') }}"onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                      </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                          @csrf
+                          <button type="submit" class="btn btn-default">Logout</button>
+                        </form>
+                      </li>
                     </ul>
                 </div>
-                {{-- {{ Auth::user()->nama}} --}}

@@ -20,22 +20,6 @@
                       <div class="table-responsive-lg">
                         <table class="table table-bordered mb-0 text-left ">
                           <thead>
-
-                            {{-- <pre>
-                                {{ print_r($arrayTree) }}
-                            </pre> --}}
-
-                            {{-- <h2>Decision Tree as String</h2>
-                            <pre>
-                                {{ $stringTree }}
-                            </pre> --}}
-
-                            {{-- <script>
-                              // Kodingan JavaScript untuk menggambar decision tree menggunakan D3.js
-                              // Sesuaikan dengan struktur dan data decision tree Anda
-                              const decisionTreeData = @json($arrayTree);
-                              // ... (kodingan D3.js)
-                           </script> --}}
                            
                             <tr>
                               <th class="cell">No.</th>
@@ -64,7 +48,7 @@
                             @empty
                                 <!-- Pesan ketika data kosong -->
                                 <tr>
-                                  <td colspan="6" class="text-center">
+                                  <td colspan="8" class="text-center">
                                       <h2><strong>Data kosong!!</strong></h2>
                                   </td>
                                 </tr>
@@ -72,7 +56,7 @@
                           </tbody>
                         </table>
                         <!-- Tombol untuk cetak PDF -->
-                        <a href="{{ route('pdf') }}" class="btn btn-primary">PDF</a>
+                        {{-- <a href="{{ route('pdf') }}" class="btn btn-primary">PDF</a> --}}
                       </div> <!--//table-responsive-->
                     </div> <!--//app-card-body-->
                   </div>

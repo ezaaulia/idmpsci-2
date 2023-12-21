@@ -13,6 +13,17 @@ use C45\C45 as C45AJA;
 
 class NilaiController extends Controller
 {
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     /**
      * Menampilkan daftar data siswa.
      *
@@ -25,7 +36,7 @@ class NilaiController extends Controller
         return view('nilai.isilihatnilai',
         [
             'data_siswas' => $data_siswas,
-            // 'data_siswas' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
+            'lhtnilai' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
             'title' => 'Lihat Data Nilai'
         ]
         );
@@ -38,9 +49,11 @@ class NilaiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function editnil(DataSiswa $id )
+    public function editnil($id)
     {
-        return view('nilai.editnil', compact($id));
+        $nilai = DataSiswa::findOrFail($id);
+
+        return view('nilai.editnil', compact('nilai'));
         // // Memeriksa apakah pengguna telah login
         // if (Auth::check()) {
         //     $nilai = DataSiswa::findOrFail($id);
@@ -80,29 +93,29 @@ class NilaiController extends Controller
         // Mengambil data nilai siswa yang akan diupdate
         $nilai = DataSiswa::find($id);
 
-        // Memuat model pohon keputusan C45AJA
-        $filename = public_path('/csv/Data_Training.csv');
-        $c45 = new C45AJA([
-            'targetAttribute' => 'hasil_mining',
-            'trainingFile' => $filename,
-            'splitCriterion' => C45AJA::SPLIT_GAIN,
-        ]);
-        $tree = $c45->buildTree();
-        // $treeString = $tree->toString();
+        // // Memuat model pohon keputusan C45AJA
+        // $filename = public_path('csv\Data_Latih.csv');
+        // $c45 = new C45AJA([
+        //     'targetAttribute' => 'status_kelas',
+        //     'trainingFile' => $filename,
+        //     'splitCriterion' => C45AJA::SPLIT_GAIN,
+        // ]);
+        // $tree = $c45->buildTree();
+        // // $treeString = $tree->toString();
 
-        // Data yang akan diklasifikasikan
-        $data = [
-            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
-            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
-            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
-            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-        ];
+        // // Data yang akan diklasifikasikan
+        // $data = [
+        //     'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+        //     'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+        //     'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+        //     'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+        // ];
 
-        // Melakukan klasifikasi menggunakan pohon keputusan C45
-        $hasil = $tree->classify($data);
+        // // Melakukan klasifikasi menggunakan pohon keputusan C45
+        // $hasil = $tree->classify($data);
         
-        // Mengupdate data nilai siswa
-        $nilai -> hasil_mining = $hasil;
+        // // Mengupdate data nilai siswa
+        // $nilai -> status_kelas = $hasil;
         $nilai -> nilai_tes_mtk = strtoupper($request->nilai_tes_mtk);
         $nilai -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
         $nilai -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);

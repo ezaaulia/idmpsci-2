@@ -17,14 +17,19 @@ class CreateUsersTable extends Migration
             $table->id();
             $table->string('nama');
             $table->string('email')->unique();
-            $table->string('username')->unique();
+            $table->string('username');
             $table->string('alamat');
             $table->string('no_hp');
-            $table->integer('level')->nullable();
             $table->string('password');
+            $table->enum('role', ['admin', 'operator'])->default('admin');
+            // $table->boolean('admin')->nullable();
+            // 0 = Admin, 1 = Operator
+            // $table->tinyInteger('role')->default(0);
+            // $table->integer('role');
+            // $table->rememberToken();
             $table->timestamps();
             
-        });
+        }); 
     }
 
     /**

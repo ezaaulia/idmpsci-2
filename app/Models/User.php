@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
@@ -24,8 +25,8 @@ class User extends Authenticatable
         'username',
         'alamat',
         'no_hp',
-        'level',
         'password',
+        'role',
     ];
 
     /**
@@ -47,10 +48,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roleuser()
+    public function isAdmin()
     {
-        return $this->hasMany(RoleUser::class);
+        return $this->role === 'admin';
     }
+    // protected function role(): Attribute
+    // {
+    //     return new Attribute(
+    //         get: fn ($value) => ["admin", "operator"][$value],
+    //     );
+    // }
+
+    // public function role()
+    // {
+    //     return $this->belongsTo(Role::class);
+    // }
+    // protected $guard = 'admin';
+
+    // public function roleuser()
+    // {
+    //     return $this->hasMany(RoleUser::class);
+    // }
     
     //ini untuk edit data siswa
     // public function editp($id, $profil)

@@ -51,11 +51,11 @@
                           </thead>
 
                           <tbody>
-                            @forelse ($data_siswas as $nilai)
-                            {{-- @forelse($lhtnilai as $key=>$nilai) --}}
+                            {{-- @forelse ($data_siswas as $nilai) --}}
+                            @forelse($lhtnilai as $key=>$nilai)
                               <tr>
-                                  <td>{{ $loop->iteration }}</td>
-                                  {{-- <td class="cell">{{ $lhtnilai->firstItem() + $key }}.</td> --}}
+                                  {{-- <td>{{ $loop->iteration }}</td> --}}
+                                  <td class="cell">{{ $lhtnilai->firstItem() + $key }}.</td>
                                   <td class="cell">{{ $nilai->nama }}</td>
                                   <td class="cell">{{ $nilai->asal }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_mtk }}</td>
@@ -95,11 +95,11 @@
                   </div>
 
                   
-                  {{-- <nav class="app-pagination">
+                  <nav class="app-pagination">
                     <ul class="pagination justify-content-center">
                       {{ $lhtnilai->links() }}
                     </ul>
-                  </nav> --}}
+                  </nav>
                 </div>
                 <!--//tab-pane-->
               </div>

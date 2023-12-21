@@ -14,16 +14,16 @@ class DataTesting extends Model
     protected $table = 'data_testing';
 
     protected $fillable = [
-        // 'id',
-        // 'nis', 
-        // 'nama', 
-        // 'asal', 
+        'id',
+        'nis', 
+        'nama', 
+        'asal', 
         'nilai_tes_mtk', 
         'nilai_tes_ipa', 
         'nilai_tes_agama', 
         'nilai_tes_bindo',
         'status_kelas',
-        'hasil'
+        'hasil_mining'
     ];
 
     public function scopeFilter($query, array $filters)

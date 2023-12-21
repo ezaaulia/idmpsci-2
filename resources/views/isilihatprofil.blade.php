@@ -23,59 +23,66 @@
                     </div><!--//row-->
                 </div><!--//app-card-header-->
                 
-                @foreach ($profil as $userp)
-                <div class="app-card-body px-4 w-100"> 
-                    <div class="item border-bottom py-2">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>Nama</strong></div>
-                                <div class="item-data">{{ $userp->nama }}</div>
-                            </div><!--//col-->
-                        </div><!--//row-->
-                    </div><!--//item-->
+                {{-- @if($profil)
+                    @foreach ($profil as $user) --}}
+                    <div class="app-card-body px-4 w-100"> 
+                        <div class="item border-bottom py-2">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label"><strong>Nama</strong></div>
+                                    <div class="item-data">{{ $profil->nama }}</div>
+                                </div><!--//col-->
+                            </div><!--//row-->
+                        </div><!--//item-->
 
-                    <div class="item border-bottom py-2">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>Email</strong></div>
-                                <div class="item-data">{{ $userp->email }}</div>
-                            </div><!--//col-->
-                        </div><!--//row-->
-                    </div><!--//item-->
+                        <div class="item border-bottom py-2">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label"><strong>Email</strong></div>
+                                    <div class="item-data">{{ $profil->email }}</div>
+                                </div><!--//col-->
+                            </div><!--//row-->
+                        </div><!--//item-->
 
-                    <div class="item border-bottom py-2">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>Username</strong></div>
-                                <div class="item-data">{{ $userp->username }}</div>
-                            </div><!--//col-->
-                        </div><!--//row-->
-                    </div><!--//item-->
+                        <div class="item border-bottom py-2">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label"><strong>Username</strong></div>
+                                    <div class="item-data">{{ $profil->username }}</div>
+                                </div><!--//col-->
+                            </div><!--//row-->
+                        </div><!--//item-->
 
-                    <div class="item border-bottom py-2">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>Alamat</strong></div>
-                                <div class="item-data">{{ $userp->alamat }}</div>
-                            </div><!--//col-->
-                        </div><!--//row-->
-                    </div><!--//item-->
+                        <div class="item border-bottom py-2">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label"><strong>Alamat</strong></div>
+                                    <div class="item-data">{{ $profil->alamat }}</div>
+                                </div><!--//col-->
+                            </div><!--//row-->
+                        </div><!--//item-->
 
-                    <div class="item border-bottom py-2">
-                        <div class="row justify-content-between align-items-center">
-                            <div class="col-auto">
-                                <div class="item-label"><strong>No. HP</strong></div>
-                                <div class="item-data">{{ $userp->no_hp }}</div>
-                            </div><!--//col-->
-                        </div><!--//row-->
-                    </div><!--//item-->
-                @endforeach
+                        <div class="item border-bottom py-2">
+                            <div class="row justify-content-between align-items-center">
+                                <div class="col-auto">
+                                    <div class="item-label"><strong>No. HP</strong></div>
+                                    <div class="item-data">{{ $profil->no_hp }}</div>
+                                </div><!--//col-->
+                            </div><!--//row-->
+                        </div><!--//item-->
+                        
+                    {{-- @endforeach
+                @else
+                    <h5 class="text-center mt-3">Data tidak ditemukan.</h5>
+                @endif --}}
+
+                
 
                     <div class="item border-bottom py-3">
                         <div class="row justify-content-center align-items-center">
                           <div class="row justify-content-end">
                             <div class="col-auto">
-                                <a type="submit" class="btn btn-warning" href="{{ url('editprofil/'.$userp->id)}}">Edit</a>
+                                <a type="submit" class="btn btn-warning" href="{{ url('editprofil/'.$profil->id)}}">Edit</a>
                             </div>
                           </div>
                         </div>

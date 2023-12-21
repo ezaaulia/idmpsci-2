@@ -24,7 +24,7 @@ class CreateDataSiswasTable extends Migration
             $table->string('nilai_tes_agama');
             $table->string('nilai_tes_bindo');
             $table->enum('status_kelas', ['reguler', 'ci']);
-            $table->string('hasil_mining')->nullable();
+            // $table->string('hasil_mining')->nullable();
             $table->timestamps();
 
             //$table->foreign('nilai_tes_id')->references('id')->on('nilai_tes');

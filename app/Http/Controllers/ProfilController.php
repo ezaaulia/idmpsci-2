@@ -1,33 +1,61 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProfilController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    /**
+     * Menampilkan profil pengguna yang sudah login.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function lihatprofil()
     {
+        // Mendapatkan data user yang sedang login
+        $user = Auth::user();
+        // $user = $request->user();
+
         return view('isilihatprofil' , [
-            'profil' => User::all(),
-            'title' => 'Lihat Profil'
+            // 'profil' => $profil,
+            'profil' => $user,
+            // 'title' => 'Lihat Profil'
         ]);
 
     }
 
-
-    public function editprofil($id)
+    /**
+     * Menampilkan form untuk mengedit profil pengguna.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function editprofil(Request $request)
     {
 
-        $userp = User::find($id);
+        // Mendapatkan informasi pengguna yang sedang login
+        $userp = Auth::user();
+        // $userp = $request->user();
 
         return view('isieditprofil' ,
         [
             'userp' => $userp,
             'title' => 'Edit Profil',
         ]);
-        // return view('isieditprofil', compact('userp'));
     }
 
     /**
@@ -39,7 +67,10 @@ class ProfilController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Request()->validate([
+        $userp = Auth::user();
+
+        // Validasi data yang dikirimkan
+        $validatedData = $request->validate([
             'nama' => 'required',
             // 'email' => 'required',
             'username' => 'required',
@@ -54,13 +85,19 @@ class ProfilController extends Controller
             'no_hp.max' => 'No.HP maksimal 13 karakter!',
         ]);
         
-        $userp = User::find($id);
+        // Update informasi pengguna dengan data yang baru
         // $userp -> update($request->all());
-        $userp -> nama = $request -> nama;
-        $userp -> username = $request -> username;
-        $userp -> alamat = $request -> alamat;
-        $userp -> no_hp = $request -> no_hp;
-        $userp->update();
+        // $userp = User::findOrFail();
+        $userp = User::findOrFail($id);
+
+        $userp->nama = $validatedData['nama'];
+        $userp->username = $validatedData['username'];
+        $userp->alamat = $validatedData['alamat'];
+        $userp->no_hp = $validatedData['no_hp'];
+
+        // dd($userp);
+
+        $userp->save();
 
      
         return redirect()->route('lihatprofil')->with('pesan', 'Data Diri Berhasil di Edit!!!');

@@ -28,7 +28,7 @@ class DataSiswa extends Model
         'nilai_tes_agama', 
         'nilai_tes_bindo',
         'status_kelas',
-        'hasil_mining',
+        // 'hasil_mining',
     ];
 
     public function scopeFilter($query, array $filters)

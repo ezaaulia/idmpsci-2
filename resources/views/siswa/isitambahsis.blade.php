@@ -25,11 +25,11 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 
-                                <form action="{{ url('upload')}}" method="POST" enctype="multipart/form-data" >
+                                <form action="{{ url()->route('import')}}" method="POST" enctype="multipart/form-data" >
                                     @csrf
                                     <div class="modal-body">
                                             <div class="form-group">
-                                                <input type="file" name="import_file" >
+                                                <input type="file" name="file" id="file" >
                                             </div>
                                     </div>
                                     <div class="modal-footer">

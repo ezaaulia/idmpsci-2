@@ -15,9 +15,15 @@ class CreateRolesTable extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('users_id');
+            $table->unsignedBigInteger('users_id');            
             $table->string('nama');
-            $table->string('display_name');
+            $table->string('email')->unique();
+            $table->string('username');
+            $table->string('alamat');
+            $table->string('no_hp');
+            $table->string('password');
+            $table->enum('role', ['admin', 'operator'])->default('admin');
+            $table->rememberToken();
             $table->timestamps();
 
 

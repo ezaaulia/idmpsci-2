@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Imports\DataTest;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -16,8 +17,8 @@ class HasilTraining extends Model
 
     protected $fillable = [
         'id',
-        'data_siswas_id',
-        'nilai_tes_id',
+        // 'data_siswas_id',
+        'data_testing_id',
         // 'nis', 
         // 'nama', 
         // 'asal',
@@ -26,19 +27,17 @@ class HasilTraining extends Model
         // 'nilai_tes_agama', 
         // 'nilai_tes_bindo',
         'status_kelas',
-        'hasilmd',
+        'hasil_mining',
+        
     ];
 
     public function allData()
     {
-        return DB::table('hasil_trainings')
-            ->leftJoin('data_siswas', 'data_siswas.id', '=', 'hasil_trainings.id')
-            ->leftJoin('nilai_tes', 'nilai_tes.id', '=', 'hasil_trainings.id')
-            ->get();
+        return DB::table('hasil_trainings')->get();
     }
 
-    public function nilai_tes()
+    public function data_testing()
     {
-        return $this->hasOne(NilaiTes::class, 'nilai_tes_id');
+        return $this->hasOne(DataTest::class, 'data_testing_id');
     }
 }

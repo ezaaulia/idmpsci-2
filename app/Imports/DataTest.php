@@ -20,17 +20,18 @@ class DataTest implements ToModel
     {
         // Membuat instance model DataSiswa
         $datas = new DataTesting();
-        // $datas->nis = $row[0];
-        $datas->nama = $row[0];
-        // $datas->asal = $row[2];
-        $datas->nilai_tes_mtk = $row[1];
-        $datas->nilai_tes_ipa = $row[2];
-        $datas->nilai_tes_agama = $row[3];
-        $datas->nilai_tes_bindo = $row[4];
-        $datas->status_kelas = $row[5];
+        $datas->nis = $row[0];
+        $datas->nama = $row[1];
+        $datas->asal = $row[2];
+        $datas->nilai_tes_mtk = $row[3];
+        $datas->nilai_tes_ipa = $row[4];
+        $datas->nilai_tes_agama = $row[5];
+        $datas->nilai_tes_bindo = $row[6];
+        $datas->status_kelas = $row[7];
+        // $datas->hasil_mining = $row[8];
 
         // Memuat model pohon keputusan C45
-        $filename = public_path('/csv/Data_Testing.csv');
+        $filename = public_path('csv/Data_Training.csv');
         $c45 = new C45([
             'targetAttribute' => 'hasil_mining',
             'trainingFile' => $filename,

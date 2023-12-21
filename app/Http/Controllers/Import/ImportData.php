@@ -34,7 +34,7 @@ class ImportData extends Controller
         Excel::import(new DataImport, public_path('/import_csv/' . $filename), null, \Maatwebsite\Excel\Excel::CSV);
 
         // Menampilkan pesan sukses dan mengarahkan kembali ke halaman daftar siswa
-        Session::flash('sukses', 'Data berhasil diimpor');
+        Session::flash('sukses', 'Data berhasil diupload');
         return redirect()->route('lihatsiswa');
     }
 }
