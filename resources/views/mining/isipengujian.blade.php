@@ -69,14 +69,6 @@
                         
                         </table>
 
-                        <h1>Performance Metrics</h1>
-                        <p>Accuracy: {{ $accuracy . "%"}}</p>
-                        <p>Precision: {{ $precision }}</p>
-                        <p>Recall: {{ $recall }}</p>
-                        <p>Specificity: {{ $specificity }}</p>
-                        <p>F1 Score: {{ $f1Score }}</p>
-
-
 {{--                         
                         <h1>Confusion Matrix</h1>
                         <table class="table">
@@ -105,6 +97,56 @@
                       </div> <!--//table-responsive-->
                     </div> <!--//app-card-body-->
                   </div>
+
+                  <div class="text-center">
+                      <h1>Hasil Uji Prediksi <span class="badge bg-secondary"></span></h1>
+                      <div class="alert alert-info" role="alert">
+                        Total Jumlah Prediksi : 
+                      </div>
+                  </div>
+
+                  <div class="text-center">
+                    <div class="alert alert-success" role="alert">
+                     Jumlah Tepat :
+                    </div>
+                  </div>
+
+                <div class="text-center">
+                  <div class="alert alert-danger" role="alert">
+                    Jumlah Tidak Tepat :
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <div class="alert alert-secondary" role="alert">
+                    Nilai Akurasi : {{ $accuracy . "%"}}
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <div class="alert alert-secondary" role="alert">
+                    Nilai Precision : {{ $precision }}
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <div class="alert alert-secondary" role="alert">
+                    Nilai recall : {{ $recall }}
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <div class="alert alert-secondary" role="alert">
+                    Nilai Specificity : {{ $specificity }}
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <div class="alert alert-secondary" role="alert">
+                    Nilai F1Score : {{ $f1Score }}
+                  </div>
+                </div>
+
                 </div>
             </div>
 

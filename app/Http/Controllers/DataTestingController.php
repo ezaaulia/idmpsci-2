@@ -8,6 +8,7 @@ use App\Imports\DataTest;
 use App\Models\DataTesting;
 use C45\C45;
 use Phpml\Metric\ConfusionMatrix;
+use Phpml\Metric\ClassificationReport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -35,9 +36,8 @@ class DataTestingController extends Controller
     {
         $tes = DataTesting::all();
 
-        $actual = DataTesting::pluck('hasil_mining')->toArray();
-        $predicted = DataTesting::pluck('status_kelas')->toArray();
-        
+        $actual = DataTesting::pluck('status_kelas')->toArray();
+        $predicted = DataTesting::pluck('hasil_mining')->toArray();
         
         // Menghitung metrik kinerja
         $accuracy = $this->accuracy($actual, $predicted);
@@ -45,20 +45,143 @@ class DataTestingController extends Controller
         $recall = $this->recall($actual, $predicted);
         $specificity = $this->specificity($actual, $predicted);
         $f1Score = $this->f1Score($precision, $recall);
+                
+        // // Menampilkan metrik kinerja
+        // // return view('mining.isipengujian', compact('transactions', 'truePositive', 'trueNegative', 'falsePositive', 'falseNegative'));
+        return view('mining.isipengujian', compact( 'tes', 'accuracy', 'precision', 'recall', 'specificity', 'f1Score' ));
+        // // return view('mining.isipengujian', compact('confusionMatrix'));
+        // 'precision', 'recall', 'specificity', 'f1Score'
+        
 
+        // $predicted = [0, 1, 1, 0, 1, 1];
+        // $actual = [0, 1, 0, 0, 1, 1];
 
-    
+    // Menghitung confusion matrix
+    //    $confusionMatrix = ConfusionMatrix::compute($actual, $predicted);
+
+    //     // Calculate the number of true positives, true negatives, false positives, and false negatives
+    //     $tp = $confusionMatrix[1][1]; // True positives
+    //     $tn = $confusionMatrix[0][0]; // True negatives
+    //     $fp = $confusionMatrix[0][1]; // False positives
+    //     $fn = $confusionMatrix[1][0]; // False negatives
+
+    //     // Calculate accuracy
+    //     $accuracy = ($tp + $tn) / (array_sum($confusionMatrix[0]) + array_sum($confusionMatrix[1]));
+
+    //     // Calculate error rate
+    //     $errorRate = 1 - $accuracy;
+
+    //     // Calculate precision
+    //     $precision = $tp / ($tp + $fp);
+
+    //     // Calculate sensitivity (recall)
+    //     $sensitivity = $tp / ($tp + $fn);
+
+    //         // Menampilkan hasil metrik
+    //    return response()->json([
+    //        'confusion_matrix' => $confusionMatrix,
+    //        'accuracy' => $accuracy,
+    //        'error_rate' => $errorRate,
+    //        'precision' => $precision,
+    //        'sensitivity' => $sensitivity,
+    //    ]);
+
         // dd($confusionMatrix);
 
-        
-        // Menampilkan metrik kinerja
-        // return view('mining.isipengujian', compact('transactions', 'truePositive', 'trueNegative', 'falsePositive', 'falseNegative'));
-        return view('mining.isipengujian', compact( 'tes','accuracy', 'precision', 'recall', 'specificity', 'f1Score'));
-        // return view('mining.isipengujian', compact('confusionMatrix'));
 
 
-       
+    // // Contoh data prediksi dan label yang sebenarnya
+    //    $predicted = [0, 1, 1, 0, 1, 1];
+    //    $actual = [0, 1, 0, 0, 1, 1];
+
+    //  // Menghitung confusion matrix
+    //    $confusionMatrix = ConfusionMatrix::compute($actual, $predicted);
+
+    //     // Calculate the number of true positives, true negatives, false positives, and false negatives
+    //     $tp = $confusionMatrix[1][1]; // True positives
+    //     $tn = $confusionMatrix[0][0]; // True negatives
+    //     $fp = $confusionMatrix[0][1]; // False positives
+    //     $fn = $confusionMatrix[1][0]; // False negatives
+
+    //     // Calculate accuracy
+    //     $accuracy = ($tp + $tn) / (array_sum($confusionMatrix[0]) + array_sum($confusionMatrix[1]));
+
+    //     // Calculate error rate
+    //     $errorRate = 1 - $accuracy;
+
+    //     // Calculate precision
+    //     $precision = $tp / ($tp + $fp);
+
+    //     // Calculate sensitivity (recall)
+    //     $sensitivity = $tp / ($tp + $fn);
+
+
+    //    // Menampilkan hasil metrik
+    //    return response()->json([
+    //        'confusion_matrix' => $confusionMatrix,
+    //        'accuracy' => $accuracy,
+    //        'error_rate' => $errorRate,
+    //        'precision' => $precision,
+    //        'sensitivity' => $sensitivity,
+    //    ]);
+
+        // // Menghitung accuracy
+        // $accuracy = ($confusionMatrix[0][0] + $confusionMatrix[1][1]) / array_sum(array_map('array_sum', $confusionMatrix));
+
+        // // Menghitung error rate
+        // $errorRate = 1 - $accuracy;
+
+        // // Menghitung precision
+        // $precision = $confusionMatrix[1][1] / ($confusionMatrix[1][1] + $confusionMatrix[0][1]);
+
+        // // Menghitung sensitivity (recall)
+        // $sensitivity = $confusionMatrix[1][1] / ($confusionMatrix[1][1] + $confusionMatrix[1][0]);
+
+    //    // Menampilkan hasil metrik
+    //    return response()->json([
+    //        'confusion_matrix' => $confusionMatrix,
+    //        'accuracy' => $accuracy,
+    //        'error_rate' => $errorRate,
+    //        'precision' => $precision,
+    //        'sensitivity' => $sensitivity,
+    //    ]);
+
+
+
+
+
+        // // Menghitung accuracy
+        // $accuracy = 0;
+        // if (array_sum($confusionMatrix[0]) + array_sum($confusionMatrix[1]) > 0) {
+        //     $accuracy = ($confusionMatrix[0][0] + $confusionMatrix[1][1]) / array_sum($confusionMatrix[0]) + array_sum($confusionMatrix[1]);
+        // }
+
+        // // Menghitung error rate
+        // $errorRate = 1 - $accuracy;
+
+        // // Menghitung precision
+        // $precision = 0;
+        // if ($confusionMatrix[0][1] + $confusionMatrix[1][1] > 0) {
+        //     $precision = $confusionMatrix[1][1] / ($confusionMatrix[0][1] + $confusionMatrix[1][1]);
+        // }
+
+        // // Menghitung sensitivity (recall)
+        // $sensitivity = 0;
+        // if ($confusionMatrix[1][0] + $confusionMatrix[1][1] > 0) {
+        //     $sensitivity = $confusionMatrix[1][1] / ($confusionMatrix[1][0] + $confusionMatrix[1][1]);
+        // }
+
+
+    //    // Menampilkan hasil metrik
+    //    return response()->json([
+    //        'confusion_matrix' => $confusionMatrix,
+    //        'accuracy' => $accuracy,
+    //        'error_rate' => $errorRate,
+    //        'precision' => $precision,
+    //        'sensitivity' => $sensitivity,
+    //    ]);
     }
+
 
     private function accuracy($actual, $predicted)
     {
@@ -156,6 +279,47 @@ class DataTestingController extends Controller
 
         return $f1Score;
     }
+    
+
+    // public function confusionMatrix()
+
+    // {
+    // // Mendapatkan data dari tabel datasiswa berdasarkan nilai hasil mining
+    // $predicted = [0, 1, 1, 0, 1, 1];
+
+    //  $actual = [0, 1, 1, 0, 1, 0];
+
+    // // buat confusion matrix
+    // $confusionMatrix = new ConfusionMatrix($actual, $predicted);
+
+    // // tampilkan nilai confusion matrix
+    // $truePositive = $confusionMatrix->truePositive();
+    // $trueNegative = $confusionMatrix->trueNegative();
+    // $falsePositive = $confusionMatrix->falsePositive();
+    // $falseNegative = $confusionMatrix->falseNegative();
+
+    // // hitung nilai akurasi, tingkat kesalahan, dan tingkat presisi
+    // $accuracy = ($truePositive + $trueNegative) / count($actual);
+    // $errorRate = ($falsePositive + $falseNegative) / count($actual);
+    // $precision = $truePositive / ($truePositive + $falsePositive);
+    // $sensitivity = $truePositive / ($truePositive + $falseNegative);
+
+    // // hitung nilai lain seperti specificity, positive predictive value, dan negative predictive value
+    // $specificity = $trueNegative / ($trueNegative + $falsePositive);
+    // $positivePredictiveValue = $truePositive / ($truePositive + $falseNegative);
+    // $negativePredictiveValue = $trueNegative / ($trueNegative + $falsePositive);
+
+    // // kembalikan nilai-nilai ke view
+    // return view('welcome', [
+    //     'accuracy' => $accuracy,
+    //     'errorRate' => $errorRate,
+    //     'precision' => $precision,
+    //     'sensitivity' => $sensitivity,
+    //     'specificity' => $specificity,
+    //     'positivePredictiveValue' => $positivePredictiveValue,
+    //     'negativePredictiveValue' => $negativePredictiveValue,
+    // ]);
+    // }
 
 
 
@@ -176,40 +340,44 @@ class DataTestingController extends Controller
 
 
 
-    public function calculateConfusionMatrix()
+
+
+
+
+    public function ujidata1()
     {
         // Mendapatkan data aktual dan hasil prediksi dari model Anda
-        $transactions = DataTesting::all();
-        $actual = $transactions->pluck('status_kelas')->toArray();
-        $predicted = $transactions->pluck('hasil_mining')->toArray();
+        // $transactions = DataTesting::all();
+        // $actual = $transactions->pluck('status_kelas')->toArray();
+        // $predicted = $transactions->pluck('hasil_mining')->toArray();
 
 
-        // Inisialisasi variabel untuk confusion matrix
-        $truePositive = $trueNegative = $falsePositive = $falseNegative = 0;
+        // // Inisialisasi variabel untuk confusion matrix
+        // $truePositive = $trueNegative = $falsePositive = $falseNegative = 0;
 
-        // Menghitung confusion matrix
-        for ($i = 0; $i < count($actual); $i++) {
-            if ($actual[$i] == 1 && $predicted[$i] == 1) {
-                $truePositive++;
-            } elseif ($actual[$i] == 0 && $predicted[$i] == 0) {
-                $trueNegative++;
-            } elseif ($actual[$i] == 0 && $predicted[$i] == 1) {
-                $falsePositive++;
-            } elseif ($actual[$i] == 1 && $predicted[$i] == 0) {
-                $falseNegative++;
-            }
-        }
-        // Menyimpan nilai confusion matrix ke dalam array
-        // Menghitung metrik kinerja
-        $accuracy = $this->accuracy($actual, $predicted);
-        $precision = $this->precision($actual, $predicted);
-        $recall = $this->recall($actual, $predicted);
-        $specificity = $this->specificity($actual, $predicted);
-        $f1Score = $this->f1Score($precision, $recall);
+        // // Menghitung confusion matrix
+        // for ($i = 0; $i < count($actual); $i++) {
+        //     if ($actual[$i] == 1 && $predicted[$i] == 1) {
+        //         $truePositive++;
+        //     } elseif ($actual[$i] == 0 && $predicted[$i] == 0) {
+        //         $trueNegative++;
+        //     } elseif ($actual[$i] == 0 && $predicted[$i] == 1) {
+        //         $falsePositive++;
+        //     } elseif ($actual[$i] == 1 && $predicted[$i] == 0) {
+        //         $falseNegative++;
+        //     }
+        // }
+        // // Menyimpan nilai confusion matrix ke dalam array
+        // // Menghitung metrik kinerja
+        // $accuracy = $this->accuracy($actual, $predicted);
+        // $precision = $this->precision($actual, $predicted);
+        // $recall = $this->recall($actual, $predicted);
+        // $specificity = $this->specificity($actual, $predicted);
+        // $f1Score = $this->f1Score($precision, $recall);
 
 
         // Menampilkan confusion matrix
-        return view('mining.matrix', compact('transactions','truePositive', 'trueNegative', 'falsePositive', 'falseNegative', 'accuracy', 'precision', 'recall', 'specificity', 'f1Score'));
+        // return view('mining.matrix', compact('transactions','truePositive', 'trueNegative', 'falsePositive', 'falseNegative', 'accuracy', 'precision', 'recall', 'specificity', 'f1Score'));
        
         // // Menghitung metrik kinerja
         // $accuracy = $this->accuracy($actualLabels, $predictedLabels);

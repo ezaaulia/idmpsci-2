@@ -5,7 +5,9 @@ namespace App\Imports;
 use App\Models\DataTesting;
 use C45\C45;
 use Maatwebsite\Excel\Concerns\ToModel;
-
+use Phpml\Metric\ConfusionMatrix;
+use Illuminate\Support\Facades\DB;
+// use Phpml\Metric\ConfusionMatrix;
 class DataTest implements ToModel
 {
 
@@ -55,6 +57,54 @@ class DataTest implements ToModel
         $datas->hasil_mining = $hasil;
         $datas->save();
 
-      
     }
+
+    // public function confusionMatrix()
+
+    // {
+    // // Mendapatkan data dari tabel datasiswa berdasarkan nilai hasil mining
+    // $predicted = [0, 1, 1, 0, 1, 1];
+
+    //  $actual = [0, 1, 1, 0, 1, 0];
+
+    // // buat confusion matrix
+    // $confusionMatrix = new ConfusionMatrix($actual, $predicted);
+
+    // // tampilkan nilai confusion matrix
+    // $truePositive = $confusionMatrix->truePositive();
+    // $trueNegative = $confusionMatrix->trueNegative();
+    // $falsePositive = $confusionMatrix->falsePositive();
+    // $falseNegative = $confusionMatrix->falseNegative();
+
+    // // hitung nilai akurasi, tingkat kesalahan, dan tingkat presisi
+    // $accuracy = ($truePositive + $trueNegative) / count($actual);
+    // $errorRate = ($falsePositive + $falseNegative) / count($actual);
+    // $precision = $truePositive / ($truePositive + $falsePositive);
+    // $sensitivity = $truePositive / ($truePositive + $falseNegative);
+
+    // // hitung nilai lain seperti specificity, positive predictive value, dan negative predictive value
+    // $specificity = $trueNegative / ($trueNegative + $falsePositive);
+    // $positivePredictiveValue = $truePositive / ($truePositive + $falseNegative);
+    // $negativePredictiveValue = $trueNegative / ($trueNegative + $falsePositive);
+
+    // // kembalikan nilai-nilai ke view
+    // return view('welcome', [
+    //     'accuracy' => $accuracy,
+    //     'errorRate' => $errorRate,
+    //     'precision' => $precision,
+    //     'sensitivity' => $sensitivity,
+    //     'specificity' => $specificity,
+    //     'positivePredictiveValue' => $positivePredictiveValue,
+    //     'negativePredictiveValue' => $negativePredictiveValue,
+    // ]);
+    // }
 }
+
+    //  // misalkan ini hasil prediksi model
+    // $predicted = [0, 1, 1, 0, 1, 1];
+
+    // // dan ini hasil sebenarnya
+    // $actual = [0, 1, 1, 0, 1, 0];
+    
+
+

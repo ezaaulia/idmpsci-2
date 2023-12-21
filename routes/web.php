@@ -73,27 +73,27 @@ Route::middleware(['admin'])->group(function(){
 
     // -------------------- OPERATOR --------------------
 
-    Route::get('/lihatoperator', [OperatorController::class, 'lihatope']);
-    // Route::get('/hapusoperator', [OperatorController::class, 'hapusope']);
-    Route::delete('/lihatoperator/deleteoperator/{id}', [OperatorController::class, 'destroy'])->name('deleteoperator');
-
-    // -------------------- MINING DATA --------------------
-
-    // Route::get('/hasilmining', [MiningDataController::class, 'index'])->name('hasilmining');
-    // Route::get('/mining', [MiningDataController::class, 'isimining_data']);
-    // Route::get('/miningdata', [MiningDataController::class, 'mining_data']);
-
-    Route::get('/pohonkeputusan', [MiningDataController::class, 'pohon']);
-    Route::get('/hasilmining', [MiningDataController::class, 'hasil']);
-    Route::get('/pengujiandata', [DataTestingController::class, 'ujidata'])->name('pengujiandata');
-
-    Route::get('/prediksiakurasi', [DataTestingController::class, 'calculateConfusionMatrix']);
-
-    // ---------- IMPORT DATA UJI ----------
-
-    Route::post('import_uji', [ImportTestController::class, '__invoke'])->name('import_uji');
-// })
+    // })
 });
+Route::get('/lihatoperator', [OperatorController::class, 'lihatope']);
+// Route::get('/hapusoperator', [OperatorController::class, 'hapusope']);
+Route::delete('/lihatoperator/deleteoperator/{id}', [OperatorController::class, 'destroy'])->name('deleteoperator');
+
+// -------------------- MINING DATA --------------------
+
+// Route::get('/hasilmining', [MiningDataController::class, 'index'])->name('hasilmining');
+// Route::get('/mining', [MiningDataController::class, 'isimining_data']);
+// Route::get('/miningdata', [MiningDataController::class, 'mining_data']);
+
+Route::get('/pohonkeputusan', [MiningDataController::class, 'pohon']);
+Route::get('/hasilmining', [MiningDataController::class, 'hasil']);
+Route::get('/pengujiandata', [DataTestingController::class, 'ujidata'])->name('pengujiandata');
+
+Route::get('/prediksiakurasi', [DataTestingController::class, 'calculateConfusionMatrix']);
+
+// ---------- IMPORT DATA UJI ----------
+
+Route::post('import_uji', [ImportTestController::class, '__invoke'])->name('import_uji');
 
 // -------------------- REGISTER --------------------
 
