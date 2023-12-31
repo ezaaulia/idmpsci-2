@@ -23,7 +23,7 @@
                            
                             <tr>
                               <th class="cell">No.</th>
-                              <th class="cell">Nama Siswa</th>
+                              {{-- <th class="cell">Nama Siswa</th>
                               <th class="cell">Nilai MTK</th>
                               <th class="cell">Nilai IPA</th>
                               <th class="cell">Nilai Agama</th>
@@ -43,7 +43,7 @@
                                   <td class="cell">{{ $datas->nilai_tes_agama }}</td>
                                   <td class="cell">{{ $datas->nilai_tes_bindo }}</td>
                                   <td class="cell">{{ $datas->status_kelas }}</td>
-                                  <td class="cell">{{ $datas->hasil_mining }}</td>
+                                  <td class="cell">{{ $datas->hasil_mining }}</td> --}}
                               </tr>
                             @empty
                                 <!-- Pesan ketika data kosong -->

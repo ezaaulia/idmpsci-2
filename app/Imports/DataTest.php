@@ -5,22 +5,19 @@ namespace App\Imports;
 use App\Models\DataTesting;
 use C45\C45;
 use Maatwebsite\Excel\Concerns\ToModel;
-use Phpml\Metric\ConfusionMatrix;
-use Illuminate\Support\Facades\DB;
-// use Phpml\Metric\ConfusionMatrix;
+// use Maatwebsite\Excel\Concerns\WithHeadingRow;
+
 class DataTest implements ToModel
 {
-
     /**
      * Mengimpor dan memproses data siswa dari baris CSV.
      *
      * @param array $row
      * @return \Illuminate\Database\Eloquent\Model|null
      */
-    
     public function model(array $row)
     {
-        // Membuat instance model DataSiswa
+        // Membuat instance model DataUji
         $datas = new DataTesting();
         $datas->nis = $row[0];
         $datas->nama = $row[1];
@@ -30,10 +27,21 @@ class DataTest implements ToModel
         $datas->nilai_tes_agama = $row[5];
         $datas->nilai_tes_bindo = $row[6];
         $datas->status_kelas = $row[7];
-        // $datas->hasil_mining = $row[8];
+
+        // $datas = DataTesting::create([
+        //     'nis' =>  $row['nis'],
+        //     'nama' =>  $row['nama'],
+        //     'asal' => $row['asal'],
+        //     'nilai_tes_mtk' => $row['nilai_tes_mtk'],
+        //     'nilai_tes_ipa' => $row['nilai_tes_ipa'],
+        //     'nilai_tes_bindo' => $row['nilai_tes_bindo'],
+        //     'nilai_tes_agama' => $row['nilai_tes_agama'],
+        //     'status_kelas' =>$row['status_kelas']
+        //     // 'hasil_mining' =>$row['hasil_mining']
+        // ]);
 
         // Memuat model pohon keputusan C45
-        $filename = public_path('csv/Data_Training.csv');
+        $filename = public_path('/csv/Data_Training.csv');
         $c45 = new C45([
             'targetAttribute' => 'hasil_mining',
             'trainingFile' => $filename,
@@ -56,55 +64,8 @@ class DataTest implements ToModel
         // Menyimpan status kelas hasil klasifikasi
         $datas->hasil_mining = $hasil;
         $datas->save();
-
     }
-
-    // public function confusionMatrix()
-
-    // {
-    // // Mendapatkan data dari tabel datasiswa berdasarkan nilai hasil mining
-    // $predicted = [0, 1, 1, 0, 1, 1];
-
-    //  $actual = [0, 1, 1, 0, 1, 0];
-
-    // // buat confusion matrix
-    // $confusionMatrix = new ConfusionMatrix($actual, $predicted);
-
-    // // tampilkan nilai confusion matrix
-    // $truePositive = $confusionMatrix->truePositive();
-    // $trueNegative = $confusionMatrix->trueNegative();
-    // $falsePositive = $confusionMatrix->falsePositive();
-    // $falseNegative = $confusionMatrix->falseNegative();
-
-    // // hitung nilai akurasi, tingkat kesalahan, dan tingkat presisi
-    // $accuracy = ($truePositive + $trueNegative) / count($actual);
-    // $errorRate = ($falsePositive + $falseNegative) / count($actual);
-    // $precision = $truePositive / ($truePositive + $falsePositive);
-    // $sensitivity = $truePositive / ($truePositive + $falseNegative);
-
-    // // hitung nilai lain seperti specificity, positive predictive value, dan negative predictive value
-    // $specificity = $trueNegative / ($trueNegative + $falsePositive);
-    // $positivePredictiveValue = $truePositive / ($truePositive + $falseNegative);
-    // $negativePredictiveValue = $trueNegative / ($trueNegative + $falsePositive);
-
-    // // kembalikan nilai-nilai ke view
-    // return view('welcome', [
-    //     'accuracy' => $accuracy,
-    //     'errorRate' => $errorRate,
-    //     'precision' => $precision,
-    //     'sensitivity' => $sensitivity,
-    //     'specificity' => $specificity,
-    //     'positivePredictiveValue' => $positivePredictiveValue,
-    //     'negativePredictiveValue' => $negativePredictiveValue,
-    // ]);
-    // }
 }
-
-    //  // misalkan ini hasil prediksi model
-    // $predicted = [0, 1, 1, 0, 1, 1];
-
-    // // dan ini hasil sebenarnya
-    // $actual = [0, 1, 1, 0, 1, 0];
     
 
 

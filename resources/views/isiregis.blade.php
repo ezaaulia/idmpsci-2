@@ -10,10 +10,10 @@
     <div class="auth-main-col text-center p-4"> {{-- biar gambar naik sejajar dengan tampilan login dan tidak di bawah, ukurn gmbr udh sesuai --}}
         <div class="d-flex flex-column align-content-"> {{-- gambar dibawah tampilan login --}}
             <div class="app-auth-body mx-auto">
-                <div class="card border-primary mb-3 shadow-sm p-3">
+                <div class="card border-primary mb-2 shadow-sm p-3">
                     <div class="app-card-body">	
-                        <div class="app-auth-branding mb-4 "><a class="app-logo" href="#"><img class="logo-icon me-2" src="assets/images/smp.png" alt="logo" ></a></div>
-                            <h2 class="auth-heading text-center mb-3 ">REGISTRASI</h2>
+                        <div class="app-auth-branding mb-1 "><a class="app-logo" href="#"><img class="logo-icon me-2" src="assets/images/smp.png" alt="logo" ></a></div>
+                            <h3 class="auth-heading text-center mb-3 ">REGISTRASI</h3>
 
                         <div class="auth-form-container text-start"> 
                             <form class="auth-form signup-form" action={{ route('register') }} method="POST">
@@ -68,10 +68,27 @@
                                     @enderror
                                 </div><!--//form-group-->
 
-                                <div class="password mb-4">
+                                <div class="password mb-1">
                                     <label class="sr-only" for="password">Password</label>
                                     <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Password" required="required" value="{{ old('password') }}">
                                     @error('password')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
+                                </div><!--//form-group-->
+
+                                <div class="form-group mb-3 {{ $errors->has('role') ? 'has-error' : null }}">
+                                    <label class="sr-only col-md-4 col-form-label text-md-right" for="role">Role</label>
+                                    {{-- <input id="role" name="role" type="role" class="form-control @error('role') is-invalid @enderror" placeholder="No.Hp" required="required" value="{{ old('role') }}"> --}}
+                                    <div class="col-md">
+                                        <select class="form-select fw-light" name="role" id="">
+                                            <option hidden selected> --- Pilih Role ---</option>
+                                            <option value="admin">Admin</option>
+                                            <option value="operator">Operator</option>
+                                          </select>
+                                    </div>
+                                    @error('role')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

@@ -10,8 +10,7 @@
         <nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1"> {{-- untuk mengatur tampilan tulisan, warna dan efek di sidebar --}}
             <ul class="app-menu list-unstyled accordion" id="menu-accordion"> {{-- untuk ngatur dropdown biar bisa d tekan di tulisan atau panah --}}
                 
-                {{-- @if (auth()->user()->role==0) --}}
-
+                @if (auth()->check() && (auth()->user()->role === 'admin' || auth()->user()->role === 'operator'))
                     <li class="nav-item">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                         <a class="nav-link {{ Request::is('beranda') ? 'active' : '' }}" href="{{ url('/beranda')}}"> {{-- ngatur warna dan tampilan pada menu beranda disidebar --}}
@@ -24,8 +23,9 @@
                             <span class="nav-link-text">Beranda</span>
                         </a><!--//nav-link-->
                     </li><!--//nav-item-->
+                @endif
                     
-
+                @if (auth()->user()->role == 'admin')
                     <li class="nav-item has-submenu">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                         <a class="nav-link submenu-toggle"  href="#" data-bs-toggle="collapse" data-bs-target="#submenu-1" aria-expanded="false" aria-controls="submenu-1">
@@ -44,12 +44,13 @@
                         </a><!--//nav-link-->
                         <div id="submenu-1" class="collapse submenu submenu-1" data-bs-parent="#menu-accordion">
                             <ul class="submenu-list list-unstyled">
-                                <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahoperator') ? 'active' : '' }}" href="{{ url('/lihatoperator')}}">Lihat</a></li>
+                                <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahoperator') ? 'active' : '' }}" href="{{ route('admin.lihatope')}}">Lihat</a></li>
                             </ul>
                         </div>
                     </li><!--//nav-item-->
+                @endif 
 
-
+                @if (auth()->check() && (auth()->user()->role === 'admin' || auth()->user()->role === 'operator'))
                     <li class="nav-item has-submenu">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                         <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
@@ -75,8 +76,9 @@
                             </ul>
                         </div>
                     </li><!--//nav-item-->
+                @endif
 
-
+                @if (auth()->user()->role == 'admin')
                     <li class="nav-item has-submenu">
                         <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
                         <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-3" aria-expanded="false" aria-controls="submenu-3">
@@ -95,43 +97,12 @@
                         </a><!--//nav-link-->
                         <div id="submenu-3" class="collapse submenu submenu-3" data-bs-parent="#menu-accordion">
                             <ul class="submenu-list list-unstyled">
-                                <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ url('/pohonkeputusan')}}">Pohon Keputusan</a></li>
-                                <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ url('/pengujiandata')}}">Pegujian Data</a></li>
+                                <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ route('admin.pohon')}}">Pohon Keputusan</a></li>
+                                <li class="submenu-item"><a class="submenu-link {{ Request::is('') ? 'active' : '' }}" href="{{ route('admin.pengujian')}}">Pegujian Data</a></li>
                             </ul>
                         </div>
                     </li><!--//nav-item-->
-
-                {{-- @elseif (auth()->user()->role==1) --}}
-
-                    {{-- <li class="nav-item has-submenu">
-                        <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                        <a class="nav-link submenu-toggle" href="#" data-bs-toggle="collapse" data-bs-target="#submenu-2" aria-expanded="false" aria-controls="submenu-2">
-                            <span class="nav-icon">
-                            <!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cloud-upload" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M4.406 1.342A5.53 5.53 0 0 1 8 0c2.69 0 4.923 2 5.166 4.579C14.758 4.804 16 6.137 16 7.773 16 9.569 14.502 11 12.687 11H10a.5.5 0 0 1 0-1h2.688C13.979 10 15 8.988 15 7.773c0-1.216-1.02-2.228-2.313-2.228h-.5v-.5C12.188 2.825 10.328 1 8 1a4.53 4.53 0 0 0-2.941 1.1c-.757.652-1.153 1.438-1.153 2.055v.448l-.445.049C2.064 4.805 1 5.952 1 7.318 1 8.785 2.23 10 3.781 10H6a.5.5 0 0 1 0 1H3.781C1.708 11 0 9.366 0 7.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383z"/>
-                                <path fill-rule="evenodd" d="M7.646 4.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V14.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3z"/>
-                            </svg>
-                            </span>
-                            <span class="nav-link-text">Input Data Siswa  </span>
-                            <span class="submenu-arrow">
-                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-chevron-down" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
-                                </svg>
-                            </span><!--//submenu-arrow-->
-                        </a><!--//nav-link-->
-                        <div id="submenu-2" class="collapse submenu submenu-2" data-bs-parent="#menu-accordion">
-                            <ul class="submenu-list list-unstyled">
-                                <li class="submenu-item"><a class="submenu-link {{ Request::is('tambahsiswa') ? 'active' : '' }}" href="{{ url('/tambahsiswa')}}">Tambah Data</a></li>
-                                <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatsiswa') ? 'active' : '' }}" href="{{ url('/lihatsiswa')}}">Lihat Siswa</a></li>
-                                <li class="submenu-item"><a class="submenu-link {{ Request::is('lihatnilai') ? 'active' : '' }}" href="{{ url('/lihatnilai')}}">Lihat Nilai</a></li>
-                            </ul>
-                        </div>
-                    </li><!--//nav-item--> --}}
-                    
-                {{-- @endif --}}
-
-
+                @endif
                 
 
 

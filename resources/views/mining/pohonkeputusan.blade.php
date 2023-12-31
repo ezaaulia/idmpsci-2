@@ -25,6 +25,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         
+                        {{-- <form action="{{ url('import_uji')}}" method="POST" enctype="multipart/form-data" > --}}
                         <form action="{{ url()->route('import_uji')}}" method="POST" enctype="multipart/form-data" >
                             @csrf
                             <div class="modal-body">
@@ -51,14 +52,18 @@
                     <div class="table-responsive-lg">
                       <table class="table table-bordered mb-0 text-left ">
                         
-                        {{-- <pre>
-                          {{ print_r($arrayTree) }}
-                        </pre>
-                        --}}
-                        
-                        <pre class="">
-                            {{$stringTree}}
-                        </pre>
+                        {{-- <pre class="">
+                          {{ print_r($arrayTree, true) }}
+                        </pre> --}}
+
+                      <style>
+                          pre {
+                              white-space: pre-wrap;
+                              font-family: Arial, sans-serif;
+                          }
+                      </style>
+                      
+                      <pre>{{ $stringTree }}</pre>
                            
                       </table>
                         <!-- Tombol untuk cetak PDF -->
@@ -73,3 +78,4 @@
     </div>
 </div>
 @endsection
+

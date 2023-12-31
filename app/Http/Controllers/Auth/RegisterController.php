@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'alamat' => 'required|max:255',
             'no_hp' => 'required|min:11|max:13',
             'password' => ['required', 'string', 'min:8'],
+            'role' => ['required', 'string'],
         ]);
 
     }
@@ -75,7 +76,10 @@ class RegisterController extends Controller
             'alamat' => $data['alamat'],
             'no_hp' => $data['no_hp'],
             'password' => Hash::make($data['password']),
+            'role' => $data['role'],
         ]);
+
+        return redirect('/login')->with('success', 'Sign Up Berhasil! Silahkan Login');
     }
 
     

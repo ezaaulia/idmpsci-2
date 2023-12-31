@@ -3,13 +3,12 @@
 @section('isi')
 
 <div class="app-wrapper">
-	    
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">			    
-            <h1 class="app-page-title">Pengujian Perhitungan Data</h1>
+          <h1 class="app-page-title">Pengujian Perhitungan Data</h1>
 
             
-            <hr class="mb-4"> {{-- garis panjang --}}
+          <hr class="mb-4"> {{-- garis panjang --}}
             
             {{-- <div class="row justify-content-end mb-3">
               <div class="col-auto">
@@ -19,7 +18,6 @@
             </div> --}}
 
             <div class="tab-content" id="orders-table-tab-content">
-              
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                   <div class="app-card app-card-orders-table shadow-sm mb-5">
                     
@@ -30,15 +28,15 @@
                             <tr>
                               <th class="cell">No.</th>
                               <th class="cell">NIS</th>
-                              <th class="cell col-2">Nama Siswa</th>
+                              <th class="cell">Nama Siswa</th>
                               <th class="cell">Asal Sekolah</th>
                               <th class="cell">Nilai Tes MTK</th>
                               <th class="cell">Nilai Tes IPA</th>
                               <th class="cell">Nilai Tes Agama</th>
                               <th class="cell">Nilai Tes B.I</th>
                               <th class="cell">Status Kelas</th>
-                              <th class="cell">Kelas Akhir</th>
-                              <th class="cell">Ketepatan</th>
+                              <th class="cell">Hasil Kelas</th>
+                              {{-- <th class="cell">Ketepatan</th> --}}
                             </tr>
                           </thead>
 
@@ -69,8 +67,8 @@
                         
                         </table>
 
-{{--                         
-                        <h1>Confusion Matrix</h1>
+                                            
+                        {{-- <h1>Confusion Matrix</h1>
                         <table class="table">
                           <thead>
                             <tr>
@@ -98,7 +96,7 @@
                     </div> <!--//app-card-body-->
                   </div>
 
-                  <div class="text-center">
+                  {{-- <div class="text-center">
                       <h1>Hasil Uji Prediksi <span class="badge bg-secondary"></span></h1>
                       <div class="alert alert-info" role="alert">
                         Total Jumlah Prediksi : 
@@ -111,41 +109,41 @@
                     </div>
                   </div>
 
-                <div class="text-center">
-                  <div class="alert alert-danger" role="alert">
-                    Jumlah Tidak Tepat :
+                  <div class="text-center">
+                    <div class="alert alert-danger" role="alert">
+                      Jumlah Tidak Tepat :
+                    </div>
                   </div>
-                </div>
 
-                <div class="text-center">
-                  <div class="alert alert-secondary" role="alert">
-                    Nilai Akurasi : {{ $accuracy . "%"}}
+                  <div class="text-center">
+                    <div class="alert alert-secondary" role="alert">
+                      Nilai Akurasi : {{  $truePositive . "%"}}
+                    </div>
                   </div>
-                </div>
 
-                <div class="text-center">
-                  <div class="alert alert-secondary" role="alert">
-                    Nilai Precision : {{ $precision }}
+                  <div class="text-center">
+                    <div class="alert alert-secondary" role="alert">
+                      Nilai Precision : {{ $falsePositive  }}
+                    </div>
                   </div>
-                </div>
 
-                <div class="text-center">
-                  <div class="alert alert-secondary" role="alert">
-                    Nilai recall : {{ $recall }}
+                  <div class="text-center">
+                    <div class="alert alert-secondary" role="alert">
+                      Nilai recall : {{ $falseNegative  }}
+                    </div>
                   </div>
-                </div>
 
-                <div class="text-center">
-                  <div class="alert alert-secondary" role="alert">
-                    Nilai Specificity : {{ $specificity }}
+                  <div class="text-center">
+                    <div class="alert alert-secondary" role="alert"> --}}
+                      {{-- Nilai Specificity : {{ $specificity }} --}}
+                    {{-- </div>
                   </div>
-                </div>
 
-                <div class="text-center">
-                  <div class="alert alert-secondary" role="alert">
-                    Nilai F1Score : {{ $f1Score }}
-                  </div>
-                </div>
+                  <div class="text-center">
+                    <div class="alert alert-secondary" role="alert">
+                      Nilai F1Score : {{ $trueNegative  }}
+                    </div>
+                  </div> --}}
 
                 </div>
             </div>

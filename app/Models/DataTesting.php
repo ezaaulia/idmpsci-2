@@ -2,19 +2,20 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-use App\Models\NilaiTes;
 
 class DataTesting extends Model
 {
-    use HasFactory;
 
     protected $table = 'data_testing';
 
+      /**
+     * Daftar kolom yang dapat diisi secara massal dalam model Student.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'id',
         'nis', 
         'nama', 
         'asal', 
@@ -39,10 +40,12 @@ class DataTesting extends Model
     {
         return DB::table('data_testing')->get();
     }
-
-//     public function scopePilihKelas($query, $hasil_mining)
-// {
-//     return $query->where('status_kelas', $hasil_mining);
-// }
+    
+    /**
+     * Menentukan apakah model akan menggunakan timestamps.
+     *
+     * @var bool
+     */
+    public $timestamps = true;
 
 }

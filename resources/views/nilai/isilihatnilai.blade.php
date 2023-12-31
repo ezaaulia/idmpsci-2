@@ -40,7 +40,6 @@
                             <tr>
                               <th class="cell">No.</th>
                               <th class="cell">Nama Siswa</th>
-                              <th class="cell">Asal Sekolah</th>
                               <th class="cell">Nilai MTK</th>
                               <th class="cell">Nilai IPA</th>
                               <th class="cell">Nilai Agama</th>
@@ -57,7 +56,6 @@
                                   {{-- <td>{{ $loop->iteration }}</td> --}}
                                   <td class="cell">{{ $lhtnilai->firstItem() + $key }}.</td>
                                   <td class="cell">{{ $nilai->nama }}</td>
-                                  <td class="cell">{{ $nilai->asal }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_mtk }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_ipa }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_agama }}</td>

@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -17,7 +15,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var arra
      */
     protected $fillable = [
         'nama',
@@ -32,7 +30,7 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -42,39 +40,21 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
 
-    public function isAdmin()
+    public function roles()
     {
-        return $this->role === 'admin';
+        return $this->belongsTo(Role::class);
     }
-    // protected function role(): Attribute
-    // {
-    //     return new Attribute(
-    //         get: fn ($value) => ["admin", "operator"][$value],
-    //     );
-    // }
 
-    // public function role()
-    // {
-    //     return $this->belongsTo(Role::class);
-    // }
-    // protected $guard = 'admin';
+    public function hasAnyRole($roles)
+    {
+        return null !== $this->roles()->whereIn('email', $roles)->first();
+        // return $this->roles()->where('email', $role)->exists();
+    }
 
-    // public function roleuser()
-    // {
-    //     return $this->hasMany(RoleUser::class);
-    // }
-    
-    //ini untuk edit data siswa
-    // public function editp($id, $profil)
-    // {
-    //     DB::table('users')
-    //         ->where('id', $id)
-    //         ->update($profil);
-    // }
 }

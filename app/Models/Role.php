@@ -11,18 +11,9 @@ class Role extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    // protected $fillable = [
-    //     'nama',
-    //     'email',
-    //     'username',
-    //     'alamat',
-    //     'no_hp',
-    //     'password',
-    //     'role',
-    // ];
 
-    // protected $hidden = [
-    //     'password',
-    //     'remember_token',
-    // ];
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

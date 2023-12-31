@@ -36,8 +36,8 @@
                                             @forelse($opere as $data)
                                               <tr>
                                                   <td>{{ $loop->iteration }}</td>
-                                                  <td class="cell">{{ $data->nama }}</td>
                                                   <td class="cell">{{ $data->email }}</td>
+                                                  <td class="cell">{{ $data->nama }}</td>
                                                   <td class="cell">{{ $data->username }}</td>
                                                   <td class="cell">{{ $data->alamat }}</td>
                                                   <td class="cell">{{ $data->no_hp }}</td>

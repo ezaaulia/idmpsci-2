@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 
-class OperatorAkses
+class CheckRole
 {
     /**
      * Handle an incoming request.
@@ -16,17 +16,11 @@ class OperatorAkses
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if ($request->user() && $request->user()->isOperator()) {
+        if (!$request->user()->hasAnyRole($roles)) {
             return $next($request);
         }
-
-        // if(auth()->user()->role == 1)
-        // {
-        //     return $next($request);
-
-        // }
         return redirect('/')->with('error', "Maaf Anda tidak dapat mengakses halaman ini");
     }
 }

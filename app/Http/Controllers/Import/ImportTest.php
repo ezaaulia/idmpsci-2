@@ -35,6 +35,6 @@ class ImportTest extends Controller
 
         // Menampilkan pesan sukses dan mengarahkan kembali ke halaman daftar siswa
         Session::flash('sukses', 'Data berhasil diupload');
-        return redirect()->route('pengujiandata');
+        return redirect()->route('admin.pengujian');
     }
 }

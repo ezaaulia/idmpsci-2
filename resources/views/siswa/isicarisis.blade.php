@@ -21,14 +21,6 @@
                                         </i></button>
                                     </form>
                                 </div>
-                                {{-- <form class="table-search-form row gx-1 align-items-center">
-                                    <div class="col-lg-8">
-                                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Cari" />
-                                    </div>
-                                    <div class="col-auto">
-                                        <button type="submit" class="btn app-btn-secondary">Cari</button>
-                                    </div>
-                                </form> --}}
                             </div>
                         </div>
                     </div>

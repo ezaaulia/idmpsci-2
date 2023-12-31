@@ -57,7 +57,7 @@
                                 </div>
 
                                 <div class="mb-1">
-                                    <label for="nilai_tes_bindo" class="form-label">Nilai B.I</label>
+                                    <label for="nilai_tes_bindo" class="form-label">Nilai Bindo</label>
                                     <input type="text" class="form-control @error('nilai_tes_bindo') is-invalid @enderror" id="bindo" name="nilai_tes_bindo" value="{{ $nilai->nilai_tes_bindo }}" >
                                     @error('nilai_tes_bindo')
                                         <div class="invalid-feedback">

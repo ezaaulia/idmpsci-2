@@ -16,17 +16,17 @@ use Algorithm\C45\DataInput;
 
 class MiningDataController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     public function pohon(Request $request) 
     {
 
         $c45 = new C45();
         $c45->loadFile('csv/Data_Training.csv'); // load example file
-        $c45->setTargetAttribute('status_kelas'); // set target attribute
+        $c45->setTargetAttribute('hasil_mining'); // set target attribute
 
         $initialize = $c45->initialize(); // initialize
         $buildTree = $initialize->buildTree(); // build tree
@@ -38,18 +38,18 @@ class MiningDataController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function hasil()
-    {
-        $status = DataTesting::all();
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function hasil()
+    // {
+    //     $status = DataTesting::all();
 
-        return view('mining.hasilmining', compact('status'));
+    //     return view('mining.hasilmining', compact('status'));
 
-    }
+    // }
 
 
 }

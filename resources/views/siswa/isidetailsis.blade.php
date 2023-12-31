@@ -92,14 +92,14 @@
                     </div><!--//row-->
                   </div><!--//item-->
 
-                  {{-- <div class="item border-bottom py-2">
+                  <div class="item border-bottom py-2">
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
                             <div class="item-label"><strong>Kelas Asli</strong></div>
                             <div class="item-data">{{ $data->hasil_mining}}</div>
                         </div><!--//col-->
                     </div><!--//row-->
-                  </div><!--//item--> --}}
+                  </div><!--//item-->
 
                   <div class="item border-bottom py-3">
                     <div class="row justify-content-center align-items-center">

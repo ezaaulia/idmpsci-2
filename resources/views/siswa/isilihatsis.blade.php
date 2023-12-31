@@ -19,15 +19,9 @@
                     </i></button>
                 </form>
               </div>
-              <div class="col-auto">
-                <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
-                {{-- <a type="button" class="btn btn-info" href="{{ url('downloadpdf')}}">Unduh Data</a> --}}
-              </div>
 
               <div class="col-auto">
-                <a type="submit" class="btn app-btn-primary" href="{{ url('delete/{Data_Siswa.csv}')}}">Hapus Siswa</a>
-                @csrf
-                @method('DELETE')
+                <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
                 {{-- <a type="button" class="btn btn-info" href="{{ url('downloadpdf')}}">Unduh Data</a> --}}
               </div>
             </div>

@@ -18,10 +18,10 @@ use App\Tree;
 
 class SiswaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     
     /**
@@ -70,32 +70,28 @@ class SiswaController extends Controller
         'status_kelas.required' => 'Kelas wajib diisi!',
     ]);
 
-    // // Memuat model pohon keputusan C45
-    // $filename = public_path('csv\Data_Latih.csv');
-    // $c45 = new C45([
-    //     'targetAttribute' => 'hasil_mining',
-    //     'trainingFile' => $filename,
-    //     'splitCriterion' => C45::SPLIT_GAIN,
-    // ]);
+    // Memuat model pohon keputusan C45
+    $filename = public_path('/csv/Data_Training.csv');
+    $c45 = new C45([
+        'targetAttribute' => 'hasil_mining',
+        'trainingFile' => $filename,
+        'splitCriterion' => C45::SPLIT_GAIN,
+    ]);
 
-    // $tree = $c45->buildTree();
+    $tree = $c45->buildTree();
     // $treeString = $tree->toString(); 
-    
-    // // print generated tree
-    // // echo '<pre>';
-    // // print_r($treeString);
-    // // echo '</pre>';
 
-    // // Data yang akan diklasifikasikan
-    // $data = [
-    //     'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
-    //     'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
-    //     'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
-    //     'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-    // ];
 
-    // // Melakukan klasifikasi menggunakan pohon keputusan C45
-    // $hasil = $tree->classify($data);
+    // Data yang akan diklasifikasikan
+    $data = [
+        'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+        'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+        'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+        'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+    ];
+
+    // Melakukan klasifikasi menggunakan pohon keputusan C45
+    $hasil = $tree->classify($data);
     
     // Membuat data siswa baru dalam database
     DataSiswa::create([
@@ -106,8 +102,9 @@ class SiswaController extends Controller
         'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
         'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
         'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-        'status_kelas' => strtoupper($request->status_kelas),
-        // 'hasil_mining' => $hasil,
+        // 'status_kelas' => strtoupper($request->status_kelas),
+        'status_kelas' => $request->status_kelas,
+        'hasil_mining' => $hasil,
     ]);
     // dd($filename);
     return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
@@ -190,25 +187,25 @@ class SiswaController extends Controller
             'asal.required' => 'Asal Sekolah wajib diisi!',
         ]);
 
-        // // Memuat model pohon keputusan C45
-        // $filename = public_path('csv\Data_Latih.csv');
-        // $c45 = new C45([
-        //     'targetAttribute' => 'status_kelas',
-        //     'trainingFile' => $filename,
-        //     'splitCriterion' => C45::SPLIT_GAIN,
-        // ]);
-        // $tree = $c45->buildTree();
+        // Memuat model pohon keputusan C45
+        $filename = public_path('/csv/Data_Training.csv');
+        $c45 = new C45([
+            'targetAttribute' => 'hasil_mining',
+            'trainingFile' => $filename,
+            'splitCriterion' => C45::SPLIT_GAIN,
+        ]);
+        $tree = $c45->buildTree();
 
-        // // Data yang akan diklasifikasikan
-        // $data = [
-        //     'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
-        //     'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
-        //     'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
-        //     'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-        // ];
+        // Data yang akan diklasifikasikan
+        $data = [
+            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
+            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
+            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
+            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
+        ];
 
-        // // Melakukan klasifikasi menggunakan pohon keputusan C45
-        // $hasil = $tree->classify($data);
+        // Melakukan klasifikasi menggunakan pohon keputusan C45
+        $hasil = $tree->classify($data);
 
         // Mengambil data siswa yang akan diupdate
         $data_siswa = DataSiswa::findOrFail($id);
@@ -216,7 +213,7 @@ class SiswaController extends Controller
         // Mengupdate data siswa
         $data_siswa->nama = $request->nama;
         $data_siswa->asal = $request->asal;
-        // $data_siswa->status_kelas = $hasil;
+        $data_siswa->hasil_mining = $hasil;
         $data_siswa->save();
         
         
@@ -251,22 +248,22 @@ class SiswaController extends Controller
     //     return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Upload!!!');
     // }
 
-    public function delete($filename)
-    {
+    // public function delete($filename)
+    // {
 
-        $file_path = storage_path('app/public/import_csv/' . $filename);
+    //     $file_path = storage_path('app/public/import_csv/' . $filename);
 
-        if (File::exists($file_path)) {
-            File::delete($file_path);
-            return redirect()->back()->with('success', 'File CSV berhasil dihapus.');
-        } else {
-            return redirect()->back()->with('error', 'File CSV tidak ditemukan.');
-        }
+    //     if (File::exists($file_path)) {
+    //         File::delete($file_path);
+    //         return redirect()->back()->with('success', 'File CSV berhasil dihapus.');
+    //     } else {
+    //         return redirect()->back()->with('error', 'File CSV tidak ditemukan.');
+    //     }
         
-        // Excel::import(new DataImport(), $request->file(key:'import_file'));
+    //     // Excel::import(new DataImport(), $request->file(key:'import_file'));
 
-        // return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Upload!!!');
-    }
+    //     // return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Upload!!!');
+    // }
 
     public function export()
     {

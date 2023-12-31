@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataTesting extends Migration
+class CreateDataTestingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -23,7 +23,8 @@ class CreateDataTesting extends Migration
             $table->string('nilai_tes_agama');
             $table->string('nilai_tes_bindo');
             $table->enum('status_kelas', ['reguler', 'ci']);
-            $table->string('hasil_mining');
+            $table->string('hasil_mining')->nullable();
+            // ->nullable()
             $table->timestamps();
         });
     }
