@@ -27,7 +27,6 @@ class CreateDataSiswasTable extends Migration
             $table->string('hasil_mining')->nullable();
             $table->timestamps();
 
-            //$table->foreign('nilai_tes_id')->references('id')->on('nilai_tes');
         });
     }
 

@@ -18,10 +18,10 @@ use App\Tree;
 
 class SiswaController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     
     /**
@@ -80,7 +80,7 @@ class SiswaController extends Controller
 
     $tree = $c45->buildTree();
     // $treeString = $tree->toString(); 
-
+    // dd($tree);
 
     // Data yang akan diklasifikasikan
     $data = [
@@ -89,6 +89,7 @@ class SiswaController extends Controller
         'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
         'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
     ];
+    // dd($data);
 
     // Melakukan klasifikasi menggunakan pohon keputusan C45
     $hasil = $tree->classify($data);
@@ -102,11 +103,10 @@ class SiswaController extends Controller
         'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
         'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
         'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-        // 'status_kelas' => strtoupper($request->status_kelas),
-        'status_kelas' => $request->status_kelas,
+        'status_kelas' => strtoupper($request->status_kelas),
         'hasil_mining' => $hasil,
     ]);
-    // dd($filename);
+    // dd($hasil);
     return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
 
     }    
@@ -128,17 +128,6 @@ class SiswaController extends Controller
         );
     }
     
-    // public function lihatnilai(Request $request)
-    // {
-
-    //     return view('siswa.isilihatnilai',
-    //     [
-    //         'lhtnilai' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
-    //         'title' => 'Lihat Data Nilai'
-    //     ]
-    //     );
-    // }
-
     /**
      * Menampilkan halaman detail data siswa tertentu.
      *
@@ -216,6 +205,7 @@ class SiswaController extends Controller
         $data_siswa->hasil_mining = $hasil;
         $data_siswa->save();
         
+        // dd();
         
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Edit!!!');
         
@@ -239,47 +229,5 @@ class SiswaController extends Controller
         
     }
 
-
-    // public function upload(Request $request)
-    // {
-        
-    //     Excel::import(new DataImport(), $request->file(key:'import_file'));
-
-    //     return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Upload!!!');
-    // }
-
-    // public function delete($filename)
-    // {
-
-    //     $file_path = storage_path('app/public/import_csv/' . $filename);
-
-    //     if (File::exists($file_path)) {
-    //         File::delete($file_path);
-    //         return redirect()->back()->with('success', 'File CSV berhasil dihapus.');
-    //     } else {
-    //         return redirect()->back()->with('error', 'File CSV tidak ditemukan.');
-    //     }
-        
-    //     // Excel::import(new DataImport(), $request->file(key:'import_file'));
-
-    //     // return redirect('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Upload!!!');
-    // }
-
-    public function export()
-    {
-        return Excel::download(new DataExport, 'datasiswa.pdf');
-    }
-
-    public function exportPDF()
-    {
-        // $pdf = App::make('lihatsiswa');
-        // $pdf->loadHTML('tes');
-        // return $pdf->stream();
-    //     $datas = DataSiswa::all();
- 
-	//     view()->share('datas', $datas);
-    //     $pdf = PDF::loadview('siswa.isipdf');
-    //     return $pdf->download('datasiswa.pdf');
-    }
 
 }

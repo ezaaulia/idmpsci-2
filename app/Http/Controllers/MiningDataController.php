@@ -16,10 +16,10 @@ use Algorithm\C45\DataInput;
 
 class MiningDataController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function pohon(Request $request) 
     {
@@ -38,18 +38,18 @@ class MiningDataController extends Controller
     }
 
 
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function hasil()
-    // {
-    //     $status = DataTesting::all();
+    /**
+     * Display the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function hasil()
+    {
+        $status = DataTesting::all();
 
-    //     return view('mining.hasilmining', compact('status'));
+        return view('mining.hasilmining', compact('status'));
 
-    // }
+    }
 
 
 }

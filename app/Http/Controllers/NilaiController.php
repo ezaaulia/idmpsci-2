@@ -14,15 +14,10 @@ use C45\C45 as C45AJA;
 class NilaiController extends Controller
 {
     
-    // /**
-    //  * Create a new controller instance.
-    //  *
-    //  * @return void
-    //  */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     /**
      * Menampilkan daftar data siswa.

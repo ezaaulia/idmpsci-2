@@ -1,4 +1,5 @@
 <?php
+use Barryvdh\DomPDF\Facade as PDF;
 
 return [
 
@@ -231,7 +232,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        // 'PDF' => Dompdf\Dompdf::class,
         // 'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDF' => Barryvdh\DomPDF\Facade\Pdf::class,
+        // 'PDF' => PDF::class,
     ],
 
 ];

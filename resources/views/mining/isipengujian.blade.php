@@ -10,12 +10,11 @@
             
           <hr class="mb-4"> {{-- garis panjang --}}
             
-            {{-- <div class="row justify-content-end mb-3">
+            <div class="row justify-content-end mb-3">
               <div class="col-auto">
-                <a type="submit" class="btn app-btn-primary" href="{{ url('hasilmining')}}">Hasil Mining</a> --}}
-                {{-- <a type="button" class="btn btn-info" href="{{ url('downloadpdf')}}">Unduh Data</a> --}}
-              {{-- </div>
-            </div> --}}
+                <a type="button" class="btn app-btn-primary" href="{{ url('download')}}">Unduh Data</a>
+              </div>
+            </div>
 
             <div class="tab-content" id="orders-table-tab-content">
                 <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
@@ -63,85 +62,65 @@
                               </tr>
                             @endforelse
                           </tbody>
-
-                        
                         </table>
-
-                                            
-                        {{-- <h1>Confusion Matrix</h1>
-                        <table class="table">
-                          <thead>
-                            <tr>
-                                <th></th>
-                                <th>Actual Positive</th>
-                                <th>Actual Negative</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              <tr>
-                                  <th>Predicted Positive</th>
-                                  <td>{{ $truePositive }}</td>
-                                  <td>{{ $falsePositive }}</td>
-                              </tr>
-                              <tr>
-                                  <th>Predicted Negative</th>
-                                  <td>{{ $falseNegative }}</td>
-                                  <td>{{ $trueNegative }}</td>
-                              </tr>
-                          </tbody>
-                        </table> --}}
-
-
                       </div> <!--//table-responsive-->
                     </div> <!--//app-card-body-->
                   </div>
 
-                  {{-- <div class="text-center">
+
+
+                  <div class="text-center">
                       <h1>Hasil Uji Prediksi <span class="badge bg-secondary"></span></h1>
-                      <div class="alert alert-info" role="alert">
-                        Total Jumlah Prediksi : 
+                      <div class="alert alert-warning" role="alert">
+                        Total Jumlah Prediksi : {{ $totalCount }}
                       </div>
                   </div>
 
                   <div class="text-center">
                     <div class="alert alert-success" role="alert">
-                     Jumlah Tepat :
+                     Jumlah Tepat : {{ $correctPredictions }}
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <div class="alert alert-secondary" role="alert">
+                      Jumlah Tidak Tepat : {{ $incorrectPredictions }}
+                    </div>
+                  </div>
+
+                  <div class="text-center">
+                    <div class="alert alert-info" role="alert">
+                      Nilai Akurasi : {{  $accuracy . "%"}}
                     </div>
                   </div>
 
                   <div class="text-center">
                     <div class="alert alert-danger" role="alert">
-                      Jumlah Tidak Tepat :
+                      Tidak Akurat : {{  $errorRate . "%"}}
+                    </div>
+                  </div>
+
+                  {{-- <div class="text-center">
+                    <div class="alert alert-secondary" role="alert">
+                      Nilai Precision : {{ $precision . "%" }}
                     </div>
                   </div>
 
                   <div class="text-center">
                     <div class="alert alert-secondary" role="alert">
-                      Nilai Akurasi : {{  $truePositive . "%"}}
+                      Nilai recall : {{ $recall . "%"  }}
                     </div>
                   </div>
 
                   <div class="text-center">
                     <div class="alert alert-secondary" role="alert">
-                      Nilai Precision : {{ $falsePositive  }}
+                      Nilai Specificity : {{ $specificity . "%" }}
                     </div>
                   </div>
 
                   <div class="text-center">
                     <div class="alert alert-secondary" role="alert">
-                      Nilai recall : {{ $falseNegative  }}
-                    </div>
-                  </div>
-
-                  <div class="text-center">
-                    <div class="alert alert-secondary" role="alert"> --}}
-                      {{-- Nilai Specificity : {{ $specificity }} --}}
-                    {{-- </div>
-                  </div>
-
-                  <div class="text-center">
-                    <div class="alert alert-secondary" role="alert">
-                      Nilai F1Score : {{ $trueNegative  }}
+                      Nilai F1Score : {{ $f1Score  . "%" }}
                     </div>
                   </div> --}}
 

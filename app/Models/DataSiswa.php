@@ -36,10 +36,10 @@ class DataSiswa extends Model
         }
     }
 
-    public function allData()
-    {
-        return DB::table('data_siswas')->get();
-    }
+    // public function allData()
+    // {
+    //     return DB::table('data_siswas')->get();
+    // }
 
         /**
      * Menentukan apakah model akan menggunakan timestamps.

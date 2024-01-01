@@ -18,7 +18,7 @@
 
                                 <div class="mb-1"> {{-- jarak antara form 1 dan tulisan contact name --}}
                                     <label for="nama" class="form-label">Nama Siswa</label>
-                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $nilai->nama }}" >
+                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ $nilai->nama }}" readonly>
                                     @error('nama')
                                         <div class="invalid-feedback">
                                            {{ $message }}
@@ -57,7 +57,7 @@
                                 </div>
 
                                 <div class="mb-1">
-                                    <label for="nilai_tes_bindo" class="form-label">Nilai Bindo</label>
+                                    <label for="nilai_tes_bindo" class="form-label">Nilai B.I</label>
                                     <input type="text" class="form-control @error('nilai_tes_bindo') is-invalid @enderror" id="bindo" name="nilai_tes_bindo" value="{{ $nilai->nilai_tes_bindo }}" >
                                     @error('nilai_tes_bindo')
                                         <div class="invalid-feedback">

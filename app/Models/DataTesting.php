@@ -36,10 +36,10 @@ class DataTesting extends Model
         }
     }
 
-    public function allData()
-    {
-        return DB::table('data_testing')->get();
-    }
+    // public function allData()
+    // {
+    //     return DB::table('data_testing')->get();
+    // }
     
     /**
      * Menentukan apakah model akan menggunakan timestamps.

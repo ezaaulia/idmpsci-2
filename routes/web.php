@@ -1,24 +1,17 @@
 <?php
 
-use App\Http\Controllers\C45;
 use App\Http\Controllers\DataTestingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\SiswaController;
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\OperatorController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\MiningDataController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Import\ImportData as ImportController;
 use App\Http\Controllers\Import\ImportTest as ImportTestController;
-use App\Http\Controllers\Imports\ImportTest;
 
-use App\Http\Controllers\MenuOperatorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,7 +99,7 @@ Route::middleware(['checkrole:admin,operator'])->group(function () {
         
     Route::post('/import_uji', [ImportTestController::class, '__invoke'])->name('import_uji');
 
-    
+    Route::get('/download', [DataTestingController::class, 'download'])->name('download');
     // ********************** PROFIL USER **********************
     
     // ---------- LIHAT ----------
