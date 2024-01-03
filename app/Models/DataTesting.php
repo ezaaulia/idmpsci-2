@@ -16,6 +16,7 @@ class DataTesting extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'nis', 
         'nama', 
         'asal', 

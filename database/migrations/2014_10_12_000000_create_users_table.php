@@ -22,9 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('no_hp');
             $table->string('password');
             $table->enum('role', ['admin', 'operator']);
-            // $table->boolean('admin')->nullable();
-            // 0 = Admin, 1 = Operator
-            // $table->tinyInteger('role')->default(0);
             $table->timestamps();
             
         }); 

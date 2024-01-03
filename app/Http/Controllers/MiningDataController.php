@@ -38,18 +38,7 @@ class MiningDataController extends Controller
     }
 
 
-    /**
-     * Display the specified resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function hasil()
-    {
-        $status = DataTesting::all();
-
-        return view('mining.hasilmining', compact('status'));
-
-    }
+   
 
 
 }

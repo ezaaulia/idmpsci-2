@@ -39,8 +39,6 @@ Route::middleware(['checkrole:admin,operator'])->group(function () {
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
 
 
-
-
     // ********************** SISWA **********************
 
     // ---------- TAMBAH SISWA ----------

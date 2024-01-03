@@ -6,7 +6,7 @@
 	    
     <div class="app-content pt-3 p-md-3 p-lg-4">
         <div class="container-xl">			    
-            <h1 class="app-page-title">Form Edit Siswa</h1>
+            <h1 class="app-page-title">Form Edit Nilai</h1>
 
             
             <hr class="mb-4"> {{-- garis panjang --}}

@@ -9,7 +9,24 @@ use Illuminate\Notifications\Notifiable;
 
 class Role extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    protected $table = 'roles';
+    
+    /**
+    * Daftar kolom yang dapat diisi secara massal dalam model Student.
+    *
+    * @var array
+    */
+   protected $fillable = [
+       'id',
+       'users_id',
+       'role', 
+       'nama', 
+       'email', 
+       'username', 
+       'alamat', 
+       'no_hp', 
+       'password',
+   ];
 
 
     public function users()

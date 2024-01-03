@@ -29,7 +29,6 @@ class ProfilController extends Controller
     {
         // Mendapatkan data user yang sedang login
         $user = Auth::user();
-        // $user = $request->user();
 
         return view('isilihatprofil' , [
             // 'profil' => $profil,
@@ -68,11 +67,9 @@ class ProfilController extends Controller
     public function update(Request $request, $id)
     {
         $userp = Auth::user();
-
         // Validasi data yang dikirimkan
         $validatedData = $request->validate([
             'nama' => 'required',
-            // 'email' => 'required',
             'username' => 'required',
             'alamat' => 'required',
             'no_hp' => 'required|max:13', 
@@ -86,8 +83,6 @@ class ProfilController extends Controller
         ]);
         
         // Update informasi pengguna dengan data yang baru
-        // $userp -> update($request->all());
-        // $userp = User::findOrFail();
         $userp = User::findOrFail($id);
 
         $userp->nama = $validatedData['nama'];

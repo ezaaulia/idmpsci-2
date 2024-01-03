@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDataSiswasTable extends Migration
+class CreateNilaiTesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,17 @@ class CreateDataSiswasTable extends Migration
      */
     public function up()
     {
-        Schema::create('data_siswas', function (Blueprint $table) {
+        Schema::create('nilai_tes', function (Blueprint $table) {
             $table->id();
-            $table->integer('nis')->unique();
-            $table->string('nama');
-            $table->string('asal');
+            $table->unsignedBigInteger('data_siswas_id');
             $table->string('nilai_tes_mtk');
             $table->string('nilai_tes_ipa');
             $table->string('nilai_tes_agama');
             $table->string('nilai_tes_bindo');
             $table->enum('status_kelas', ['reguler', 'ci']);
-            $table->string('hasil_mining')->nullable();
             $table->timestamps();
 
-
+            $table->foreign('data_siswas_id')->references('id')->on('data_siswas');
         });
     }
 
@@ -37,7 +34,6 @@ class CreateDataSiswasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('data_siswas');
-        // Schema::dropIfExists('nilai_tes');
+        Schema::dropIfExists('nilai_tes');
     }
 }
