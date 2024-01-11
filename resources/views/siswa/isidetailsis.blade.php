@@ -87,7 +87,7 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-auto">
                             <div class="item-label"><strong>Status Kelas</strong></div>
-                            <div class="item-data">{{ $data->status_kelas}}</div>
+                            <div class="item-data">{{ $data->kelas}}</div>
                         </div><!--//col-->
                     </div><!--//row-->
                   </div><!--//item-->

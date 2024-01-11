@@ -22,7 +22,6 @@
 
               <div class="col-auto">
                 <a type="submit" class="btn app-btn-primary" href="{{ url('tambahsiswa')}}">Tambah Siswa</a>
-                {{-- <a type="button" class="btn btn-info" href="{{ url('downloadpdf')}}">Unduh Data</a> --}}
               </div>
             </div>
 
@@ -49,6 +48,7 @@
                               <th class="cell">NIS</th>
                               <th class="cell">Nama Siswa</th>
                               <th class="cell">Asal Sekolah</th>
+
                               <th class="cell">Aksi</th>
                             </tr>
                           </thead>
@@ -60,7 +60,6 @@
                                   <td class="cell">{{ $datas->nis }}</td>
                                   <td class="cell">{{ $datas->nama }}</td>
                                   <td class="cell">{{ $datas->asal }}</td>
-                                  
 
                                   <td class="cell">  
 

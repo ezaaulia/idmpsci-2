@@ -19,6 +19,6 @@ class HasilMining extends Model
 
     public function data_testing()
     {
-        return $this->hasOne(DataTesting::class, 'data_testing_id');
+        return $this->hasOne(DataLatih::class, 'data_testing_id');
     }
 }

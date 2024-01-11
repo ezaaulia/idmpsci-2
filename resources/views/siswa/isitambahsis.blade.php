@@ -11,11 +11,11 @@
 
             
             <hr class="mb-4"> {{-- garis panjang --}}
-
+                @if (auth()->check() && auth()->user()->role === 'admin')
                     <div class="col-auto mb-3 d-grid gap-2 d-md-flex justify-content-md-end ">
-                        <a type="button" class="btn app-btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">Upload Data</a>
+                        <a type="button" class="btn app-btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">Upload Data Siswa</a>
                     </div>
-
+                @endif
                     <!-- Modal -->
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-            
+                
                     <div class="app-card app-card-settings shadow-sm p-3">
                         <div class="app-card-body">
                             <form class="settings-form" enctype="multipart/form-data" method="POST" action="{{ url('/tambahsiswa/save') }}"> {{-- {{ URL::to('save') }} --}}
@@ -136,18 +136,18 @@
                                 
                                 <fieldset class="form-group">
                                     <div class="mb-3 row">
-                                        <legend class="col-sm-2 col-form-label fw-bold ">Ket Kelas</legend>
+                                        <legend class="col-sm-2 col-form-label fw-bold ">Status Kelas</legend>
                                         <div class="col-sm-9 @error('status_kelas') is-invalid @enderror">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="status_kelas" id="reguler" value="reguler">
+                                                <input class="form-check-input" type="radio" name="kelas" id="reguler" value="reguler">
                                                 <label class="form-check-label" for="reguler">
                                                     Reguler
                                                 </label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="status_kelas" id="ci" value="ci">
+                                                <input class="form-check-input" type="radio" name="kelas" id="ci" value="ci">
                                                 <label class="form-check-label" for="ci">
-                                                    Class International
+                                                    CI
                                                 </label>
                                             </div>
                                         </div>

@@ -31,9 +31,7 @@ class ProfilController extends Controller
         $user = Auth::user();
 
         return view('isilihatprofil' , [
-            // 'profil' => $profil,
             'profil' => $user,
-            // 'title' => 'Lihat Profil'
         ]);
 
     }
@@ -53,7 +51,6 @@ class ProfilController extends Controller
         return view('isieditprofil' ,
         [
             'userp' => $userp,
-            'title' => 'Edit Profil',
         ]);
     }
 
@@ -89,8 +86,6 @@ class ProfilController extends Controller
         $userp->username = $validatedData['username'];
         $userp->alamat = $validatedData['alamat'];
         $userp->no_hp = $validatedData['no_hp'];
-
-        // dd($userp);
 
         $userp->save();
 

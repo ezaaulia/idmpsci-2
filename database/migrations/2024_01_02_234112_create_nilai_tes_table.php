@@ -20,7 +20,7 @@ class CreateNilaiTesTable extends Migration
             $table->string('nilai_tes_ipa');
             $table->string('nilai_tes_agama');
             $table->string('nilai_tes_bindo');
-            $table->enum('status_kelas', ['reguler', 'ci']);
+            $table->enum('kelas', ['reguler', 'ci']);
             $table->timestamps();
 
             $table->foreign('data_siswas_id')->references('id')->on('data_siswas');

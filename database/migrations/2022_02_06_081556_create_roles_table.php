@@ -17,12 +17,7 @@ class CreateRolesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('users_id');            
             $table->enum('role', ['admin', 'operator'])->default('admin');
-            $table->string('nama');
             $table->string('email')->unique();
-            $table->string('username');
-            $table->string('alamat');
-            $table->string('no_hp');
-            $table->string('password');
             $table->rememberToken();
             $table->timestamps();
 

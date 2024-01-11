@@ -80,7 +80,6 @@
 
                                 <div class="form-group mb-3 {{ $errors->has('role') ? 'has-error' : null }}">
                                     <label class="sr-only col-md-4 col-form-label text-md-right" for="role">Role</label>
-                                    {{-- <input id="role" name="role" type="role" class="form-control @error('role') is-invalid @enderror" placeholder="No.Hp" required="required" value="{{ old('role') }}"> --}}
                                     <div class="col-md">
                                         <select class="form-select fw-light" name="role" id="">
                                             <option hidden selected> --- Pilih Role ---</option>

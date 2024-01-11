@@ -10,7 +10,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\OperatorController;
 use App\Http\Controllers\MiningDataController;
 use App\Http\Controllers\Import\ImportData as ImportController;
-use App\Http\Controllers\Import\ImportTest as ImportTestController;
+use App\Http\Controllers\Import\ImportLatih as ImportLatihController;
 
 
 /*
@@ -30,6 +30,7 @@ Route::get('/', function () {
 });
 
 
+
 Auth::routes();
 
 
@@ -37,7 +38,6 @@ Auth::routes();
 Route::middleware(['checkrole:admin,operator'])->group(function () {
 
     Route::get('/beranda', [HomeController::class, 'index'])->name('beranda');
-
 
     // ********************** SISWA **********************
 
@@ -48,7 +48,9 @@ Route::middleware(['checkrole:admin,operator'])->group(function () {
 
     // ---------- IMPORT SISWA ----------
 
-    Route::post('/import', [ImportController::class, '__invoke'])->name('import');
+    Route::post('/import', [ImportController::class, '__invoke'])->name('import'); // untuk upload data siswa
+    Route::post('/import_latih', [ImportLatihController::class, '__invoke'])->name('import_latih');
+    Route::get('/downloadtemplate', [MiningDataController::class, 'downloadtemplate'])->name('downloadtemplate');
 
     // ---------- LIHAT SISWA DAN DETAIL SISWA ----------
 
@@ -86,18 +88,12 @@ Route::middleware(['checkrole:admin,operator'])->group(function () {
 
     // ********************** MINING DATA **********************
     
+    Route::get('/datalatih', [MiningDataController::class, 'datalatih'])->name('datalatih');
     Route::get('/pohonkeputusan', [MiningDataController::class, 'pohon'])->name('admin.pohon');
-    // Route::get('/hasilmining', [MiningDataController::class, 'hasil'])->name('admin.hasil');
     Route::get('/pengujiandata', [DataTestingController::class, 'ujidata'])->name('admin.pengujian');
-    
-    // ---------- IMPORT DATA UJI ----------
-    // Route::namespace('Import')->group(function () {
-    //     Route::post('import_uji', 'ImportTest')->name('import_uji');
-    // });
-        
-    Route::post('/import_uji', [ImportTestController::class, '__invoke'])->name('import_uji');
-
     Route::get('/download', [DataTestingController::class, 'download'])->name('download');
+    
+    
     // ********************** PROFIL USER **********************
     
     // ---------- LIHAT ----------

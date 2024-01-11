@@ -62,7 +62,7 @@
                                             @empty
                                               <!-- Pesan ketika data kosong -->
                                               <tr>
-                                                <td colspan="6" class="text-center">
+                                                <td colspan="8" class="text-center">
                                                     <h2><strong>Data kosong!!</strong></h2>
                                                 </td>
                                               </tr>

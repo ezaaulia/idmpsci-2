@@ -22,7 +22,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <li>
                         <a class="dropdown-item" href="{{ route('lihatprofil') }}">
-                          {{ Auth::user()->nama}}
+                          Lihat Profil
                         </a>
                       </li>
 

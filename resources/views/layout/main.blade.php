@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"> 
 <head>
-    <title>IDMPSCI | </title>  
-    
+     
     <!-- Meta -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -19,6 +18,7 @@
     <link id="theme-style" rel="stylesheet" href="{{asset('assets/css/portal.css')}}">
     <script src="https://d3js.org/d3.v6.min.js"></script>
 
+    <title>IDMPSCI</title> 
 </head>
 
 

@@ -10,64 +10,40 @@
             
             <hr class="mb-4"> {{-- garis panjang --}}
 
-            
-
-            <div class="col-auto mb-3 d-grid gap-2 d-md-flex justify-content-md-end ">
-              <a type="button" class="btn app-btn-primary " data-bs-toggle="modal" data-bs-target="#exampleModal">Upload Data Uji</a>
-            </div>
-
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Upload Data Uji</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        
-                        {{-- <form action="{{ url('import_uji')}}" method="POST" enctype="multipart/form-data" > --}}
-                        <form action="{{ url()->route('import_uji')}}" method="POST" enctype="multipart/form-data" >
-                            @csrf
-                            <div class="modal-body">
-                                    <div class="form-group">
-                                        <input type="file" name="file" id="file" >
-                                    </div>
-                            </div>
-                            <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn app-btn-primary">Upload</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="tab-content" id="orders-table-tab-content">
               
               <div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
                 <div class="app-card app-card-orders-table shadow-sm mb-5">
                   
+                  
                   <div class="app-card-body">
                     <div class="table-responsive-lg">
-                      <table class="table table-bordered mb-0 text-left ">
                         
-                        {{-- <pre class="">
-                          {{ print_r($arrayTree, true) }}
-                        </pre> --}}
-
                       <style>
                           pre {
                               white-space: pre-wrap;
                               font-family: Arial, sans-serif;
                           }
                       </style>
+
+
+                      @if (isset($error))
+                          <div class="alert alert-danger" role="alert">
+                              {{ $error }}
+                          </div>
+                      @elseif (empty($stringTree))
+                          <div class="alert alert-danger text-center" role="alert">
+                              Data Kosong!!
+                              <br>
+                              Tidak ada data yang dapat ditampilkan. 
+                              <br>
+                              Silahkan Upload Data Latih terlebih dahulu.
+                          </div>
+                      @else
+                          <pre>{{ $stringTree }}</pre>
+                      @endif
                       
-                      <pre>{{ $stringTree }}</pre>
                            
-                      </table>
-                        <!-- Tombol untuk cetak PDF -->
-                        {{-- <a href="{{ route('pdf') }}" class="btn btn-primary">PDF</a> --}}
                     </div> <!--//table-responsive-->
                   </div> <!--//app-card-body-->
                 </div>

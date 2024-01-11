@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class DataTesting extends Model
+class DataLatih extends Model
 {
 
-    protected $table = 'data_testing';
+    protected $table = 'data_latih';
 
       /**
      * Daftar kolom yang dapat diisi secara massal dalam model Student.
@@ -17,15 +17,11 @@ class DataTesting extends Model
      */
     protected $fillable = [
         'id',
-        'nis', 
-        'nama', 
-        'asal', 
         'nilai_tes_mtk', 
         'nilai_tes_ipa', 
         'nilai_tes_agama', 
         'nilai_tes_bindo',
-        'status_kelas',
-        'hasil_mining'
+        'hasil_mining',
     ];
 
     public function scopeFilter($query, array $filters)
@@ -37,11 +33,6 @@ class DataTesting extends Model
         }
     }
 
-    // public function allData()
-    // {
-    //     return DB::table('data_testing')->get();
-    // }
-    
     /**
      * Menentukan apakah model akan menggunakan timestamps.
      *

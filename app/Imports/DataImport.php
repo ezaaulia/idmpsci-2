@@ -5,7 +5,6 @@ namespace App\Imports;
 use App\Models\DataSiswa;
 use C45\C45;
 use Maatwebsite\Excel\Concerns\ToModel;
-// use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
 class DataImport implements ToModel
 {
@@ -27,18 +26,8 @@ class DataImport implements ToModel
         $data_siswa->nilai_tes_ipa = $row[4];
         $data_siswa->nilai_tes_agama = $row[5];
         $data_siswa->nilai_tes_bindo = $row[6];
-        $data_siswa->status_kelas = $row[7];
+        $data_siswa->kelas = $row[7];
 
-        // $data_siswa = DataSiswa::create([
-        //     'nis' =>  $row['nis'],
-        //     'nama' =>  $row['nama'],
-        //     'asal' => $row['asal'],
-        //     'nilai_tes_mtk' => $row['nilai_tes_mtk'],
-        //     'nilai_tes_ipa' => $row['nilai_tes_ipa'],
-        //     'nilai_tes_bindo' => $row['nilai_tes_bindo'],
-        //     'nilai_tes_agama' => $row['nilai_tes_agama'],
-        //     'status_kelas' =>$row['status_kelas']
-        // ]);
 
         // Memuat model pohon keputusan C45
         $filename = public_path('/csv/Data_Training.csv');

@@ -23,9 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('beranda' , [
-            // 'title' => 'Login'
-        ]);
+        return view('beranda');
     }
     
 }

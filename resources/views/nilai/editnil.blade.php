@@ -67,14 +67,14 @@
                                 </div>
                                 
                                 <div class="mb-3">
-                                    <label for="kelas" class="form-label">Ket Kelas</label>
+                                    <label for="kelas" class="form-label">Status Kelas</label>
                                     <div class="col-auto">
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status_kelas" id="reg" value="reguler">
+                                            <input class="form-check-input" type="radio" name="kelas" id="reg" value="reguler">
                                             <label class="form-check-label" for="reg">Reguler</label>
                                         </div>
                                         <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="status_kelas" id="ci" value="ci">
+                                            <input class="form-check-input" type="radio" name="kelas" id="ci" value="ci">
                                             <label class="form-check-label" for="ci">CI</label>
                                         </div>
                                     </div>

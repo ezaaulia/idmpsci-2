@@ -2,10 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
 class Role extends Authenticatable
 {
@@ -20,12 +17,7 @@ class Role extends Authenticatable
        'id',
        'users_id',
        'role', 
-       'nama', 
        'email', 
-       'username', 
-       'alamat', 
-       'no_hp', 
-       'password',
    ];
 
 

@@ -2,19 +2,11 @@
 
 namespace App\Http\Controllers;
 
-// use Barryvdh\DomPDF\PDF;
 use App\Models\DataSiswa;
-use App\Exports\DataExport;
-use App\Imports\DataImport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\Controller;
-use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use C45\C45;
-use PDF;
-use App\Tree;
 
 class SiswaController extends Controller
 {
@@ -31,10 +23,7 @@ class SiswaController extends Controller
      */
     public function tambahsis()
     {   
-        return view('siswa.isitambahsis',
-        [   
-            'title' => 'Tambah Data Siswa'
-        ]);
+        return view('siswa.isitambahsis');
     }
 
     /**
@@ -55,7 +44,7 @@ class SiswaController extends Controller
         'nilai_tes_ipa' => 'required',
         'nilai_tes_agama' => 'required',
         'nilai_tes_bindo' => 'required',
-        'status_kelas' => 'required'
+        'kelas' => 'required'
     ],[
         'nis.required' => 'NIS wajib diisi!',
         'nis.unique' => 'NIS ini sudah ada!',
@@ -67,7 +56,7 @@ class SiswaController extends Controller
         'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
         'nilai_tes_agama.required' => 'Nilai wajib diisi!',
         'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
-        'status_kelas.required' => 'Kelas wajib diisi!',
+        'kelas.required' => 'Kelas wajib diisi!',
     ]);
 
     // Memuat model pohon keputusan C45
@@ -79,8 +68,6 @@ class SiswaController extends Controller
     ]);
 
     $tree = $c45->buildTree();
-    // $treeString = $tree->toString(); 
-    // dd($tree);
 
     // Data yang akan diklasifikasikan
     $data = [
@@ -89,7 +76,6 @@ class SiswaController extends Controller
         'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
         'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
     ];
-    // dd($data);
 
     // Melakukan klasifikasi menggunakan pohon keputusan C45
     $hasil = $tree->classify($data);
@@ -103,10 +89,10 @@ class SiswaController extends Controller
         'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
         'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
         'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-        'status_kelas' => strtoupper($request->status_kelas),
+        'kelas' => $request->kelas,
         'hasil_mining' => $hasil,
     ]);
-    // dd($hasil);
+    
     return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Tambahkan!!!');
 
     }    
@@ -123,7 +109,6 @@ class SiswaController extends Controller
         return view('siswa.isilihatsis',
         [
             'lhtsiswa' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
-            'title' => 'Lihat Data Siswa'
             ]
         );
     }
@@ -141,7 +126,6 @@ class SiswaController extends Controller
         return view('siswa.isidetailsis', 
         [
             'data' => $data,
-            'title' => 'Detail Data Siswa',
         ]);
     }
 
@@ -176,36 +160,14 @@ class SiswaController extends Controller
             'asal.required' => 'Asal Sekolah wajib diisi!',
         ]);
 
-        // Memuat model pohon keputusan C45
-        $filename = public_path('/csv/Data_Training.csv');
-        $c45 = new C45([
-            'targetAttribute' => 'hasil_mining',
-            'trainingFile' => $filename,
-            'splitCriterion' => C45::SPLIT_GAIN,
-        ]);
-        $tree = $c45->buildTree();
-
-        // Data yang akan diklasifikasikan
-        $data = [
-            'nilai_tes_mtk' => strtoupper($request->nilai_tes_mtk),
-            'nilai_tes_ipa' => strtoupper($request->nilai_tes_ipa),
-            'nilai_tes_agama' => strtoupper($request->nilai_tes_agama),
-            'nilai_tes_bindo' => strtoupper($request->nilai_tes_bindo),
-        ];
-
-        // Melakukan klasifikasi menggunakan pohon keputusan C45
-        $hasil = $tree->classify($data);
-
         // Mengambil data siswa yang akan diupdate
         $data_siswa = DataSiswa::findOrFail($id);
 
         // Mengupdate data siswa
         $data_siswa->nama = $request->nama;
         $data_siswa->asal = $request->asal;
-        $data_siswa->hasil_mining = $hasil;
         $data_siswa->save();
         
-        // dd();
         
         return redirect()->route('lihatsiswa')->with('pesan', 'Data Siswa Berhasil di Edit!!!');
         

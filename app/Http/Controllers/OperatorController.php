@@ -2,10 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Role;
-use App\Models\RoleUser;
 
 class OperatorController extends Controller
 {
@@ -28,11 +25,11 @@ class OperatorController extends Controller
      */
     public function lihatope()
     {
-        $user = User::all();
+        // Mengambil semua operator dari database
+        $operators = User::where('role', 'operator')->get();
 
         return view('operator.isilihatope' , [
-            'opere' => $user,
-            'title' => 'Lihat Operator'
+            'opere' => $operators,
             ]);
     }
 
@@ -46,25 +43,13 @@ class OperatorController extends Controller
     public function destroy($id)
     {
         // Hapus data siswa terlebih dahulu
-        $siswa = User::findOrFail($id);
+        $operators = User::findOrFail($id);
 
         // Menghapus data siswa
-        $siswa->delete();
+        $operators->delete();
 
         return redirect('lihatoperator')->with('pesan', 'Data Siswa Berhasil di Hapus!!!');
         
     }
 
-    // /**
-    //  * Remove the specified resource from storage.
-    //  *
-    //  * @param  int  $id
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function hapusope($id)
-    // {
-    //     return view('operator.isihapusope' , [
-    //         "title" => "Hapus Operator"
-    //         ]);
-    // }
 }

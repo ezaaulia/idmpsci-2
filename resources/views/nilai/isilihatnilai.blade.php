@@ -50,18 +50,15 @@
                           </thead>
 
                           <tbody>
-                            {{-- @forelse ($data_siswas as $nilai) --}}
                             @forelse($lhtnilai as $key=>$nilai)
                               <tr>
-                                  {{-- <td>{{ $loop->iteration }}</td> --}}
                                   <td class="cell">{{ $lhtnilai->firstItem() + $key }}.</td>
                                   <td class="cell">{{ $nilai->nama }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_mtk }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_ipa }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_agama }}</td>
                                   <td class="cell">{{ $nilai->nilai_tes_bindo }}</td>
-                                  <td class="cell">{{ $nilai->status_kelas }}</td>
-                                  
+                                  <td class="cell">{{ $nilai->kelas }}</td>
 
                                   <td class="cell">  
 

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class DataSiswa extends Model
 {
@@ -24,7 +23,7 @@ class DataSiswa extends Model
         'nilai_tes_ipa', 
         'nilai_tes_agama', 
         'nilai_tes_bindo',
-        'status_kelas',
+        'kelas',
         'hasil_mining'
     ];
 
@@ -36,11 +35,6 @@ class DataSiswa extends Model
                 ->orWhere('nama', 'LIKE', '%'.$filters['search'].'%');
         }
     }
-
-    // public function allData()
-    // {
-    //     return DB::table('data_siswas')->get();
-    // }
 
         /**
      * Menentukan apakah model akan menggunakan timestamps.

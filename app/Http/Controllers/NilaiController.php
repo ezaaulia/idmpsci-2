@@ -27,12 +27,11 @@ class NilaiController extends Controller
     public function lihatnilai(Request $request)
     {
         $data_siswas = DataSiswa::all();
-        // return view('admin/lihat-nilai', ['data_siswas' => $data_siswas]);
+        
         return view('nilai.isilihatnilai',
         [
             'data_siswas' => $data_siswas,
             'lhtnilai' =>  DataSiswa::latest()->filter(request(['search']))->paginate(15),
-            'title' => 'Lihat Data Nilai'
         ]
         );
     }
@@ -49,13 +48,7 @@ class NilaiController extends Controller
         $nilai = DataSiswa::findOrFail($id);
 
         return view('nilai.editnil', compact('nilai'));
-        // // Memeriksa apakah pengguna telah login
-        // if (Auth::check()) {
-        //     $nilai = DataSiswa::findOrFail($id);
-        //     return view('nilai.editnil', compact('nilai'));
-        // } else {
-        //     return redirect()->route('login')->with(['msg' => 'Anda harus login!']);
-        // }
+    
     }
 
     
@@ -76,13 +69,13 @@ class NilaiController extends Controller
             'nilai_tes_ipa' => 'required', 
             'nilai_tes_agama' => 'required', 
             'nilai_tes_bindo' => 'required', 
-            'status_kelas' => 'required',
+            'kelas' => 'required',
         ],[
             'nilai_tes_mtk.required' => 'Nilai wajib diisi!',
             'nilai_tes_ipa.required' => 'Nilai wajib diisi!',
             'nilai_tes_agama.required' => 'Nilai wajib diisi!',
             'nilai_tes_bindo.required' => 'Nilai wajib diisi!',
-            'status_kelas.required' => 'Kelas wajib diisi!',
+            'kelas.required' => 'Kelas wajib diisi!',
         ]);
 
         // Mengambil data nilai siswa yang akan diupdate
@@ -115,11 +108,7 @@ class NilaiController extends Controller
         $nilai -> nilai_tes_ipa = strtoupper($request->nilai_tes_ipa);
         $nilai -> nilai_tes_agama = strtoupper($request->nilai_tes_agama);
         $nilai -> nilai_tes_bindo = strtoupper($request->nilai_tes_bindo);
-        // $nilai -> nilai_tes_mtk = $request->nilai_tes_mtk;
-        // $nilai -> nilai_tes_ipa = $request->nilai_tes_ipa;
-        // $nilai -> nilai_tes_agama = $request->nilai_tes_agama;
-        // $nilai -> nilai_tes_bindo = $request->nilai_tes_bindo;
-        $nilai -> status_kelas = $request->status_kelas;
+        $nilai -> kelas = $request->kelas;
         $nilai->save();
 
 
