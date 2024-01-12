@@ -82,7 +82,7 @@ class NilaiController extends Controller
         $nilai = DataSiswa::find($id);
 
         // Memuat model pohon keputusan C45AJA
-        $filename = public_path('/csv/Data_Training.csv');
+        $filename = storage_path('app/csv/Data_Training.csv');
         $c45 = new C45AJA([
             'targetAttribute' => 'hasil_mining',
             'trainingFile' => $filename,

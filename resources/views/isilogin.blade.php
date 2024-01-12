@@ -33,7 +33,7 @@
 
                         <div class="card border-primary mb-3 shadow-sm p-4">
                             <div class="app-card-body">	
-                                <div class="app-auth-branding mb-4 "><a class="app-logo" href="#"><img class="logo-icon me-2" src="assets/images/smp.png" alt="logo" ></a></div>
+                                <div class="app-auth-branding mb-4 "><a class="app-logo" href="#"><img class="logo-icon me-2" src="{{asset('assets/images/smp.png')}}" alt="logo" ></a></div>
                                 <h2 class="auth-heading text-center mb-5 ">LOGIN</h2>
                                 <div class="auth-form-container text-start">
                                     @if($errors->any())

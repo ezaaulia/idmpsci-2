@@ -60,7 +60,7 @@ class SiswaController extends Controller
     ]);
 
     // Memuat model pohon keputusan C45
-    $filename = public_path('/csv/Data_Training.csv');
+    $filename = storage_path('app/csv/Data_Training.csv');
     $c45 = new C45([
         'targetAttribute' => 'hasil_mining',
         'trainingFile' => $filename,

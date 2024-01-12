@@ -43,12 +43,12 @@ class ImportLatih extends Controller
         }
 
         // Simpan file yang diunggah dengan nama yang telah ditetapkan
-        $newDataFile->move('csv', $fileName);
+        $newDataFile->storeAs('csv', $fileName);
 
         // Hapus data lama dari database sebelum menambahkan data baru
         DB::table('data_latih')->truncate();
 
-        Excel::import(new DataTraining, public_path('/csv/' . $fileName), null, \Maatwebsite\Excel\Excel::CSV);
+        Excel::import(new DataTraining, storage_path('app/csv/' . $fileName), null, \Maatwebsite\Excel\Excel::CSV);
 
         // Beri pesan sukses atau redirect ke halaman lain
         return redirect()->route('datalatih')->with('success', 'File data baru berhasil diunggah dan data siswa berhasil diimpor.');

@@ -26,6 +26,7 @@ class DataTestingController extends Controller
         // Mengambil semua data dari tabel DataSiswa
         $allData = DataSiswa::all(); 
 
+        
         // Menghitung jumlah total data dari tabel yang diinginkan
         $totalCount = DataSiswa::count();
 
@@ -47,7 +48,7 @@ class DataTestingController extends Controller
         // Menghitung jumlah prediksi yang tepat dan tidak tepat
         $correctPredictions = 0;
         $incorrectPredictions = 0;
-
+        
         foreach ($allData as $key => $data) {
             if ($actualLabelsLower[$key] != $predictedLabelsLower[$key]) {
                 $incorrectPredictions++;

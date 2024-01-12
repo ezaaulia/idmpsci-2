@@ -34,7 +34,7 @@ class MiningDataController extends Controller
     {
 
         // Path ke file CSV template yang ingin diunduh
-        $filePath = public_path('files/template-file-latih.csv');
+        $filePath = storage_path('app/files/template-file-latih.csv');
 
         // Mengembalikan respons untuk mengunduh file
         return response()->download($filePath);
@@ -43,7 +43,7 @@ class MiningDataController extends Controller
 
     public function pohon(Request $request) 
     {
-        $filePath = 'csv/Data_Training.csv';
+        $filePath = storage_path('app/csv/Data_Training.csv');
 
         if (!file_exists($filePath)) {
             // Jika file tidak ditemukan, beri tahu pengguna

@@ -28,10 +28,10 @@ class ImportData extends Controller
 
         // Menghasilkan nama unik untuk file dan memindahkannya ke direktori 'import_csv'
         $filename = rand() . $file->getClientOriginalName();
-        $file->move('import_csv', $filename);
+        $file->storeAs('import_csv', $filename);
 
         // Mengimpor data siswa dari file CSV menggunakan library Excel
-        Excel::import(new DataImport, public_path('/import_csv/' . $filename), null, \Maatwebsite\Excel\Excel::CSV);
+        Excel::import(new DataImport, storage_path('app/import_csv/' . $filename), null, \Maatwebsite\Excel\Excel::CSV);
 
         // Menampilkan pesan sukses dan mengarahkan kembali ke halaman daftar siswa
         Session::flash('sukses', 'Data berhasil diupload');

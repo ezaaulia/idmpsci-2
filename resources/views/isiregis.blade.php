@@ -12,7 +12,7 @@
             <div class="app-auth-body mx-auto">
                 <div class="card border-primary mb-2 shadow-sm p-3">
                     <div class="app-card-body">	
-                        <div class="app-auth-branding mb-1 "><a class="app-logo" href="#"><img class="logo-icon me-2" src="assets/images/smp.png" alt="logo" ></a></div>
+                        <div class="app-auth-branding mb-1 "><a class="app-logo" href="#"><img class="logo-icon me-2" src="{{asset('assets/images/smp.png')}}" alt="logo" ></a></div>
                             <h3 class="auth-heading text-center mb-3 ">REGISTRASI</h3>
 
                         <div class="auth-form-container text-start"> 
