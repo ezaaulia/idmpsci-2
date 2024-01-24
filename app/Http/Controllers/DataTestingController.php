@@ -25,7 +25,6 @@ class DataTestingController extends Controller
 
         // Mengambil semua data dari tabel DataSiswa
         $allData = DataSiswa::all(); 
-
         
         // Menghitung jumlah total data dari tabel yang diinginkan
         $totalCount = DataSiswa::count();
@@ -81,7 +80,7 @@ class DataTestingController extends Controller
             }
         }
 
-        $accuracy = ($correctPredictions / $totalSamples) * 100;
+        $accuracy = ($totalSamples == 0) ? 0 : ($correctPredictions / $totalSamples) * 100;
         
         // Memformat nilai akurasi dengan dua angka di belakang koma
         $formattedAccuracy = number_format($accuracy, 2);
@@ -105,8 +104,8 @@ class DataTestingController extends Controller
         }
 
         // Menghitung laju error
-        $errorRate = ($incorrectPredictions / $totalSamples) * 100;
-
+        $errorRate = ($totalSamples == 0) ? 0 : ($incorrectPredictions / $totalSamples) * 100;
+        
         // Memformat nilai laju error dengan dua angka di belakang koma
         $formattedErrorRate = number_format($errorRate, 2);
 

@@ -100,10 +100,8 @@
                                 </td>
                               </tr>
                             @endforelse
-
                           </tbody>
-                        </table>
-                       
+                        </table>                     
                       </div>
                       <!--//table-responsive-->
                     </div>

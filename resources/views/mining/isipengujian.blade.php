@@ -39,7 +39,7 @@
                             </thead>
 
                             <tbody>
-                              @forelse($incorrectData as $data)
+                              @foreach($incorrectData as $data)
                                 <tr>
                                     <td class="cell">{{ $loop->iteration }}.</td>
                                     <td class="cell">{{ $data->nis }}</td>
@@ -52,19 +52,11 @@
                                     <td class="cell">{{ $data->kelas }}</td>
                                     <td class="cell">{{ $data->hasil_mining }}</td>
                                 </tr>
-                              @empty
-                                <!-- Pesan ketika data kosong -->
-                                <tr>
-                                  <td colspan="3" class="text-center">
-                                      <h2><strong>Data kosong atau tidak ada prediksi yang tidak tepat!!</strong></h2>
-                                  </td>
-                                </tr>
-                              @endforelse
+                              @endforeach
                             </tbody>
                           </table>
                         </div> <!--//table-responsive-->
                       </div> <!--//app-card-body-->
-                    
                     @endif
                 </div>
               </div>
@@ -72,6 +64,7 @@
 
                   <!-- Menampilkan metrik kinerja -->
                   <div class="text-center">
+                    @if (($incorrectPredictions > 0) || !$allData->isEmpty())
                       <h1>Hasil Uji Prediksi <span class="badge bg-secondary"></span></h1>
                       <div class="alert alert-warning" role="alert">
                         Total Jumlah Prediksi : {{ $totalCount }}
@@ -100,6 +93,11 @@
                     <div class="alert alert-danger" role="alert">
                       Tidak Akurat : {{  $errorRate . "%"}}
                     </div>
+                    @else
+                      <div class="alert alert-danger" role="alert">
+                        Tidak ada data yang tersedia.
+                      </div>
+                    @endif
                   </div>
         </div>
     </div>

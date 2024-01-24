@@ -30,9 +30,7 @@ Route::get('/', function () {
 });
 
 
-
 Auth::routes();
-
 
 
 Route::middleware(['checkrole:admin,operator'])->group(function () {
@@ -66,9 +64,6 @@ Route::middleware(['checkrole:admin,operator'])->group(function () {
 
     Route::delete('/lihatsiswa/deletesiswa/{id}', [SiswaController::class, 'destroy'])->name('deletesiswa');
 
-    // ---------- CARI SISWA ----------
-
-    Route::get('/carisiswa', [SiswaController::class, 'carisis'])->name('carisiswa');
 
     // ---------- LIHAT NILAI DAN EDIT NILAI ----------
 
@@ -77,13 +72,10 @@ Route::middleware(['checkrole:admin,operator'])->group(function () {
     Route::put('/lihatnilai/update/{id}', [NilaiController::class, 'update']);
 
 
-
-
     // ********************** OPERATOR **********************
 
     Route::get('/lihatoperator', [OperatorController::class, 'lihatope'])->name('admin.lihatope');
     Route::delete('/lihatoperator/deleteoperator/{id}', [OperatorController::class, 'destroy'])->name('deleteoperator');
-
 
 
     // ********************** MINING DATA **********************
